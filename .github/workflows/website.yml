@@ -1,4 +1,4 @@
-name: Deploy Docs Website
+name: Deploy https://vike.land
 on:
   push:
     # We only run this GitHub action upon new commits to `master`
@@ -11,11 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Enable GitHub action to clone `libframe/` submobule
-        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2
+        with:
+          version: 6
 
       - name: Install
         # `pnpm install` will checkout the git submodule `libframe/`
