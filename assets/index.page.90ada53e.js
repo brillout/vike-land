@@ -1,0 +1,1 @@
+import{a as e,F as r}from"./renderer/_default.page.client.tsx.28117c3b.js";import"./vendor.4e869364.js";const n=!1;function o(){return e(r,{children:"Some other page"})}export{o as Page,n as skipShell};

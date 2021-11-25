@@ -1,57 +1,57 @@
 {
   "renderer/_default.page.client.tsx": {
-    "file": "assets/renderer/_default.page.client.tsx.78b0881d.js",
+    "file": "assets/renderer/_default.page.client.tsx.28117c3b.js",
     "src": "renderer/_default.page.client.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor.d8c35c5c.js"
+      "_vendor.4e869364.js"
     ],
     "css": [
       "assets/renderer/_default.page.client.tsx.635c5a7f.css"
     ],
     "assets": [
-      "assets/logo.bebe2e90.svg"
+      "assets/vike-logo-hammer.e1911efc.png"
     ]
   },
-  "_vendor.d8c35c5c.js": {
-    "file": "assets/vendor.d8c35c5c.js",
+  "_vendor.4e869364.js": {
+    "file": "assets/vendor.4e869364.js",
     "dynamicImports": [
       "renderer/_error.page.tsx",
-      "pages/about/index.page.tsx",
       "pages/index/index.page.tsx",
+      "pages/other/index.page.tsx",
       "renderer/_default.page.client.tsx",
       "renderer/_default.page.server.tsx"
     ]
   },
   "renderer/_error.page.tsx": {
-    "file": "assets/_error.page.63ad8620.js",
+    "file": "assets/_error.page.d644127c.js",
     "src": "renderer/_error.page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "renderer/_default.page.client.tsx",
-      "_vendor.d8c35c5c.js"
-    ]
-  },
-  "pages/about/index.page.tsx": {
-    "file": "assets/index.page.b34898b5.js",
-    "src": "pages/about/index.page.tsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "renderer/_default.page.client.tsx",
-      "_vendor.d8c35c5c.js"
-    ],
-    "css": [
-      "assets/index.page.de42b54a.css"
+      "_vendor.4e869364.js"
     ]
   },
   "pages/index/index.page.tsx": {
-    "file": "assets/index.page.fb57edee.js",
+    "file": "assets/index.page.6d6f8bfd.js",
     "src": "pages/index/index.page.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor.d8c35c5c.js",
-      "renderer/_default.page.client.tsx"
+      "renderer/_default.page.client.tsx",
+      "_vendor.4e869364.js"
+    ],
+    "assets": [
+      "assets/vike-logo-banner.25fb5698.jpg"
+    ]
+  },
+  "pages/other/index.page.tsx": {
+    "file": "assets/index.page.90ada53e.js",
+    "src": "pages/other/index.page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "renderer/_default.page.client.tsx",
+      "_vendor.4e869364.js"
     ]
   },
   "renderer/_default.page.server.tsx": {
