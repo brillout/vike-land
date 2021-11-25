@@ -11,7 +11,7 @@ export { render };
 async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { Page, pageExports } = pageContext;
 
-  const pageElement = pageExports.skipShell ? (
+  const pageElement = pageExports.skipPageShell ? (
     <Page />
   ) : (
     <PageShell pageContext={pageContext}>

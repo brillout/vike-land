@@ -1,7 +1,7 @@
 import React from 'react'
 import logoBanner from './vike-logo-banner.jpg'
 
-export const skipShell = true
+export const skipPageShell = true
 
 export { Page }
 

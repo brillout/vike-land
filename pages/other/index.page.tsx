@@ -1,6 +1,6 @@
 import React from "react";
 
-export const skipShell = false
+export const skipPageShell = false
 
 export { Page };
 
