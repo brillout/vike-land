@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./vike-logo-hammer.png";
 import { PageContextProvider } from "./usePageContext";
 import type { PageContext } from "./types";
 import "./PageShell.css";
@@ -23,8 +23,8 @@ function PageShell({
             <Link className="navitem" href="/">
               Home
             </Link>
-            <Link className="navitem" href="/about">
-              About
+            <Link className="navitem" href="/other">
+              Another Page
             </Link>
           </Sidebar>
           <Content>{children}</Content>

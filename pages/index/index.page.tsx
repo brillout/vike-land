@@ -1,19 +1,17 @@
-import React from "react";
-import { Counter } from "./Counter";
+import React from 'react'
+import logoBanner from './vike-logo-banner.jpg'
 
-export { Page };
+export const skipShell = true
+
+export { Page }
 
 function Page() {
   return (
-    <>
-      <h1>Welcome</h1>
-      This page is:
-      <ul>
-        <li>Rendered to HTML.</li>
-        <li>
-          Interactive. <Counter />
-        </li>
-      </ul>
-    </>
-  );
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+      <img src={logoBanner} height={200} alt="logo" style={{ display: 'block' }} />
+      <br />
+      <br />
+      <div>Landing Page</div>
+    </div>
+  )
 }
