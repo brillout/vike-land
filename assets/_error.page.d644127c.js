@@ -1,1 +1,0 @@
-import{j as r,F as n,a as e}from"./renderer/_default.page.client.tsx.28117c3b.js";import"./vendor.4e869364.js";function d({is404:t}){return t?r(n,{children:[e("h1",{children:"404 Page Not Found"}),e("p",{children:"This page could not be found."})]}):r(n,{children:[e("h1",{children:"500 Internal Server Error"}),e("p",{children:"Something went wrong."})]})}export{d as Page};
