@@ -1,0 +1,36 @@
+name: Deploy Docs Website
+on:
+  push:
+    # We only run this GitHub action upon new commits to `master`
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Enable GitHub action to clone `libframe/` submobule
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Install
+        # `pnpm install` will checkout the git submodule `libframe/`
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist/client
+          # Remove previous build files
+          clean: true
+          # Do not remove the `.nojekyll` file: we have manually added an empty `.nojekyll` file at the root of the `gh-pages` branch and we don't want having to re-create it after each build.
+          clean-exclude: |
+            .nojekyll

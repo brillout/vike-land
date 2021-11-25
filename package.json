@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "dev": "node ./devServer",
+    "// Simulate production locally": "",
+    "prod": "yarn build && yarn prod:serve",
+    "// Build for production": "",
+    "build": "yarn build:clean && yarn build:vite && yarn build:prerender",
+    "build:clean": "rm -rf dist/",
+    "build:vite": "vite build && vite build --ssr",
+    "build:prerender": "vite-plugin-ssr prerender --noExtraDir",
+    "// Simulate static host": "",
+    "prod:serve": "serve ../../docs/dist/client/ --listen 3000"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.0",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.9",
+    "@vitejs/plugin-react": "^1.0.4",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.4.4",
+    "vite": "2.6.7",
+    "vite-plugin-ssr": "^0.3.31"
+  }
+}
