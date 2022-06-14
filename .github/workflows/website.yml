@@ -1,9 +1,9 @@
 name: Deploy https://vike.land
 on:
   push:
-    # We only run this GitHub action upon new commits to `master`
+    # We only run this GitHub action upon new commits to `main`
     branches:
-      - master
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
