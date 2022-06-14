@@ -1,0 +1,16 @@
+@import './fonts.css';
+@import './header.css';
+
+body {
+  margin: 0;
+  padding-bottom: 100px;
+}
+
+#copy {
+  width: 750px;
+  margin: auto;
+}
+#copy h2 {
+  font-weight: 500;
+  margin-top: 40px;
+}

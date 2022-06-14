@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  --logo-size-large: 400px;
+  --logo-size-small: 40px;
+  --logo-size: var(--logo-size-large);
+}
+body.faviconSize {
+  --logo-size: var(--logo-size-small);
+}
+
+.hammer {
+  cursor: move;
+}
+#logo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+}
+#wrapper {
+  float: left;
+  width: var(--logo-size-large);
+  height: var(--logo-size-large);
+}
+#colors {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  display: inline-block;
+}
+
+body.zdogView .circle-square {
+  display: none;
+}
+body.zdogView .hammer {
+  outline: 1px solid black;
+}
+
+code {
+  font-family: monospace;
+  background-color: #eaeaea;
+  padding: 3px 5px;
+  border-radius: 4px;
+}

@@ -1,0 +1,23 @@
+body {
+  font-family: 'Inter';
+}
+button {
+  font-family: inherit;
+}
+body {
+  line-height: 1.5;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: oblique 0deg 12deg;
+  src: url('../fonts/Inter-Var.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'Mitr';
+  font-weight: 100 900;
+  src: url('../fonts/Mitr-Light.ttf') format('truetype-variations');
+}

@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.42",
+    "@types/zdog": "^1.1.2",
+    "vite": "^2.9.12",
+    "zdog": "1.1.3"
+  }
+}
