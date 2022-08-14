@@ -1,0 +1,1 @@
+import{H as o,Z as i}from"./Hammer.baa0a7a9.js";const t=new o(document.querySelector("#logo"));t.dragRotate=!0;t.colors={metal1:"#949494",metal2:"#828282",metal3:"#696969",metal4:"#707070",wood:"#96511d",lightningBolt:"#ecb018"};{const{TAU:e}=i;t.perspective={rotate:{x:e*(-.13/16),y:e*(-6.63/16),z:e*(-1.2/16)},translate:{x:-2.6,y:7,z:0}}}t.init();
