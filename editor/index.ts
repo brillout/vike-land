@@ -19,13 +19,11 @@ function main(anchors: {
   const hammer = new Hammer(document.querySelector('#logo')!)
   hammer.dragRotate = true
   hammer.colors = {
-    // *b*lue
     metal1: '#949494',
     metal2: '#828282',
     metal3: '#696969',
     metal4: '#707070',
-    // b*r*aun
-    wood: '#96511d',
+    wood: '#a05922',
     lightningBolt: '#ecb018'
   }
   {

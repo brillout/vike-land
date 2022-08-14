@@ -15,3 +15,9 @@ body {
   font-style: oblique 0deg 12deg;
   src: url('/fonts/Inter-Var.ttf') format('truetype-variations');
 }
+
+@font-face {
+  font-family: 'Mitr';
+  font-weight: 100 900;
+  src: url('/fonts/Mitr-Light.ttf') format('truetype-variations');
+}
