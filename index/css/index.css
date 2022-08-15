@@ -1,8 +1,9 @@
 @import './fonts.css';
+@import './code.css';
+@import './blockquote.css';
 
 body {
   margin: 0;
-  padding-bottom: 100px;
 }
 
 #copy {
@@ -12,4 +13,19 @@ body {
 #copy h2 {
   font-weight: 500;
   margin-top: 40px;
+}
+
+#toc a {
+  margin-bottom: 2px;
+  display: block;
+  font-weight: 500;
+}
+
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+#tool-list li {
+  margin: 25px 0px;
 }

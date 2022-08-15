@@ -1,0 +1,13 @@
+code {
+  font-family: monospace;
+  /*
+  background-color: #f3f3f3;
+  */
+  background-color: #ddd;
+  padding-left: 6px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  font-size: 1.1em;
+  border-radius: 5px;
+}

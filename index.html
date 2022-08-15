@@ -3,117 +3,162 @@
   <head>
     <link rel="stylesheet" href="./index/css/index.css" />
     <link rel="icon" type="image/svg+xml" href="./assets/vike-hammer_favicon.svg" />
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
   </head>
   <body>
-    <h1 id="header" style="text-align: center;">
-      <img src="./assets/vike-hammer_with-text.svg" height=100 style="display: inline-block;height: 120px; margin: 0 20px; margin-top: 24px;" alt="Vike" />
+    <h1 style="text-align: center; margin-bottom: 15px">
+      <img
+        src="./assets/vike-hammer_with-text.svg"
+        height="100"
+        style="display: inline-block; height: 120px; margin: 0 20px; margin-top: 24px"
+        alt="Vike"
+      />
     </h1>
 
-    <div style="text-align: center; font-size: 1.7em; letter-spacing: 1px; font-weight: 400">Build Your Own framework</div>
-
-    <br />
-    <div style="text-align: center; font-size: 1em;">
-      <span style=" background-color: #eee; border-radius: 10px; padding: 10px 20px;">
-      🚧
-      This website's esthetic is work-in-progress.
-      </span>
+    <div style="text-align: center; font-size: 1.74em; font-weight: 400; margin-bottom: 40px; margin-top: 24px">
+      Build Your Own Framework.
     </div>
 
-    <br />
     <div id="copy">
-      <p>Vike is a set of tools to easily:</p>
-      <ul>
-        <li>build your own app architecture, or</li>
-        <li>build your own web framework.</li>
-      </ul>
+      <div id="toc" style="margin-top: 20px; margin-bottom: 40px">
+        <a href="#easy">It has never been easier to build your own framework</a>
+        <a href="#all-included">All-included frameworks</a>
+        <a href="#scale">Build company internal frameworks, to scale your teams</a>
+        <a href="#framework-as-a-product">Build a framework tailored to your product, to delight your users</a>
+        <a href="#getting-started">Getting Started</a>
+      </div>
 
-      <p>Hundreds of LOCs are enough to build a full-fledged architecture and/or framework.</p>
+      <h2 id="easy">It has never been easier to build your own framework</h2>
+      <p>
+        Building a framework like Next.js used to be hard. These days are over: with modern tools, such as Vite, you can
+        build your own Next.js with only hundreds of lines of code.
+      </p>
+      <p>
+        Don't let a framework dictate your architecture, keep full control, and use any tool and technology you want.
+        Re-use your framework('s architecture) for each new project.
+      </p>
+      <p>
+        Build internal company frameworks to scale your teams, or delight your users with a bespoke framework, or just
+        keep architectural control.
+      </p>
+      <p>Build Your Own Framework.</p>
 
-      <p>Vike tools:</p>
-      <ul>
+      <h2 id="all-included">All-included frameworks</h2>
+      <p>
+        While frameworks like Next.js only take care of the frontend, you can build a framework that includes
+        everything: the server (Express.js, Koa, ...), authentication, API (GraphQL, RPC, ...), ORM (Prisma, MikroORM,
+        ...), logging (e.g. Prometheus), error tracking (Sentry, Bugsnag, ...), emailing (e.g. Mailgun + Nodemailer),
+        deployment (AWS, Cloudflare Workers, ...).
+      </p>
+      <p>
+        All the framework's users have left to do is: define UI components and data models (if the framework has a
+        database).
+      </p>
+
+      <h2 id="scale">Build company internal frameworks, to scale your teams</h2>
+      <p>
+        Give senior employees the power of fully owning the architecture while providing junior employees an
+        <a href="#all-included">all-included framework</a> that takes care of everything.
+      </p>
+      <p>Keep full control and leverage your company's favorite tools without limitations nor compromise.</p>
+      <p>
+        You can then share (some of) your internal frameworks with the world, fostering open source values within your
+        company while stimulating and attracting engineering talent. For example, Facebook's decision to open source and
+        share React with the world has been a strong force inside Facebook for engineering excellence and has enabled
+        Facebook to hire highly skilled Software Engineers.
+      </p>
+
+      <h2 id="framework-as-a-product">Build a framework tailored to your product, to delight your users</h2>
+      <p>Delight your users with a bespoke framework that deeply integrates with your product.</p>
+      <p>
+        For example, if you are a headless CMS provider (Sanity, Contentful, Tina, ...), then build a CMS on top. Or, if
+        you are a full-stack deployment provider (PlanetScale, Cloudflare D1, Fly, ...), then build a thin full-stack
+        framework to showcase the capabalities of your deployment platform and for the community to fork. Or, if you are
+        an e-commerce platform, provide a framework like Shopify's
+        <a href="https://hydrogen.shopify.dev/">Hydrogen</a>.
+      </p>
+      <p>Build a "Framework as a Product".</p>
+
+      <h2 id="getting-started">Getting Started</h2>
+      <p>Vike is not a tool: it's just a cheerful recommendation to build your own framework.</p>
+      <p>That said, we recommend following tools.</p>
+      <ul id="tool-list">
+        <li>
+          <a href="https://vitejs.dev">Vite</a> - Next Generation Frontend Tooling.
+          <blockquote>
+            <p>Vite is a webpack alternative that has first-class support for building frameworks.</p>
+            <p>
+              In particular, check out <a href="https://vitejs.dev/guide/ssr.html">Vite's native SSR API</a> which is a
+              low-level and highly flexible API enabling you to build SSR frameworks.
+            </p>
+          </blockquote>
+        </li>
         <li>
           <a href="https://vite-plugin-ssr.com">vite-plugin-ssr</a> - Like Next.js/Nuxt but as do-one-thing-do-it-well
-          Vite plugin. (Production ready.)
+          Vite plugin.
+          <blockquote>
+            <p>
+              Vite-plugin-ssr also has first-class support for building framworks while taking care of much more than
+              Vite's native SSR API: it enables you to build a framework like Next.js with only hundreds of lines of
+              code.
+            </p>
+            <p>That said, if you need extra flexibility then use Vite's native SSR API instead.</p>
+            <p>
+              Check out its guide
+              <a href="https://vite-plugin-ssr.com/build-your-own-framework"
+                >vite-plugin-ssr > Build Your Own Framework</a
+              >.
+            </p>
+          </blockquote>
         </li>
-        <li><a href="https://github.com/brillout/react-streaming">react-streaming</a> - React 18 Streaming. Full-fledged & Easy. (Only for React apps/frameworks. Production ready.)</li>
-        <li><a href="https://github.com/hattipjs/hattip">HatTip</a> - (Nothing) Like Express.js. (WIP.)</li>
-        <li>scaffi - Project Scaffolding. (WIP.)</li>
-      </ul>
-
-      <p>Vike frameworks:</p>
-      <ul>
         <li>
-          <a href="https://wind-ssg.pages.dev/">Wind SSG</a> - Static site generator for Vue, like Gridsome but with
-          Vite. (WIP.)
+          <a href="https://github.com/brillout/react-streaming">react-streaming</a> - React 18 Streaming. Full-fledged &
+          Easy.
+          <blockquote>
+            <p>
+              Easily integrate React 18's SSR streaming advanced capabilities such as server-side
+              <code>&lt;Suspense&gt;</code>.
+            </p>
+          </blockquote>
         </li>
         <li>
-          <a href="https://vilay.xiniha.dev/en/introduction/">Vilay</a> - React 18 + Relay framework with
-          Render-as-you-Fetch SSR streaming. (WIP.)
+          <a href="https://github.com/hattipjs/hattip">HatTip</a> - (nothing) Like Express.js
+          <blockquote>
+            <p>Easily integrate your framework with any deployment provider (Cloudflare Workers, Vercel, ...).</p>
+          </blockquote>
         </li>
-        <li>Stem - Like Blitz.js but with Vite and Telefunc. (WIP.)</li>
-        <li><button onclick="alert('Nothing here yet :-)')">ADD YOURS</button></li>
       </ul>
-
-      <h2>Keep architectural control</h2>
-      <p>
-        Don't let a framework dictate your stack. With Vike, you keep full control: use any technology and tool you
-        want.
-      </p>
-
-      <h2>Build your own framework</h2>
-      <p>
-        Build your own framework with only hundreds of LOCs: set up your architecture once, publish it as an npm
-        package, then reap the benefits and re-use your framework for each new project.
-      </p>
-
-      <h2>All-included frameworks&#x2122;</h2>
-      <p>
-        While Next.js/Nuxt only takes care of the frontend, you can include all your integrations to your framework: the
-        server (e.g. Express.js), authentication, communication (e.g. GraphQL or RPC), ORM (e.g. Prisma or MikroORM),
-        logging (e.g. Prometheus), error tracking (e.g. Sentry), emailing (e.g. Mailgun + Nodemailer), deploy (e.g.
-        Cloudflare Workers or AWS), etc.
-      </p>
-      <p>
-        After you've built your all-included framework, all it takes to create a new app is defining data models and UI
-        components.
-      </p>
-
-      <h2>Scale your team</h2>
-      <p>
-        Give your senior colleagues the power of fully owning the architecture while providing your less-senior
-        colleagues a simple framework that takes care of everything. Use and leverage your company's favorite tools
-        without compromise.
-      </p>
-
-      <h2>Ecosystem of frameworks</h2>
-      <p>
-        Vike fosters the creation of frameworks: use an all-included framework built by another company, fork and adjust
-        it to your likings, and share your framework(s) with the world
-        <span style="font-family: emoji">&#x2764;&#xFE0F;</span>.
-      </p>
-
-      <h2>Enhance your product</h2>
-      <p>
-        You are building a headless CMS? An e-commerce platform like Shopify? Delight your users with a tailored
-        framework that deeply integrates with your product.
-      </p>
     </div>
 
     <!-- FOOTER -->
-    <div style="margin-top: 40px; text-align: center">
+    <div style="margin-top: 80px; text-align: center; margin-bottom: 35px">
       <a
         href="https://github.com/brillout/vike"
-        style="font-size: 1.1em; color: #888; text-decoration: none; font-weight: 500"
+        style="font-size: 1.05em; color: #888; text-decoration: none; font-weight: 500"
       >
         <img
           src="https://i.imgur.com/MOmHIpm.png"
-          height="22"
-          width="22"
+          height="20"
+          width="20"
           style="vertical-align: middle; position: relative; top: -1px; padding-right: 3px"
         />
         brillout/vike
       </a>
     </div>
+
+    <!-- SCRIPT -->
+    <script>
+      // Smooth Anchor Scrolling, copied & adapted from https://stackoverflow.com/questions/7717527/smooth-scrolling-when-clicking-an-anchor-link/7717572#7717572
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          const id = this.getAttribute('href')
+          window.location.href = id
+          e.preventDefault()
+          document.querySelector(selector).scrollIntoView({
+            behavior: 'smooth',
+          })
+        })
+      })
+    </script>
   </body>
 </html>

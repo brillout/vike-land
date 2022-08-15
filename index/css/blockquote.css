@@ -1,0 +1,23 @@
+blockquote {
+  border-left: 5px solid #ccc;
+  border-radius: 5px;
+  margin: 0;
+  padding: 12px 18px;
+  background-color: #f0f0f0;
+  margin: 6px 0;
+}
+
+blockquote p:first-of-type {
+  margin-top: 0px;
+}
+blockquote p:last-of-type {
+  margin-bottom: 0px;
+}
+
+/*
+blockquote.info::before {
+  content: '\2139\FE0F';
+  font-size: 1.1em;
+  font-family: emoji;
+}
+*/
