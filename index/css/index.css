@@ -7,8 +7,11 @@ body {
 }
 
 #copy {
-  width: 750px;
+  max-width: 770px;
+  width: 100vw;
+  padding: 0 10px;
   margin: auto;
+  box-sizing: border-box;
 }
 #copy h2 {
   font-weight: 500;

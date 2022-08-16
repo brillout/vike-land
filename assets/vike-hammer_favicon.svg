@@ -1,12 +1,4 @@
 <svg class="hammer" width="41.217" height="41.217" version="1.1" viewBox="-50 -50 41.217 41.217" xmlns="http://www.w3.org/2000/svg">
- <defs>
-  <linearGradient id="a" x1="-50" x2="-22.623" y1="-9.1495" y2="-9.1495" gradientUnits="userSpaceOnUse">
-   <stop stop-color="#363636" stop-opacity="0" offset="0"/>
-   <stop stop-color="#464646" offset="0"/>
-   <stop stop-color="#464646" offset=".72538"/>
-   <stop stop-color="#515151" stop-opacity="0" offset="1"/>
-  </linearGradient>
- </defs>
  <g transform="translate(-1.3476)">
   <path d="m-40.453-34.749 1.126 4.064 2.707-2.765z" fill="#949494" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="m-34.215-48.796-6.238 14.047 3.833 1.299 6.238-14.048z" fill="#828282" stroke-linecap="round" stroke-linejoin="round"/>
@@ -60,6 +52,4 @@
    <path d="m-15.634-31.411-1.126-4.064-2.707 2.766z" fill="#949494"/>
   </g>
  </g>
- <path d="m-50-9.1495h41.217z" fill-opacity="0" stroke="url(#a)" stroke-width=".73309px"/>
- <rect x="-59.497" y="-8.7914" width="39.156" height="24.2" rx="0" ry="0" fill="#fffefe" stroke-width="2.5395" style="paint-order:normal"/>
 </svg>
