@@ -153,7 +153,7 @@
           const id = this.getAttribute('href')
           window.location.href = id
           e.preventDefault()
-          document.querySelector(selector).scrollIntoView({
+          document.querySelector(id).scrollIntoView({
             behavior: 'smooth',
           })
         })
