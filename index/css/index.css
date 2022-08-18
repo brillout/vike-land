@@ -15,9 +15,13 @@ body {
 }
 #copy h2 {
   font-weight: 500;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
+#toc {
+  margin-bottom: -10px;
+  margin-top: 20px;
+}
 #toc a {
   margin-bottom: 2px;
   display: block;

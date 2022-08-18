@@ -1,0 +1,16 @@
+h1,
+h2[id] {
+  cursor: pointer;
+}
+h2[id] {
+  --anchor-icon-width: 1em;
+  position: relative;
+  margin-left: calc(-1 * var(--anchor-icon-width));
+  padding-left: var(--anchor-icon-width);
+}
+h2[id]:hover:before {
+  content: '#';
+  position: absolute;
+  left: 0px;
+  color: #aaa;
+}

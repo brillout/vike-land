@@ -2,25 +2,29 @@
 <html>
   <head>
     <link rel="stylesheet" href="./index/css/index.css" />
+    <title>Vike: Build Your Own Framework</title>
+    <meta name="description" content="Build Your Own Framework." />
     <link rel="icon" type="image/svg+xml" href="./assets/vike-hammer_favicon.svg" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
     <meta charset="utf-8" />
   </head>
   <body>
-    <h1 style="text-align: center; margin-bottom: 0px">
-      <img
-        src="./assets/vike-hammer_with-text.svg"
-        style="display: inline-block; margin-top: 24px; max-width: 100vw; width: 447px"
-        alt="Vike"
-      />
-    </h1>
+    <div style="text-align: center">
+      <h1 style="margin: 0; padding: 24px; padding-top: 32px; display: inline-block">
+        <img
+          src="./assets/vike-hammer_with-text.svg"
+          style="display: inline-block; max-width: 100%; width: 447px"
+          alt="Vike"
+        />
 
-    <div style="text-align: center; font-size: 1.64em; font-weight: 400; margin-bottom: 40px; margin-top: 3px">
-      Build Your Own Framework
+        <div style="text-align: center; font-size: 1.64rem; font-weight: 400; margin-top: 2px">
+          Build Your Own Framework
+        </div>
+      </h1>
     </div>
 
     <div id="copy">
-      <div id="toc" style="margin-top: 20px; margin-bottom: 40px">
+      <div id="toc">
         <a href="#easy">It has never been easier to build your own framework</a>
         <a href="#all-included">All-included frameworks</a>
         <a href="#scale">Build company internal frameworks, to scale your teams</a>
@@ -30,8 +34,8 @@
 
       <h2 id="easy">It has never been easier to build your own framework</h2>
       <p>
-        Building a framework like Next.js used to be hard. These days are over: with modern tools, such as Vite, you can
-        build your own Next.js with only hundreds of lines of code.
+        Building a framework like Next.js used to be hard. These days are over: with modern tools, such as Vite and its
+        ecosystem, you can build your own Next.js with only hundreds of lines of code.
       </p>
       <p>
         Don't let a framework dictate your architecture, keep full control, and use any tool and technology you want.
@@ -59,11 +63,11 @@
         Give senior employees the power of fully owning the architecture while providing junior employees an
         <a href="#all-included">all-included framework</a> that takes care of everything.
       </p>
-      <p>Keep full control and leverage your company's favorite tools without limitations nor compromise.</p>
+      <p>Keep full control and leverage your company's favorite tools without limitations.</p>
       <p>
         You can then share (some of) your internal frameworks with the world, fostering open source values within your
         company while stimulating and attracting engineering talent. For example, Facebook's decision to open source and
-        share React with the world has been a strong force inside Facebook for engineering excellence and has enabled
+        share React with the world has been a strong force within Facebook for engineering excellence and has enabled
         Facebook to hire highly skilled Software Engineers.
       </p>
 
@@ -98,7 +102,7 @@
           <blockquote>
             <p>
               Vite-plugin-ssr also has first-class support for building framworks. It takes care of significantly more
-              things than Vite's native SSR API: it enables you to build a framework like Next.js with only hundreds of
+              things than Vite's native SSR API and enables you to build a framework like Next.js with only hundreds of
               lines of code.
             </p>
             <p>If you need more flexibility then use Vite's native SSR API instead.</p>
@@ -115,7 +119,7 @@
           Easy.
           <blockquote>
             <p>
-              Easily integrate React 18's SSR streaming advanced capabilities such as server-side
+              Easily integrate React 18 SSR streaming advanced capabilities such as server-side
               <code>&lt;Suspense&gt;</code>.
             </p>
           </blockquote>
@@ -146,18 +150,6 @@
     </div>
 
     <!-- SCRIPT -->
-    <script>
-      // Smooth Anchor Scrolling, copied & adapted from https://stackoverflow.com/questions/7717527/smooth-scrolling-when-clicking-an-anchor-link/7717572#7717572
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener('click', function (e) {
-          const id = this.getAttribute('href')
-          window.location.href = id
-          e.preventDefault()
-          document.querySelector(id).scrollIntoView({
-            behavior: 'smooth',
-          })
-        })
-      })
-    </script>
+    <script src="./index/anchor-scrolling.ts" type="module"></script>
   </body>
 </html>
