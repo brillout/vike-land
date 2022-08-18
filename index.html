@@ -5,23 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/assets/vike-hammer_favicon.7d52c0b3.svg" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/assets/main.1f193d58.css">
+    <script type="module" crossorigin src="/assets/main.68ac6a77.js"></script>
+    <link rel="modulepreload" href="/assets/modulepreload-polyfill.b7f2da20.js">
+    <link rel="stylesheet" href="/assets/main.b2371c0c.css">
   </head>
   <body>
-    <h1 style="text-align: center; margin-bottom: 0px">
-      <img
-        src="/assets/vike-hammer_with-text.619a9b74.svg"
-        style="display: inline-block; margin-top: 24px; max-width: 100vw; width: 447px"
-        alt="Vike"
-      />
-    </h1>
+    <div style="text-align: center">
+      <h1 style="margin: 0; padding: 24px; padding-top: 32px; display: inline-block">
+        <img
+          src="/assets/vike-hammer_with-text.619a9b74.svg"
+          style="display: inline-block; max-width: 100vw; width: 447px"
+          alt="Vike"
+        />
 
-    <div style="text-align: center; font-size: 1.64em; font-weight: 400; margin-bottom: 40px; margin-top: 3px">
-      Build Your Own Framework
+        <div style="text-align: center; font-size: 1.64rem; font-weight: 400; margin-top: 2px">
+          Build Your Own Framework
+        </div>
+      </h1>
     </div>
 
     <div id="copy">
-      <div id="toc" style="margin-top: 20px; margin-bottom: 40px">
+      <div id="toc">
         <a href="#easy">It has never been easier to build your own framework</a>
         <a href="#all-included">All-included frameworks</a>
         <a href="#scale">Build company internal frameworks, to scale your teams</a>
@@ -147,18 +151,6 @@
     </div>
 
     <!-- SCRIPT -->
-    <script>
-      // Smooth Anchor Scrolling, copied & adapted from https://stackoverflow.com/questions/7717527/smooth-scrolling-when-clicking-an-anchor-link/7717572#7717572
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener('click', function (e) {
-          const id = this.getAttribute('href')
-          window.location.href = id
-          e.preventDefault()
-          document.querySelector(id).scrollIntoView({
-            behavior: 'smooth',
-          })
-        })
-      })
-    </script>
+    
   </body>
 </html>
