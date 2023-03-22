@@ -8,7 +8,7 @@ hammer.colors = {
   metal2: '#828282',
   metal3: '#696969',
   metal4: '#707070',
-  wood: '#a05922',
+  wood: '#774722',
   lightningBolt: '#ecb018'
 }
 {
