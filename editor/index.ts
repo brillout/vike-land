@@ -1,25 +1,24 @@
 import * as Zdog from 'zdog'
 import { Hammer, Colors } from '../Hammer'
 
-main({
-  colorPicker: document.getElementById('colorPicker')!,
-  handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
-  handleLengthPicker: document.getElementById('handleLengthPicker')!,
-  rotationInfo: document.getElementById('rotationInfo')!,
-  zdogView: document.getElementById('zdogView')!,
-  faviconSize: document.getElementById('faviconSize')!,
-  autoSpinning: document.getElementById('autoSpinning')!,
-})
+main()
 
-function main(anchors: {
-  colorPicker: Element
-  handleLengthPicker: Element
-  handleDiameterPicker: Element
-  rotationInfo: Element
-  zdogView: Element
-  faviconSize: Element
-  autoSpinning: Element
-}) {
+function getElements() {
+  return {
+    colorPicker: document.getElementById('colorPicker')!,
+    handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
+    handleLengthPicker: document.getElementById('handleLengthPicker')!,
+    rotationInfo: document.getElementById('rotationInfo')!,
+    zdogView: document.getElementById('zdogView')!,
+    faviconSize: document.getElementById('faviconSize')!,
+    autoSpinning: document.getElementById('autoSpinning')!,
+    reset: document.querySelector('button')!,
+  }
+}
+
+function main() {
+  const elements = getElements()
+
   const hammer = new Hammer(document.querySelector('#logo')!)
   hammer.dragRotate = true
   hammer.colors = {
@@ -38,19 +37,30 @@ function main(anchors: {
       translate: { x: -2.6, y: 7, z: 0 },
     }
   }
-  hammer.init()
 
-  zdogViewInit(anchors.zdogView)
-  initColorInputs(anchors.colorPicker, hammer)
-  initHandlePicker(hammer, anchors.handleDiameterPicker, 'handleDiameter')
-  initHandlePicker(hammer, anchors.handleLengthPicker, 'handleLength')
-  faviconSizeInit(anchors.faviconSize)
-  autoSpinningInit(anchors.autoSpinning)
-  animate(hammer, anchors.rotationInfo)
+  zdogViewInit(elements.zdogView)
+  initColorInputs(elements.colorPicker, hammer)
+  initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter')
+  initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
+  faviconSizeInit(elements.faviconSize)
+  autoSpinningInit(elements.autoSpinning)
+  animate(hammer, elements.rotationInfo)
+  elements.reset.onclick = () => {
+    clearStore()
+    main()
+  }
+
+  hammer.init()
 }
 
 function initColorInputs(colorPicker: Element, hammer: Hammer) {
-  Object.keys(hammer.colors).forEach((key) => {
+  colorPicker.innerHTML = ''
+  objectKeys(hammer.colors).forEach((key) => {
+    {
+      const val = getStoreValue(key)
+      if (val) hammer.colors[key] = val
+    }
+
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
     const parentEl = document.createElement('div')
     colorPicker.appendChild(parentEl)
@@ -63,22 +73,30 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     parentEl.appendChild(valEl)
 
     const updateUI = () => {
-      const val = hammer.colors[key as keyof Colors]
+      const val = hammer.colors[key]
       inputEl.value = val
       valEl.innerHTML = ` ${val} <code>${key}</code>`
     }
     updateUI()
 
     inputEl.oninput = (ev: any) => {
-      hammer.colors[key as keyof Colors] = ev.target!.value
+      const val: string = ev.target!.value
+      hammer.colors[key as keyof Colors] = val
       updateUI()
       hammer.updateColors()
+      setStoreValue(key, val)
     }
   })
 }
 
 function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
+  {
+    const val = toFloat(getStoreValue(handleProp))
+    if (val) hammer[handleProp] = val
+  }
+
   // <div><label><input type="number" step="any" /></label><span id="r2-val"></span></div>
+  handlePicker.innerHTML = ''
   const parentEl = document.createElement('div')
   handlePicker.appendChild(parentEl)
   const labelEl = document.createElement('label')
@@ -100,9 +118,11 @@ function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'ha
   updateUI()
 
   inputEl.oninput = (ev: any) => {
-    hammer[handleProp] = ev.target!.value
+    const val: string = ev.target!.value
+    hammer[handleProp] = toFloat(val)
     updateUI()
     hammer.init()
+    setStoreValue(handleProp, val)
   }
 }
 
@@ -139,6 +159,7 @@ function createCheckboxInput({
   labelText: string
   onToggle: (isChecked: boolean) => void
 }) {
+  elem.innerHTML = ''
   const labelEl = document.createElement('label')
   elem.appendChild(labelEl)
   const inputEl = document.createElement('input')
@@ -148,12 +169,11 @@ function createCheckboxInput({
 
   const { id } = elem
   assert(id)
-  const storeKey = '__vike_logo__input_' + id
-  const storeGet = () => (JSON.parse(window.localStorage[storeKey] ?? '"{}"').isChecked as undefined | boolean) ?? false
+  const storeGet = () => (JSON.parse(getStoreValue(id) ?? '"{}"').isChecked as undefined | boolean) ?? false
   const storeToggle = () => {
     let isChecked = storeGet()
     isChecked = !isChecked
-    window.localStorage[storeKey] = JSON.stringify({ isChecked })
+    setStoreValue(id, JSON.stringify({ isChecked }))
   }
   const updateUI = () => {
     const isChecked = storeGet()
@@ -210,4 +230,26 @@ function updateRotationPrint(hammer: Hammer, rotationInfo: Element) {
 
 function assert(condition: unknown): asserts condition {
   if (!condition) throw new Error('Assertion failed.')
+}
+
+function getStoreValue(key: string): null | string {
+  return window.localStorage[`__vike_logo__input_${key}`] ?? null
+}
+function setStoreValue(key: string, val: string): void | undefined {
+  window.localStorage[`__vike_logo__input_${key}`] = val
+}
+function clearStore() {
+  window.localStorage.clear()
+}
+
+function toFloat(val: string): number
+function toFloat(val: string | null): number | null
+function toFloat(val: string | null): number | null {
+  if (val === null) return null
+  return parseFloat(val)
+}
+
+/** Same as Object.keys() but with type inference */
+export function objectKeys<T extends Record<string, unknown>>(obj: T): Array<keyof T> {
+  return Object.keys(obj)
 }
