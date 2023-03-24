@@ -1,5 +1,5 @@
 import * as Zdog from 'zdog'
-import { Hammer, Colors } from '../Hammer'
+import { Hammer, Colors, Perspective } from '../Hammer'
 
 main()
 
@@ -29,14 +29,8 @@ function main() {
     wood: '#774722',
     lightningBolt: '#ecb018',
   }
-  {
-    const { TAU } = Zdog
-    hammer.perspective = {
-      // rotate: { x: TAU * (-0.29 / 16), y: TAU * (9.99 / 16), z: TAU * (-1.2 / 16) },
-      rotate: { x: TAU * (-0.13 / 16), y: TAU * (-6.63 / 16), z: TAU * (-1.2 / 16) },
-      translate: { x: -2.6, y: 7, z: 0 },
-    }
-  }
+
+  initPerspective(hammer)
 
   zdogViewInit(elements.zdogView)
   initColorInputs(elements.colorPicker, hammer)
@@ -193,15 +187,42 @@ function animate(hammer: Hammer, rotationInfo: Element) {
   hammer.onDragStart = () => {
     isSpinning = false
   }
+  hammer.onDragEnd = () => {
+    savePerspective(hammer)
+  }
   if (isSpinning) {
     hammer.perspective.rotate.y += 0.03
     hammer.updatePerspective()
+    savePerspective(hammer)
   }
   updateRotationPrint(hammer, rotationInfo)
   requestAnimationFrame(() => {
     hammer.update()
     animate(hammer, rotationInfo)
   })
+}
+function savePerspective(hammer: Hammer) {
+  if (!hammer.illo) return
+  const perspective: Perspective = {
+    rotate: hammer.illo.rotate,
+    translate: hammer.illo.translate,
+  }
+  setStoreValue('perspective', JSON.stringify(perspective))
+}
+function initPerspective(hammer: Hammer) {
+  const val = getStoreValue('perspective')
+  let perspective: Perspective
+  if (val) {
+    perspective = JSON.parse(val)
+  } else {
+    const { TAU } = Zdog
+    perspective = {
+      // rotate: { x: TAU * (-0.29 / 16), y: TAU * (9.99 / 16), z: TAU * (-1.2 / 16) },
+      rotate: { x: TAU * (-0.13 / 16), y: TAU * (-6.63 / 16), z: TAU * (-1.2 / 16) },
+      translate: { x: -2.6, y: 7, z: 0 },
+    }
+  }
+  hammer.perspective = perspective
 }
 
 var rotationValue: string

@@ -1,6 +1,7 @@
 export { Hammer }
 export type { IlloElement }
 export type { Colors }
+export type { Perspective }
 
 import * as Zdog from 'zdog'
 const { TAU } = Zdog
@@ -71,6 +72,7 @@ class Hammer {
   perspective: Perspective
   dragRotate: boolean = false
   onDragStart: (() => void) | undefined = undefined
+  onDragEnd: (() => void) | undefined = undefined
   handleDiameter: number
   handleLength: number
   updateColors() {
@@ -134,6 +136,9 @@ function render(hammer: Hammer) {
     dragRotate,
     onDragStart() {
       hammer.onDragStart?.()
+    },
+    onDragEnd() {
+      hammer.onDragEnd?.()
     },
     //zoom: 4.3,
     rotate: perspective.rotate,
