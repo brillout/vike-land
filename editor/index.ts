@@ -21,14 +21,6 @@ function main() {
 
   const hammer = new Hammer(document.querySelector('#logo')!)
   hammer.dragRotate = true
-  hammer.colors = {
-    metal1: '#949494',
-    metal2: '#828282',
-    metal3: '#696969',
-    metal4: '#707070',
-    wood: '#774722',
-    lightningBolt: '#ecb018',
-  }
 
   initPerspective(hammer)
 
@@ -211,18 +203,10 @@ function savePerspective(hammer: Hammer) {
 }
 function initPerspective(hammer: Hammer) {
   const val = getStoreValue('perspective')
-  let perspective: Perspective
   if (val) {
-    perspective = JSON.parse(val)
-  } else {
-    const { TAU } = Zdog
-    perspective = {
-      // rotate: { x: TAU * (-0.29 / 16), y: TAU * (9.99 / 16), z: TAU * (-1.2 / 16) },
-      rotate: { x: TAU * (-0.13 / 16), y: TAU * (-6.63 / 16), z: TAU * (-1.2 / 16) },
-      translate: { x: -2.6, y: 7, z: 0 },
-    }
+    const perspective: Perspective = JSON.parse(val)
+    hammer.perspective = perspective
   }
-  hammer.perspective = perspective
 }
 
 var rotationValue: string

@@ -6,6 +6,10 @@ export type { Perspective }
 import * as Zdog from 'zdog'
 const { TAU } = Zdog
 
+/*******************************/
+/********** DEFAULTS ***********/
+/*******************************/
+
 const headLength = 35
 
 const handleDiameterDefault = 8
@@ -14,6 +18,23 @@ const handleLengthDefault = 21
 const STROKE = 0
 const slopeSize = 3
 const sideLength = 8
+
+const perspectiveDefault: Perspective = {
+  rotate: { x: TAU * (-0.13 / 16), y: TAU * (-6.63 / 16), z: TAU * (-1.2 / 16) },
+  translate: { x: -2.6, y: 7, z: 0 },
+}
+const colorsDefault: Colors = {
+  metal1: '#8c8c8c',
+  metal2: '#808080',
+  metal3: '#696969',
+  metal4: '#707070',
+  wood: '#774722',
+  lightningBolt: '#f9c02f',
+}
+
+/******************************/
+/*********** LOGIC ************/
+/******************************/
 
 // default to flat, filled shapes
 ;[Zdog.Shape, Zdog.Rect, Zdog.Ellipse].forEach(function (ItemClass) {
@@ -45,16 +66,6 @@ type Colors = {
   metal4: string
   wood: string
   lightningBolt: string
-}
-
-const perspectiveDefault = { rotate: { x: 0, y: 0, z: 0 }, translate: { x: 0, y: 0, z: 0 } }
-const colorsDefault = {
-  metal1: '#00f',
-  metal2: '#0f0',
-  metal3: '#0ff',
-  metal4: '#f00',
-  wood: '#f0f',
-  lightningBolt: '#ff0',
 }
 
 class Hammer {

@@ -9,8 +9,9 @@ const config: UserConfig = {
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        nested: path.resolve(__dirname, 'editor.html')
+        index: path.resolve(__dirname, 'index.html'),
+        editor: path.resolve(__dirname, 'editor.html'),
+        embed: path.resolve(__dirname, 'embed.html')
       }
     }
   }
