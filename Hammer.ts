@@ -24,12 +24,12 @@ const perspectiveDefault: Perspective = {
   translate: { x: -2.6, y: 7, z: 0 },
 }
 const colorsDefault: Colors = {
-  metal1: '#8c8c8c',
-  metal2: '#808080',
-  metal3: '#696969',
+  metal1: '#9e9e9e',
+  metal2: '#8c8c8c',
+  metal3: '#7d7d7d',
   metal4: '#707070',
   wood: '#774722',
-  lightningBolt: '#f9c02f',
+  lightningBolt: '#f4be34',
 }
 
 /******************************/
