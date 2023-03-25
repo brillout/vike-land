@@ -37,6 +37,15 @@ body {
   src: url('/fonts/Mitr-Light.ttf') format('truetype-variations');
 }
 
+#header-0 {
+  position: relative;
+  left: -76px;
+}
+#header-0 #logo-png {
+  width: 85px;
+  margin-right: 27px;
+}
+
 #header-2 {
   color: white;
   --color-border: black;
