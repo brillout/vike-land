@@ -1,0 +1,114 @@
+.header {
+  text-align: center;
+}
+.header > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header > .logo {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  top: -13px;
+  right: -25px;
+}
+
+body {
+  font-family: 'Inter';
+}
+button {
+  font-family: inherit;
+}
+body {
+  line-height: 1.5;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: oblique 0deg 12deg;
+  src: url('/fonts/Inter-Var.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'Mitr';
+  font-weight: 100 900;
+  src: url('/fonts/Mitr-Light.ttf') format('truetype-variations');
+}
+
+#header-2 {
+  color: white;
+  --color-border: black;
+  -webkit-text-stroke: 3px black;
+}
+
+/* Adapted from https://markdotto.com/playground/3d-text/ */
+#header-5 {
+  background-color: #0e8cbb;
+}
+#header-5 > .title {
+  color: white;
+  /* prettier-ignore */
+  text-shadow:
+               0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
+}
+
+#header-3 > .title {
+  color: #ddd;
+  --step: 20;
+  --color-side: black;
+  --color-border: black;
+  -webkit-text-stroke: 2px black;
+  /* prettier-ignore */
+  text-shadow:
+               0 1px 0 var(--color-side),
+               0 2px 0 var(--color-side),
+               0 3px 0 var(--color-side),
+               0 4px 0 var(--color-side),
+               0 5px 0 var(--color-side),
+               0 6px 0 var(--color-side);
+}
+#header-4 > .title {
+  color: black;
+  --step: 100;
+  --color-side: rgba(var(--step), var(--step), var(--step), 0.3);
+  /* prettier-ignore */
+  text-shadow:
+               0 1px 0 var(--color-side),
+               0 2px 0 var(--color-side),
+               0 3px 0 var(--color-side),
+               0 4px 0 var(--color-side),
+               0 5px 0 var(--color-side),
+               0 6px 0 var(--color-side);
+}
+.header > .title {
+  font-size: 5em;
+  font: bold 100px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.header {
+  position: relative;
+  --shift: 120px;
+  width: calc(100vw + var(--shift));
+  left: calc(-1 * var(--shift));
+}
+
+body {
+  margin: 0;
+  padding-bottom: 100px;
+}
+
+.circle-square {
+  display: none;
+}

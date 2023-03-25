@@ -1,3 +1,6 @@
 import { Hammer } from '../Hammer'
-const hammer = new Hammer(document.querySelector('#logo')!)
-hammer.init()
+
+Array.from(document.querySelectorAll('.logo')).forEach((logoEl) => {
+  const hammer = new Hammer(logoEl as HTMLElement)
+  hammer.init()
+})
