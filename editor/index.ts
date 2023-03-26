@@ -8,12 +8,14 @@ function getElements() {
     colorPicker: document.getElementById('colorPicker')!,
     handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
     handleLengthPicker: document.getElementById('handleLengthPicker')!,
-    rotationInfo: document.getElementById('rotationInfo')!,
     zdogView: document.getElementById('zdogView')!,
     faviconSize: document.getElementById('faviconSize')!,
     autoSpinning: document.getElementById('autoSpinning')!,
     resetBtn: document.querySelector('button')!,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
+    perspectiveX: document.getElementById('perspective-x')!,
+    perspectiveY: document.getElementById('perspective-y')!,
+    perspectiveZ: document.getElementById('perspective-z')!,
   }
 }
 
@@ -33,54 +35,52 @@ function main() {
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.resetBtn)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
+  initPerspectiveControlers(hammer, elements)
 
-  animate(hammer, elements.rotationInfo)
+  animate(hammer)
 
   hammer.init()
 }
 
-function initReset(resetBtn: HTMLButtonElement) {
-  resetBtn.onclick = () => {
-    isSpinning = false
-    clearStore()
-    // @ts-ignore
-    window.navigation.reload()
-  }
-}
-
-function initColorInputs(colorPicker: Element, hammer: Hammer) {
-  colorPicker.innerHTML = ''
-  objectKeys(hammer.colors).forEach((key) => {
-    {
-      const val = getStoreValue(key)
-      if (val) hammer.colors[key] = val
-    }
-
-    // <div><label><input type="color" /></label><span id="r2-val"></span></div>
-    const parentEl = document.createElement('div')
-    colorPicker.appendChild(parentEl)
-    const labelEl = document.createElement('label')
-    parentEl.appendChild(labelEl)
-    const inputEl = document.createElement('input')
-    inputEl.setAttribute('type', 'color')
-    labelEl.appendChild(inputEl)
-    const valEl = document.createElement('span')
-    parentEl.appendChild(valEl)
-
-    const updateUI = () => {
-      const val = hammer.colors[key]
-      inputEl.value = val
-      valEl.innerHTML = ` ${val} <code>${key}</code>`
-    }
-    updateUI()
-
-    inputEl.oninput = (ev: any) => {
-      const val: string = ev.target!.value
-      hammer.colors[key as keyof Colors] = val
-      updateUI()
-      hammer.reset()
-      setStoreValue(key, val)
-    }
+function initPerspectiveControlers(
+  hammer: Hammer,
+  {
+    perspectiveX,
+    perspectiveY,
+    perspectiveZ,
+  }: { perspectiveX: HTMLElement; perspectiveY: HTMLElement; perspectiveZ: HTMLElement },
+) {
+  ;(
+    [
+      {
+        elem: perspectiveX,
+        axis: 'x',
+      },
+      {
+        elem: perspectiveY,
+        axis: 'y',
+      },
+      {
+        elem: perspectiveZ,
+        axis: 'z',
+      },
+    ] as const
+  ).forEach(({ elem, axis }) => {
+    const changeVal = createNumberInput({
+      elem,
+      labelText: `<code>${axis}</code>`,
+      getValue() {
+        return hammer.perspective.rotate[axis]
+      },
+      setValue(n: number) {
+        hammer.perspective.rotate[axis] = n
+      },
+      hammer,
+    })
+    if (!onPerspectiveChange) onPerspectiveChange = []
+    onPerspectiveChange.push((perspective) => {
+      changeVal(perspective.rotate[axis])
+    })
   })
 }
 
@@ -148,6 +148,11 @@ function createNumberInput({
     hammer.reset()
     setStoreValue(storeKey, val)
   }
+
+  const changeVal = (n: number) => {
+    inputEl.value = String(n)
+  }
+  return changeVal
 }
 
 function zdogViewInit(zdogView: Element) {
@@ -236,8 +241,54 @@ function createCheckboxInput({
   updateUI(true)
 }
 
+function initReset(resetBtn: HTMLButtonElement) {
+  resetBtn.onclick = () => {
+    isSpinning = false
+    clearStore()
+    // @ts-ignore
+    window.navigation.reload()
+  }
+}
+
+function initColorInputs(colorPicker: Element, hammer: Hammer) {
+  colorPicker.innerHTML = ''
+  objectKeys(hammer.colors).forEach((key) => {
+    {
+      const val = getStoreValue(key)
+      if (val) hammer.colors[key] = val
+    }
+
+    // <div><label><input type="color" /></label><span id="r2-val"></span></div>
+    const parentEl = document.createElement('div')
+    colorPicker.appendChild(parentEl)
+    const labelEl = document.createElement('label')
+    parentEl.appendChild(labelEl)
+    const inputEl = document.createElement('input')
+    inputEl.setAttribute('type', 'color')
+    labelEl.appendChild(inputEl)
+    const valEl = document.createElement('span')
+    parentEl.appendChild(valEl)
+
+    const updateUI = () => {
+      const val = hammer.colors[key]
+      inputEl.value = val
+      valEl.innerHTML = ` ${val} <code>${key}</code>`
+    }
+    updateUI()
+
+    inputEl.oninput = (ev: any) => {
+      const val: string = ev.target!.value
+      hammer.colors[key as keyof Colors] = val
+      updateUI()
+      hammer.reset()
+      setStoreValue(key, val)
+    }
+  })
+}
+
 var isSpinning: boolean
-function animate(hammer: Hammer, rotationInfo: Element) {
+var onPerspectiveChange: ((perspective: Perspective) => void | undefined)[]
+function animate(hammer: Hammer) {
   hammer.onDragStart = () => {
     isSpinning = false
   }
@@ -249,10 +300,10 @@ function animate(hammer: Hammer, rotationInfo: Element) {
     hammer.updatePerspective()
     savePerspective(hammer)
   }
-  updateRotationPrint(hammer, rotationInfo)
   requestAnimationFrame(() => {
     hammer.update()
-    animate(hammer, rotationInfo)
+    callOnPerspectiveChange(hammer)
+    animate(hammer)
   })
 }
 function savePerspective(hammer: Hammer) {
@@ -273,8 +324,7 @@ function initPerspective(hammer: Hammer) {
 }
 
 var rotationValue: string
-function updateRotationPrint(hammer: Hammer, rotationInfo: Element) {
-  if (!rotationInfo) return
+function callOnPerspectiveChange(hammer: Hammer) {
   if (!hammer.illo) return
   let { x, y, z } = hammer.illo.rotate
   const t = (v: number) => {
@@ -290,10 +340,7 @@ function updateRotationPrint(hammer: Hammer, rotationInfo: Element) {
     return
   }
   rotationValue = rotationValueNew
-  const print = rotationValue.split('\n').join('<br/>').split(' ').join('&nbsp;')
-  if (rotationInfo.innerHTML !== print) {
-    rotationInfo.innerHTML = print
-  }
+  onPerspectiveChange.forEach((fn) => fn(hammer.perspective))
 }
 
 function assert(condition: unknown): asserts condition {
