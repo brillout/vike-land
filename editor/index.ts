@@ -1,12 +1,4 @@
-import {
-  fromHumanReadable,
-  fromHumanReadableAxis,
-  Hammer,
-  toHumanReadable,
-  type Colors,
-  type Perspective,
-  type PerspectiveUserControlable,
-} from '../Hammer'
+import { fromHumanReadableAxis, Hammer, toHumanReadable, type Colors, type PerspectiveUserControlable } from '../Hammer'
 
 main()
 
@@ -32,7 +24,6 @@ function main() {
   const hammer = new Hammer(document.querySelector('#logo')!)
   hammer.dragRotate = true
 
-  initPerspective(hammer)
   zdogViewInit(elements.zdogView)
 
   initColorInputs(elements.colorPicker, hammer)
@@ -158,7 +149,9 @@ function createNumberInput({
 
   const changeVal = (n: number) => {
     // console.log('change', n)
-    inputEl.value = String(n)
+    const val = String(n)
+    inputEl.value = val
+    setStoreValue(storeKey, val)
   }
   return changeVal
 }
@@ -300,35 +293,15 @@ function animate(hammer: Hammer) {
   hammer.onDragStart = () => {
     isSpinning = false
   }
-  hammer.onDragEnd = () => {
-    savePerspective(hammer)
-  }
   if (isSpinning) {
     hammer.perspective.rotate.y += 0.03
     hammer.updatePerspective()
-    savePerspective(hammer)
   }
   requestAnimationFrame(() => {
     hammer.update()
     callOnPerspectiveChange(hammer)
     animate(hammer)
   })
-}
-function savePerspective(hammer: Hammer) {
-  if (!hammer.illo) return
-  const perspective: Perspective = {
-    rotate: hammer.illo.rotate,
-    translate: hammer.illo.translate,
-  }
-  hammer.perspective = perspective
-  setStoreValue('perspective', JSON.stringify(perspective))
-}
-function initPerspective(hammer: Hammer) {
-  const val = getStoreValue('perspective')
-  if (val) {
-    const perspective: Perspective = JSON.parse(val)
-    hammer.perspective = perspective
-  }
 }
 
 var rotationValue: string

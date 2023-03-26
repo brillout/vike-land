@@ -1,10 +1,8 @@
 export { Hammer }
 export { toHumanReadable }
-export { fromHumanReadable }
 export { fromHumanReadableAxis }
 export type { IlloElement }
 export type { Colors }
-export type { Perspective }
 export type { PerspectiveUserControlable }
 
 import * as Zdog from 'zdog'
@@ -93,7 +91,6 @@ class Hammer {
   perspective: Perspective
   dragRotate: boolean = false
   onDragStart: (() => void) | undefined = undefined
-  onDragEnd: (() => void) | undefined = undefined
   handleDiameter: number
   handleLength: number
   hideBackLightningBolt: boolean
@@ -163,9 +160,6 @@ function render(hammer: Hammer) {
     dragRotate,
     onDragStart() {
       hammer.onDragStart?.()
-    },
-    onDragEnd() {
-      hammer.onDragEnd?.()
     },
     //zoom: 4.3,
     rotate: perspective.rotate,
