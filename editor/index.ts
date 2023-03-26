@@ -43,7 +43,8 @@ function main() {
 function initReset(resetBtn: HTMLButtonElement) {
   resetBtn.onclick = () => {
     clearStore()
-    main()
+    // @ts-ignore
+    window.navigation.reload()
   }
 }
 
