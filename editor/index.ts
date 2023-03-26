@@ -13,7 +13,7 @@ function getElements() {
     zdogView: document.getElementById('zdogView')!,
     faviconSize: document.getElementById('faviconSize')!,
     autoSpinning: document.getElementById('autoSpinning')!,
-    reset: document.querySelector('button')!,
+    resetBtn: document.querySelector('button')!,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
   }
 }
@@ -32,7 +32,7 @@ function main() {
   initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
-  initReset(elements.reset)
+  initReset(elements.resetBtn)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
 
   animate(hammer, elements.rotationInfo)
@@ -124,9 +124,9 @@ function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'ha
 function zdogViewInit(zdogView: Element) {
   createCheckboxInput({
     elem: zdogView,
-    labelText: 'Zdog original view',
+    labelText: 'Icon view',
     onToggle: (isChecked: boolean) => {
-      document.body.classList[isChecked ? 'add' : 'remove']('zdogView')
+      document.body.classList[!isChecked ? 'add' : 'remove']('zdogView')
     },
   })
 }
