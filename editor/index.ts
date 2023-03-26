@@ -86,15 +86,43 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 }
 
 function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
+  createNumberInput({
+    elem: handlePicker,
+    labelText: `<code>${handleProp}</code>`,
+    getValue() {
+      return hammer[handleProp]
+    },
+    setValue(n: number) {
+      hammer[handleProp] = n
+    },
+    hammer,
+  })
+}
+
+function createNumberInput({
+  elem,
+  labelText,
+  getValue,
+  setValue,
+  hammer,
+}: {
+  elem: Element
+  labelText: string
+  getValue: () => number
+  setValue: (n: number) => void
+  hammer: Hammer
+}) {
+  const storeKey = elem.id!
+
   {
-    const val = toFloat(getStoreValue(handleProp))
-    if (val) hammer[handleProp] = val
+    const val = toFloat(getStoreValue(storeKey))
+    if (val) setValue(val)
   }
 
   // <div><label><input type="number" step="any" /></label><span id="r2-val"></span></div>
-  handlePicker.innerHTML = ''
+  elem.innerHTML = ''
   const parentEl = document.createElement('div')
-  handlePicker.appendChild(parentEl)
+  elem.appendChild(parentEl)
   const labelEl = document.createElement('label')
   parentEl.appendChild(labelEl)
   const inputEl = document.createElement('input')
@@ -104,21 +132,22 @@ function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'ha
   inputEl.style.padding = '4px'
   labelEl.appendChild(inputEl)
   const valEl = document.createElement('span')
-  valEl.innerHTML = ` <code>${handleProp}</code>`
+  valEl.innerHTML = ' ' + labelText
   parentEl.appendChild(valEl)
 
   const updateUI = () => {
-    const val = hammer[handleProp]
+    const val = getValue()
     inputEl.value = String(val)
   }
   updateUI()
 
   inputEl.oninput = (ev: any) => {
     const val: string = ev.target!.value
-    hammer[handleProp] = toFloat(val)
+    const n = toFloat(val)
+    setValue(n)
     updateUI()
     hammer.reset()
-    setStoreValue(handleProp, val)
+    setStoreValue(storeKey, val)
   }
 }
 
@@ -126,7 +155,7 @@ function zdogViewInit(zdogView: Element) {
   createCheckboxInput({
     elem: zdogView,
     labelText: 'Icon view',
-    onToggle: (isChecked: boolean) => {
+    onToggle(isChecked: boolean) {
       document.body.classList[!isChecked ? 'add' : 'remove']('zdogView')
     },
   })
@@ -136,7 +165,7 @@ function initFaviconSize(faviconSize: Element) {
   createCheckboxInput({
     elem: faviconSize,
     labelText: 'Favicon size',
-    onToggle: (isChecked: boolean) => {
+    onToggle(isChecked: boolean) {
       document.body.classList[isChecked ? 'add' : 'remove']('faviconSize')
     },
   })
@@ -146,7 +175,7 @@ function initAutoSpinning(autoSpinning: Element) {
   createCheckboxInput({
     elem: autoSpinning,
     labelText: 'Auto spinning',
-    onToggle: (isChecked: boolean) => {
+    onToggle(isChecked: boolean) {
       isSpinning = isChecked
     },
   })
@@ -156,10 +185,10 @@ function initHighBackLightningBold(hideBackLightningBolt: HTMLElement, hammer: H
   createCheckboxInput({
     elem: hideBackLightningBolt,
     labelText: 'Hide back lightning bolt',
-    onToggle: (isChecked: boolean) => {
+    onToggle(isChecked: boolean) {
       hammer.hideBackLightningBolt = isChecked
     },
-    onChange: () => {
+    applyValue() {
       hammer.reset()
     },
   })
@@ -169,12 +198,12 @@ function createCheckboxInput({
   elem,
   labelText,
   onToggle,
-  onChange,
+  applyValue,
 }: {
   elem: Element
   labelText: string
   onToggle: (isChecked: boolean) => void
-  onChange?: (isChecked: boolean) => void
+  applyValue?: (isChecked: boolean) => void
 }) {
   elem.innerHTML = ''
   const labelEl = document.createElement('label')
@@ -197,7 +226,7 @@ function createCheckboxInput({
     onToggle(isChecked)
     inputEl.checked = isChecked
     if (!isInit) {
-      onChange?.(isChecked)
+      applyValue?.(isChecked)
     }
   }
   inputEl.oninput = (ev) => {
