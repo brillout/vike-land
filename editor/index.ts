@@ -1,4 +1,3 @@
-import { isContext } from 'vm'
 import * as Zdog from 'zdog'
 import { Hammer, Colors, Perspective } from '../Hammer'
 
