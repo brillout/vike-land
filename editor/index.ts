@@ -135,7 +135,7 @@ function zdogViewInit(zdogView: Element) {
 function initFaviconSize(faviconSize: Element) {
   createCheckboxInput({
     elem: faviconSize,
-    labelText: 'favicon size',
+    labelText: 'Favicon size',
     onToggle: (isChecked: boolean) => {
       document.body.classList[isChecked ? 'add' : 'remove']('faviconSize')
     },
