@@ -42,6 +42,7 @@ function main() {
 
 function initReset(resetBtn: HTMLButtonElement) {
   resetBtn.onclick = () => {
+    isSpinning = false
     clearStore()
     // @ts-ignore
     window.navigation.reload()
@@ -232,6 +233,7 @@ function savePerspective(hammer: Hammer) {
     rotate: hammer.illo.rotate,
     translate: hammer.illo.translate,
   }
+  hammer.perspective = perspective
   setStoreValue('perspective', JSON.stringify(perspective))
 }
 function initPerspective(hammer: Hammer) {
