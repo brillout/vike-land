@@ -1,7 +1,11 @@
 export { Hammer }
+export { toHumanReadable }
+export { fromHumanReadable }
+export { fromHumanReadableAxis }
 export type { IlloElement }
 export type { Colors }
 export type { Perspective }
+export type { PerspectiveUserControlable }
 
 import * as Zdog from 'zdog'
 const { TAU } = Zdog
@@ -20,7 +24,7 @@ const slopeSize = 3
 const sideLength = 8
 
 const perspectiveDefault: Perspective = {
-  rotate: { x: TAU * (-0.13 / 16), y: TAU * (-6.63 / 16), z: TAU * (-1.2 / 16) },
+  rotate: fromHumanReadable({ x: -0.13, y: -6.63, z: -1.2 }),
   translate: { x: -2.6, y: 7, z: 0 },
 }
 const colorsDefault: Colors = {
@@ -57,6 +61,11 @@ type Perspective = {
     y: number
     z: number
   }
+}
+type PerspectiveUserControlable = {
+  x: number
+  y: number
+  z: number
 }
 
 type Colors = {
@@ -614,4 +623,26 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     scale: { x: scale, y: scale, z: scale },
   })
   return shape
+}
+
+function toHumanReadable({ x, y, z }: { x: number; y: number; z: number }) {
+  const f = (v: number) => {
+    v = (v * 16) / TAU
+    v = Math.floor(v * 100) / 100
+    return v
+  }
+  x = f(x)
+  y = f(y)
+  z = f(z)
+  return { x, y, z }
+}
+function fromHumanReadableAxis(n: number) {
+  return TAU * (n / 16)
+}
+function fromHumanReadable({ x, y, z }: { x: number; y: number; z: number }) {
+  const f = fromHumanReadableAxis
+  x = f(x)
+  y = f(y)
+  z = f(z)
+  return { x, y, z }
 }

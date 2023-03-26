@@ -1,5 +1,12 @@
-import * as Zdog from 'zdog'
-import { Hammer, Colors, Perspective } from '../Hammer'
+import {
+  fromHumanReadable,
+  fromHumanReadableAxis,
+  Hammer,
+  toHumanReadable,
+  type Colors,
+  type Perspective,
+  type PerspectiveUserControlable,
+} from '../Hammer'
 
 main()
 
@@ -70,16 +77,20 @@ function initPerspectiveControlers(
       elem,
       labelText: `<code>${axis}</code>`,
       getValue() {
-        return hammer.perspective.rotate[axis]
+        const n = toHumanReadable(hammer.perspective.rotate)[axis]
+        // console.log('get', n)
+        return n
       },
       setValue(n: number) {
-        hammer.perspective.rotate[axis] = n
+        // console.log('set', n)
+        hammer.perspective.rotate[axis] = fromHumanReadableAxis(n)
       },
       hammer,
     })
     if (!onPerspectiveChange) onPerspectiveChange = []
-    onPerspectiveChange.push((perspective) => {
-      changeVal(perspective.rotate[axis])
+    onPerspectiveChange.push((perspectiveUserControlable) => {
+      const n = perspectiveUserControlable[axis]
+      changeVal(n)
     })
   })
 }
@@ -134,22 +145,19 @@ function createNumberInput({
   valEl.innerHTML = ' ' + labelText
   parentEl.appendChild(valEl)
 
-  const updateUI = () => {
-    const val = getValue()
-    inputEl.value = String(val)
-  }
-  updateUI()
+  const val = getValue()
+  inputEl.value = String(val)
 
   inputEl.oninput = (ev: any) => {
     const val: string = ev.target!.value
     const n = toFloat(val)
     setValue(n)
-    updateUI()
     hammer.reset()
     setStoreValue(storeKey, val)
   }
 
   const changeVal = (n: number) => {
+    // console.log('change', n)
     inputEl.value = String(n)
   }
   return changeVal
@@ -287,7 +295,7 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 }
 
 var isSpinning: boolean
-var onPerspectiveChange: ((perspective: Perspective) => void | undefined)[]
+var onPerspectiveChange: ((perspective: PerspectiveUserControlable) => void | undefined)[]
 function animate(hammer: Hammer) {
   hammer.onDragStart = () => {
     isSpinning = false
@@ -326,21 +334,13 @@ function initPerspective(hammer: Hammer) {
 var rotationValue: string
 function callOnPerspectiveChange(hammer: Hammer) {
   if (!hammer.illo) return
-  let { x, y, z } = hammer.illo.rotate
-  const t = (v: number) => {
-    v = (v * 16) / Zdog.TAU
-    v = Math.floor(v * 100) / 100
-    return v
-  }
-  x = t(x)
-  y = t(y)
-  z = t(z)
+  const { x, y, z } = toHumanReadable(hammer.illo.rotate)
   const rotationValueNew = JSON.stringify({ x, y, z }, null, 2)
-  if (rotationValue === rotationValueNew) {
-    return
-  }
+  const hasChanged = rotationValue !== rotationValueNew
   rotationValue = rotationValueNew
-  onPerspectiveChange.forEach((fn) => fn(hammer.perspective))
+  if (!hasChanged) return
+  const perspectiveUserControlable: PerspectiveUserControlable = { x, y, z }
+  onPerspectiveChange.forEach((fn) => fn(perspectiveUserControlable))
 }
 
 function assert(condition: unknown): asserts condition {
