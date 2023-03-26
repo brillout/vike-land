@@ -77,6 +77,7 @@ class Hammer {
     this.perspective = perspectiveDefault
     this.handleDiameter = handleDiameterDefault
     this.handleLength = handleLengthDefault
+    this.hideBackLightningBolt = false
   }
   illo: Zdog.Illustration | undefined = undefined
   illoElem: IlloElement
@@ -86,7 +87,8 @@ class Hammer {
   onDragEnd: (() => void) | undefined = undefined
   handleDiameter: number
   handleLength: number
-  updateColors() {
+  hideBackLightningBolt: boolean
+  reset() {
     this.init()
   }
   updatePerspective() {
@@ -138,6 +140,11 @@ function renderOuterHtml(outerElem: HTMLElement) {
   return illoElem
 }
 
+type Options = {
+  colors: Colors
+  hideBackLightningBolt: boolean
+}
+
 function render(hammer: Hammer) {
   const { illoElem, perspective, dragRotate } = hammer
   illoElem.setAttribute('width', '100')
@@ -156,7 +163,9 @@ function render(hammer: Hammer) {
     translate: perspective.translate,
   })
 
-  const { colors } = hammer
+  const { colors, hideBackLightningBolt } = hammer
+  const options = { colors, hideBackLightningBolt }
+
   // anchor
   var hammerGroup = new Zdog.Group({
     addTo: illo,
@@ -177,7 +186,7 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  genHead(head, colors)
+  genHead(head, options)
 
   {
     const { handleDiameter, handleLength } = hammer
@@ -221,9 +230,9 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   mount(mountColor1, 2, 3)
 }
 
-function genHead(head: Zdog.Anchor, colors: Colors) {
-  genHeadSides(head, colors)
-  genHeadFaces(head, colors)
+function genHead(head: Zdog.Anchor, options: Options) {
+  genHeadSides(head, options.colors)
+  genHeadFaces(head, options)
 }
 
 function genHeadSides(head: Zdog.Anchor, colors: Colors) {
@@ -236,11 +245,13 @@ function genHeadSides(head: Zdog.Anchor, colors: Colors) {
   })
 }
 
-function genHeadFaces(head: Zdog.Anchor, colors: Colors) {
-  genFaces(head, colors)
-  genFaceSlopes(head, colors)
+function genHeadFaces(head: Zdog.Anchor, options: Options) {
+  genFaces(head, options)
+  genFaceSlopes(head, options.colors)
 }
-function genFaces(head: Zdog.Anchor, colors: Colors) {
+function genFaces(head: Zdog.Anchor, options: Options) {
+  const { colors } = options
+
   const shape = (props: Zdog.ShapeOptions) =>
     new Zdog.Shape({
       stroke: STROKE,
@@ -277,7 +288,7 @@ function genFaces(head: Zdog.Anchor, colors: Colors) {
     translate: { x: 0, y: slopeSize },
     addTo: frontFaceGroup,
   })
-  genViteLogo(frontFaceGroup, colors)
+  const viteLogo = genViteLogo(frontFaceGroup, colors)
 
   // Back face
   frontFaceGroup.copyGraph({
@@ -285,6 +296,10 @@ function genFaces(head: Zdog.Anchor, colors: Colors) {
     translate: { x: 0, y: headLength, z: 0 },
     addTo: head,
   })
+
+  if (options.hideBackLightningBolt) {
+    viteLogo.remove()
+  }
 }
 
 function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
@@ -452,7 +467,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const translate = { x: 6.5, y: 8.2, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
-  new Zdog.Shape({
+  const shape = new Zdog.Shape({
     addTo,
     rotate,
     path: [
@@ -598,4 +613,5 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     translate: { x: translate.x, y: translate.y, z: translate.z },
     scale: { x: scale, y: scale, z: scale },
   })
+  return shape
 }
