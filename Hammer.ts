@@ -470,6 +470,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const translate = { x: 6.5, y: 8.2, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
+  const stroke = 0.6
   const shape = new Zdog.Shape({
     addTo,
     rotate,
@@ -610,10 +611,10 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
       },
     ],
     closed: true,
-    stroke: 1,
+    stroke,
     fill: true,
     color: colors.lightningBolt,
-    translate: { x: translate.x, y: translate.y, z: translate.z },
+    translate: { x: translate.x, y: translate.y, z: translate.z - stroke / 3 },
     scale: { x: scale, y: scale, z: scale },
   })
   return shape
