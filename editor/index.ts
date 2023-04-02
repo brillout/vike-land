@@ -293,11 +293,11 @@ function animate(hammer: Hammer) {
   hammer.onDragStart = () => {
     isSpinning = false
   }
-  if (isSpinning) {
-    hammer.perspective.rotate.y += 0.03
-    hammer.updatePerspective()
-  }
   requestAnimationFrame(() => {
+    if (isSpinning) {
+      hammer.perspective.rotate.y += 0.03
+      hammer.updatePerspective()
+    }
     hammer.update()
     callOnPerspectiveChange(hammer)
     animate(hammer)
