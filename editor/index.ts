@@ -78,6 +78,7 @@ function initPerspectiveControlers(
         type: 'rotate' as const,
         axis: 'z',
       },
+      /*
       {
         elem: translateX,
         type: 'translate' as const,
@@ -93,6 +94,7 @@ function initPerspectiveControlers(
         type: 'translate' as const,
         axis: 'z',
       },
+      */
     ] as const
   ).forEach(({ elem, axis, type }) => {
     const getCoordinate = () => hammer.perspective[type]
