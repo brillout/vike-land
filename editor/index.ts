@@ -12,9 +12,9 @@ function getElements() {
     autoSpinning: document.getElementById('autoSpinning')!,
     resetBtn: document.querySelector('button')!,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
-    perspectiveX: document.getElementById('perspective-x')!,
-    perspectiveY: document.getElementById('perspective-y')!,
-    perspectiveZ: document.getElementById('perspective-z')!,
+    rotationX: document.getElementById('rotation-x')!,
+    rotationY: document.getElementById('rotation-y')!,
+    rotationZ: document.getElementById('rotation-z')!,
   }
 }
 
@@ -42,24 +42,20 @@ function main() {
 
 function initPerspectiveControlers(
   hammer: Hammer,
-  {
-    perspectiveX,
-    perspectiveY,
-    perspectiveZ,
-  }: { perspectiveX: HTMLElement; perspectiveY: HTMLElement; perspectiveZ: HTMLElement },
+  { rotationX, rotationY, rotationZ }: { rotationX: HTMLElement; rotationY: HTMLElement; rotationZ: HTMLElement },
 ) {
   ;(
     [
       {
-        elem: perspectiveX,
+        elem: rotationX,
         axis: 'x',
       },
       {
-        elem: perspectiveY,
+        elem: rotationY,
         axis: 'y',
       },
       {
-        elem: perspectiveZ,
+        elem: rotationZ,
         axis: 'z',
       },
     ] as const
