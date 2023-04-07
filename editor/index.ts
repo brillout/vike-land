@@ -12,9 +12,12 @@ function getElements() {
     autoSpinning: document.getElementById('autoSpinning')!,
     resetBtn: document.querySelector('button')!,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
-    rotationX: document.getElementById('rotation-x')!,
-    rotationY: document.getElementById('rotation-y')!,
-    rotationZ: document.getElementById('rotation-z')!,
+    rotateX: document.getElementById('rotate-x')!,
+    rotateY: document.getElementById('rotate-y')!,
+    rotateZ: document.getElementById('rotate-z')!,
+    translateX: document.getElementById('translate-x')!,
+    translateY: document.getElementById('translate-y')!,
+    translateZ: document.getElementById('translate-z')!,
   }
 }
 
@@ -42,43 +45,78 @@ function main() {
 
 function initPerspectiveControlers(
   hammer: Hammer,
-  { rotationX, rotationY, rotationZ }: { rotationX: HTMLElement; rotationY: HTMLElement; rotationZ: HTMLElement },
+  {
+    rotateX,
+    rotateY,
+    rotateZ,
+    translateX,
+    translateY,
+    translateZ,
+  }: {
+    rotateX: HTMLElement
+    rotateY: HTMLElement
+    rotateZ: HTMLElement
+    translateX: HTMLElement
+    translateY: HTMLElement
+    translateZ: HTMLElement
+  },
 ) {
   ;(
     [
       {
-        elem: rotationX,
+        elem: rotateX,
+        type: 'rotate' as const,
         axis: 'x',
       },
       {
-        elem: rotationY,
+        elem: rotateY,
+        type: 'rotate' as const,
         axis: 'y',
       },
       {
-        elem: rotationZ,
+        elem: rotateZ,
+        type: 'rotate' as const,
+        axis: 'z',
+      },
+      {
+        elem: translateX,
+        type: 'translate' as const,
+        axis: 'x',
+      },
+      {
+        elem: translateY,
+        type: 'translate' as const,
+        axis: 'y',
+      },
+      {
+        elem: translateZ,
+        type: 'translate' as const,
         axis: 'z',
       },
     ] as const
-  ).forEach(({ elem, axis }) => {
+  ).forEach(({ elem, axis, type }) => {
+    const getCoordinate = () => hammer.perspective[type]
     const changeVal = createNumberInput({
       elem,
-      labelText: `<code>${axis}</code>`,
+      labelText: `<code>${axis}</code> (${type})`,
       getValue() {
-        const n = toHumanReadable(hammer.perspective.rotate)[axis]
+        const n = toHumanReadable(getCoordinate())[axis]
         // console.log('get', n)
         return n
       },
       setValue(n: number) {
         // console.log('set', n)
-        hammer.perspective.rotate[axis] = fromHumanReadableAxis(n)
+        getCoordinate()[axis] = fromHumanReadableAxis(n)
       },
       hammer,
     })
-    if (!onPerspectiveChange) onPerspectiveChange = []
-    onPerspectiveChange.push((perspectiveUserControlable) => {
-      const n = perspectiveUserControlable[axis]
-      changeVal(n)
-    })
+    if (type === 'rotate') {
+      if (!onPerspectiveChange) onPerspectiveChange = []
+      onPerspectiveChange.push((perspectiveUserControlable) => {
+        const n = perspectiveUserControlable[axis]
+        changeVal(n)
+      })
+    }
   })
 }
 
@@ -300,13 +338,13 @@ function animate(hammer: Hammer) {
   })
 }
 
-var rotationValue: string
+var rotateValue: string
 function callOnPerspectiveChange(hammer: Hammer) {
   if (!hammer.illo) return
   const { x, y, z } = toHumanReadable(hammer.illo.rotate)
-  const rotationValueNew = JSON.stringify({ x, y, z }, null, 2)
-  const hasChanged = rotationValue !== rotationValueNew
-  rotationValue = rotationValueNew
+  const rotateValueNew = JSON.stringify({ x, y, z }, null, 2)
+  const hasChanged = rotateValue !== rotateValueNew
+  rotateValue = rotateValueNew
   if (!hasChanged) return
   const perspectiveUserControlable: PerspectiveUserControlable = { x, y, z }
   onPerspectiveChange.forEach((fn) => fn(perspectiveUserControlable))
