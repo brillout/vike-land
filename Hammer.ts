@@ -22,8 +22,9 @@ const slopeSize = 3
 const sideLength = 8
 
 const perspectiveDefault: Perspective = {
-  rotate: fromHumanReadable({ x: -0.13, y: -6.63, z: -1.2 }),
+  // rotate: fromHumanReadable({ x: -0.13, y: -6.63, z: -1.2 }),
   // translate: { x: -2.6, y: 7, z: 0 },
+  rotate: fromHumanReadable({ x: -0.3, y: -6.63, z: 0 }),
   translate: { x: 0, y: 0, z: 0 },
 }
 const colorsDefault: Colors = {

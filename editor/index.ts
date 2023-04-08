@@ -1,5 +1,7 @@
 import { fromHumanReadableAxis, Hammer, toHumanReadable, type Colors, type PerspectiveUserControlable } from '../Hammer'
 
+const rotation2DDefault = 11
+
 main()
 
 function getElements() {
@@ -15,6 +17,7 @@ function getElements() {
     rotateX: document.getElementById('rotate-x')!,
     rotateY: document.getElementById('rotate-y')!,
     rotateZ: document.getElementById('rotate-z')!,
+    rotate2D: document.getElementById('rotate2D')!,
     translateX: document.getElementById('translate-x')!,
     translateY: document.getElementById('translate-y')!,
     translateZ: document.getElementById('translate-z')!,
@@ -37,6 +40,7 @@ function main() {
   initReset(elements.resetBtn)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initPerspectiveControlers(hammer, elements)
+  initRotate2D(elements.rotate2D)
 
   animate(hammer)
 
@@ -122,6 +126,28 @@ function initPerspectiveControlers(
   })
 }
 
+function initRotate2D(elemRotate2D: HTMLElement) {
+  const elemLogo = document.getElementById('logo')!
+
+  const toVal = (n: number) => `rotate(${n}deg)`
+  const fromVal = (val: string) => parseInt(val.split('(')[1]!.split('deg)')[0]!, 10)
+
+  createNumberInput({
+    elem: elemRotate2D,
+    labelText: `<code>degree</code> (2D rotation)`,
+    defaultValue: rotation2DDefault,
+    getValue() {
+      const val = elemLogo.style.transform
+      return fromVal(val)
+    },
+    setValue(n: number) {
+      const val = toVal(n)
+      elemLogo.style.transform = val
+    },
+    step: 1,
+  })
+}
+
 function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
   createNumberInput({
     elem: handlePicker,
@@ -141,19 +167,24 @@ function createNumberInput({
   labelText,
   getValue,
   setValue,
+  defaultValue,
+  step = 0.1,
   hammer,
 }: {
   elem: Element
   labelText: string
   getValue: () => number
   setValue: (n: number) => void
-  hammer: Hammer
+  step?: number
+  defaultValue?: number
+  hammer?: Hammer
 }) {
   const storeKey = elem.id!
 
   {
     const val = toFloat(getStoreValue(storeKey))
     if (val) setValue(val)
+    else if (defaultValue) setValue(defaultValue)
   }
 
   // <div><label><input type="number" step="any" /></label><span id="r2-val"></span></div>
@@ -164,7 +195,7 @@ function createNumberInput({
   parentEl.appendChild(labelEl)
   const inputEl = document.createElement('input')
   inputEl.setAttribute('type', 'number')
-  inputEl.setAttribute('step', '0.1')
+  inputEl.setAttribute('step', step.toString())
   inputEl.style.width = '40px'
   inputEl.style.padding = '4px'
   labelEl.appendChild(inputEl)
@@ -179,7 +210,7 @@ function createNumberInput({
     const val: string = ev.target!.value
     const n = toFloat(val)
     setValue(n)
-    hammer.reset()
+    hammer?.reset()
     setStoreValue(storeKey, val)
   }
 
@@ -331,7 +362,7 @@ function animate(hammer: Hammer) {
   }
   requestAnimationFrame(() => {
     if (isSpinning) {
-      hammer.perspective.rotate.y += 0.03
+      hammer.perspective.rotate.y += 0.015
       hammer.updatePerspective()
     }
     hammer.update()
