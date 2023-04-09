@@ -163,6 +163,10 @@ function render(hammer: Hammer) {
     onDragStart() {
       hammer.onDragStart?.()
     },
+    onDragMove() {
+      Object.assign(perspective.rotate, illo.rotate)
+      Object.assign(perspective.translate, illo.translate)
+    },
     //zoom: 4.3,
     rotate: perspective.rotate,
     translate: perspective.translate,
