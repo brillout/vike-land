@@ -31,7 +31,7 @@ label {
 body.zdogView .circle-square {
   display: none;
 }
-body.zdogView .hammer {
+#logo:hover .hammer {
   outline: 1px solid black;
 }
 
