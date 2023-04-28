@@ -355,18 +355,19 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 }
 
 var isSpinning: boolean
+var isMouseover: boolean
 var onPerspectiveChange: ((perspective: PerspectiveUserControlable) => void | undefined)[]
 function animate(hammer: Hammer) {
   const logoElem = document.getElementById('logo')!
   logoElem.onmouseleave = () => {
-    isSpinning = true
+    isMouseover = false
   }
   logoElem.onmouseenter = () => {
-    isSpinning = false
+    isMouseover = true
   }
   /*
   hammer.onDragStart = () => {
-    isSpinning = false
+    isMouseover = true
   }
   */
   render(hammer)
@@ -374,7 +375,7 @@ function animate(hammer: Hammer) {
 
 function render(hammer: Hammer) {
   requestAnimationFrame(() => {
-    if (isSpinning) {
+    if (isSpinning && !isMouseover) {
       hammer.perspective.rotate.y += 0.015
       hammer.updatePerspective()
     }
