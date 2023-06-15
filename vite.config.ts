@@ -4,7 +4,8 @@ import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   server: {
-    host: true
+    host: true,
+    port: 3000
   },
   build: {
     rollupOptions: {

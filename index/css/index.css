@@ -1,21 +1,10 @@
 @import './fonts.css';
 @import './code.css';
 @import './blockquote.css';
+@import './copy.css';
 
 body {
   margin: 0;
-}
-
-#copy {
-  max-width: 770px;
-  width: 100vw;
-  padding: 0 10px;
-  margin: auto;
-  box-sizing: border-box;
-}
-#copy h2 {
-  font-weight: 500;
-  margin-top: 50px;
 }
 
 #toc {
