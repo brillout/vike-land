@@ -1,8 +1,10 @@
 export { Hammer }
 export { toHumanReadable }
+export { fromHumanReadable }
 export { fromHumanReadableAxis }
 export type { IlloElement }
 export type { Colors }
+export type { Perspective }
 export type { PerspectiveUserControlable }
 
 import * as Zdog from 'zdog'
@@ -21,12 +23,12 @@ const STROKE = 0
 const slopeSize = 3
 const sideLength = 8
 
+// perspectiveDefault is meant to be overriden by setting hammer.perspective = /* ... */
 const perspectiveDefault: Perspective = {
-  // rotate: fromHumanReadable({ x: -0.13, y: -6.63, z: -1.2 }),
-  // translate: { x: -2.6, y: 7, z: 0 },
-  rotate: fromHumanReadable({ x: -0.3, y: -6.63, z: 0 }),
+  rotate: fromHumanReadable({ x: 0, y: 0, z: 0 }),
   translate: { x: 0, y: 0, z: 0 },
 }
+
 const colorsDefault: Colors = {
   metal1: '#9e9e9e',
   metal2: '#8c8c8c',

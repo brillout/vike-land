@@ -1,6 +1,33 @@
-import { fromHumanReadableAxis, Hammer, toHumanReadable, type Colors, type PerspectiveUserControlable } from '../Hammer'
+import {
+  fromHumanReadableAxis,
+  Hammer,
+  toHumanReadable,
+  type Colors,
+  type PerspectiveUserControlable,
+} from '../Hammer'
 
-const rotation2DDefault = 11
+const perspectiveOldest = {
+  rotation2D: 0,
+  rotate: { x: -0.13, y: -6.63, z: -1.2 },
+  // translate: { x: -2.6, y: 7, z: 0 },
+}
+const perspectivePrevious = {
+  rotation2D: 11,
+  rotate: { x: -0.3, y: -6.63, z: 0 },
+}
+const perspectiveNew1 = {
+  rotation2D: -23,
+  rotate: { x: -0.4, y: 152.8, z: 0 },
+}
+const perspectiveNew2 = {
+  rotation2D: -23,
+  rotate: { x: -0.6, y: 159.19, z: 0 },
+}
+let perspectiveDefault: typeof perspectiveOldest
+perspectiveDefault = perspectiveOldest
+perspectiveDefault = perspectivePrevious
+perspectiveDefault = perspectiveNew1
+perspectiveDefault = perspectiveNew2
 
 main()
 
@@ -114,6 +141,7 @@ function initPerspectiveControlers(
         // console.log('set', n)
         getCoordinate()[axis] = fromHumanReadableAxis(n)
       },
+      defaultValue: perspectiveDefault.rotate[axis],
       hammer,
     })
     if (type === 'rotate') {
@@ -135,7 +163,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   createNumberInput({
     elem: elemRotate2D,
     labelText: `<code>degree</code> (2D rotation)`,
-    defaultValue: rotation2DDefault,
+    defaultValue: perspectiveDefault.rotation2D,
     getValue() {
       const val = elemLogo.style.transform
       return fromVal(val)
@@ -183,8 +211,8 @@ function createNumberInput({
 
   {
     const val = toFloat(getStoreValue(storeKey))
-    if (val) setValue(val)
-    else if (defaultValue) setValue(defaultValue)
+    if (val !== null) setValue(val)
+    else if (defaultValue !== undefined) setValue(defaultValue)
   }
 
   // <div><label><input type="number" step="any" /></label><span id="r2-val"></span></div>
