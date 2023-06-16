@@ -5,7 +5,7 @@ import { Pricing } from './Pricing'
 import { PricingDesc } from './PricingDesc'
 
 const container = document.getElementById('react-root')
-const root = ReactDOM.createRoot(container)
+const root = ReactDOM.createRoot(container!)
 root.render(
   <div id="pricing-page">
     <h1>Pricing</h1>

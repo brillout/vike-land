@@ -15,12 +15,14 @@ function Pricing() {
 function PricingIndividual() {
   return (
     <>
-      <P c="box">
+      <P c="box" id="pricing-individual">
         <P c="header">Individual</P>
         <P c="table">
           <P c="row">
+            <P c="cell">Always</P>
+          </P>
+          <P c="row">
             <P c="cell">
-              Forever
               <P c="free">Free</P>
             </P>
           </P>
@@ -32,7 +34,7 @@ function PricingIndividual() {
 function PricingCompany() {
   return (
     <>
-      <P c="box">
+      <P c="box" id="pricing-company">
         <P c="header">Company</P>
         <P c="table">
           <P c="row">
@@ -61,6 +63,6 @@ function PricingCompany() {
   )
 }
 
-function P({ c, children }: { c: string; children: any }) {
-  return <div className={`pricing-${c}`}>{children}</div>
+function P({ c, ...props }: { c: string } & Record<string, any>) {
+  return <div className={`pricing-${c}`} {...props} />
 }
