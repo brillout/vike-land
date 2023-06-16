@@ -477,6 +477,8 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
+  // Distance from the hammer => apparent thickness of the Vite logo
+  const thikness = stroke / 4
   const shape = new Zdog.Shape({
     addTo,
     rotate,
@@ -620,7 +622,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     stroke,
     fill: true,
     color: colors.lightningBolt,
-    translate: { x: translate.x, y: translate.y, z: translate.z - stroke / 3 },
+    translate: { x: translate.x, y: translate.y, z: translate.z + thikness },
     scale: { x: scale, y: scale, z: scale },
   })
   return shape
