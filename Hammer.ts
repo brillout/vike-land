@@ -30,12 +30,12 @@ const perspectiveDefault: Perspective = {
 }
 
 const colorsDefault: Colors = {
-  metal1: '#9e9e9e',
-  metal2: '#8c8c8c',
-  metal3: '#7a7a7a',
-  metal4: '#6b6b6b',
-  wood: '#774722',
-  lightningBolt: '#f4be34',
+  metal1: '#b5b5b5',
+  metal2: '#a2a0a0',
+  metal3: '#8c8c8c',
+  metal4: '#828282',
+  wood: '#a26a3f',
+  lightningBolt: '#f9c748',
 }
 
 /******************************/
