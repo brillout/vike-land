@@ -1,10 +1,4 @@
-import {
-  fromHumanReadableAxis,
-  Hammer,
-  toHumanReadable,
-  type Colors,
-  type PerspectiveUserControlable,
-} from '../Hammer'
+import { fromHumanReadableAxis, Hammer, toHumanReadable, type Colors, type PerspectiveUserControlable } from '../Hammer'
 
 const perspectiveOldest = {
   rotation2D: 0,
@@ -23,11 +17,15 @@ const perspectiveNew2 = {
   rotation2D: -23,
   rotate: { x: -0.6, y: 159.19, z: 0 },
 }
-let perspectiveDefault: typeof perspectiveOldest
-perspectiveDefault = perspectiveOldest
-perspectiveDefault = perspectivePrevious
-perspectiveDefault = perspectiveNew1
-perspectiveDefault = perspectiveNew2
+const perspectiveNew3 = {
+  rotation2D: -23,
+  rotate: { x: -0.4, y: 159.3, z: 0 },
+}
+const perspectiveFavicon = {
+  rotation2D: 29,
+  rotate: { x: -0.4, y: 0.6, z: 0 },
+}
+const perspectiveDefault = perspectiveNew3
 
 main()
 
