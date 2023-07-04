@@ -25,7 +25,11 @@ const perspectiveFavicon = {
   rotation2D: 29,
   rotate: { x: -0.4, y: 0.6, z: 0 },
 }
-const perspectiveDefault = perspectiveNew3
+const perspectiveLatest = {
+  rotation2D: -30,
+  rotate: { x: -0.5, y: 23.2, z: 0 },
+}
+const perspectiveDefault = perspectiveLatest
 
 main()
 
