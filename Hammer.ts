@@ -29,6 +29,7 @@ const perspectiveDefault: Perspective = {
   translate: { x: 0, y: 0, z: 0 },
 }
 
+/* Much brighter
 const colorsDefault: Colors = {
   metal1: '#bdbdbd',
   metal2: '#b3b3b3',
@@ -36,6 +37,15 @@ const colorsDefault: Colors = {
   metal4: '#9e9e9e',
   wood: '#a56c4a',
   lightningBolt: '#fbcc56',
+}
+*/
+const colorsDefault: Colors = {
+  metal1: '#b5b5b5',
+  metal2: '#949494',
+  metal3: '#7a7a7a',
+  metal4: '#787878',
+  wood: '#91512b',
+  lightningBolt: '#f7bc26',
 }
 
 /******************************/
