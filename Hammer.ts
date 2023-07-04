@@ -16,7 +16,7 @@ const { TAU } = Zdog
 
 const headLength = 35
 
-const handleDiameterDefault = 8
+const handleDiameterDefault = 8.5
 const handleLengthDefault = 18
 
 const STROKE = 0
