@@ -29,7 +29,11 @@ const perspectiveLatest = {
   rotation2D: -30,
   rotate: { x: -0.5, y: 23.2, z: 0 },
 }
-const perspectiveDefault = perspectiveLatest
+const perspectiveLatest2 = {
+  rotation2D: 13,
+  rotate: { x: -0.4, y: 23.5, z: 0 },
+}
+const perspectiveDefault = perspectiveLatest2
 
 main()
 

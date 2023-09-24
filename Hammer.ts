@@ -16,8 +16,8 @@ const { TAU } = Zdog
 
 const headLength = 35
 
-const handleDiameterDefault = 8.5
-const handleLengthDefault = 18
+const handleDiameterDefault = 8.6
+const handleLengthDefault = 16.7
 
 const STROKE = 0
 const slopeSize = 3
@@ -39,12 +39,22 @@ const colorsDefault: Colors = {
   lightningBolt: '#fbcc56',
 }
 */
+/*
 const colorsDefault: Colors = {
   metal1: '#b5b5b5',
   metal2: '#949494',
   metal3: '#7a7a7a',
   metal4: '#787878',
   wood: '#91512b',
+  lightningBolt: '#f7bc26',
+}
+*/
+const colorsDefault: Colors = {
+  metal1: '#b5b5b5',
+  metal2: '#949494',
+  metal3: '#757575',
+  metal4: '#808080',
+  wood: '#9e4d1f',
   lightningBolt: '#f7bc26',
 }
 
