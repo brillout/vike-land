@@ -98,6 +98,7 @@ let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
 let changeHandleDiameter: (n: number) => void
 let changeHandleLength: (n: number) => void
+let updateColorInputs: () => void
 main()
 
 function getElements() {
@@ -466,6 +467,7 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer) {
     genPresetBtn(name, presetsColorEl, () => {
       hammer.colors = colors
       hammer.reset()
+      updateColorInputs()
     })
   })
 }
@@ -487,6 +489,10 @@ function addHeading(heading: string, el: Element) {
 
 function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
+
+  const updateInputs: (() => void)[] = []
+  updateColorInputs = () => updateInputs.forEach(f => f())
+
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
@@ -504,19 +510,27 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     const valEl = document.createElement('span')
     parentEl.appendChild(valEl)
 
-    const updateUI = () => {
+    const updateInput = () => {
       const val = hammer.colors[key]
       inputEl.value = val
       valEl.innerHTML = ` ${val} <code>${key}</code>`
     }
-    updateUI()
+    const updateStore = () => {
+      const val = hammer.colors[key]
+      setStoreValue(key, val)
+    }
+    updateInput()
+    updateInputs.push(() => {
+      updateInput()
+      updateStore()
+    })
 
     inputEl.oninput = (ev: any) => {
       const val: string = ev.target!.value
-      hammer.colors[key as keyof Colors] = val
-      updateUI()
+      hammer.colors[key] = val
+      updateInput()
       hammer.reset()
-      setStoreValue(key, val)
+      updateStore()
     }
   })
 }
