@@ -1,44 +1,56 @@
-import { fromHumanReadableAxis, Hammer, toHumanReadable, type Colors, type PerspectiveUserControlable } from '../Hammer'
+import {
+  fromHumanReadable,
+  fromHumanReadableAxis,
+  Hammer,
+  toHumanReadable,
+  type Colors,
+  type PerspectiveUserControlable,
+} from '../Hammer'
 
-const perspectiveOldest = {
-  rotation2D: 0,
-  rotate: { x: -0.13, y: -6.63, z: -1.2 },
-  // translate: { x: -2.6, y: 7, z: 0 },
+const presets = {
+  oldest: {
+    rotation2D: 0,
+    rotate: { x: -0.13, y: -6.63, z: -1.2 },
+    // translate: { x: -2.6, y: 7, z: 0 },
+  },
+  previous: {
+    rotation2D: 11,
+    rotate: { x: -0.3, y: -6.63, z: 0 },
+  },
+  new1: {
+    rotation2D: -23,
+    rotate: { x: -0.4, y: 152.8, z: 0 },
+  },
+  new2: {
+    rotation2D: -23,
+    rotate: { x: -0.6, y: 159.19, z: 0 },
+  },
+  new3: {
+    rotation2D: -23,
+    rotate: { x: -0.4, y: 159.3, z: 0 },
+  },
+  favicon: {
+    rotation2D: 29,
+    rotate: { x: -0.4, y: 0.6, z: 0 },
+  },
+  latest: {
+    rotation2D: -30,
+    rotate: { x: -0.5, y: 23.2, z: 0 },
+  },
+  latest2: {
+    rotation2D: 13,
+    rotate: { x: -0.4, y: 23.5, z: 0 },
+  },
 }
-const perspectivePrevious = {
-  rotation2D: 11,
-  rotate: { x: -0.3, y: -6.63, z: 0 },
-}
-const perspectiveNew1 = {
-  rotation2D: -23,
-  rotate: { x: -0.4, y: 152.8, z: 0 },
-}
-const perspectiveNew2 = {
-  rotation2D: -23,
-  rotate: { x: -0.6, y: 159.19, z: 0 },
-}
-const perspectiveNew3 = {
-  rotation2D: -23,
-  rotate: { x: -0.4, y: 159.3, z: 0 },
-}
-const perspectiveFavicon = {
-  rotation2D: 29,
-  rotate: { x: -0.4, y: 0.6, z: 0 },
-}
-const perspectiveLatest = {
-  rotation2D: -30,
-  rotate: { x: -0.5, y: 23.2, z: 0 },
-}
-const perspectiveLatest2 = {
-  rotation2D: 13,
-  rotate: { x: -0.4, y: 23.5, z: 0 },
-}
-const perspectiveDefault = perspectiveLatest2
 
+const perspectiveDefault = presets.latest2
+
+let changeRotation2D: (n: number) => void
 main()
 
 function getElements() {
   return {
+    presets: document.getElementById('presets')!,
     colorPicker: document.getElementById('colorPicker')!,
     handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
     handleLengthPicker: document.getElementById('handleLengthPicker')!,
@@ -65,6 +77,7 @@ function main() {
 
   zdogViewInit(elements.zdogView)
 
+  initPresets(elements.presets, hammer)
   initColorInputs(elements.colorPicker, hammer)
   initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter')
   initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
@@ -166,7 +179,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   const toVal = (n: number) => `rotate(${n}deg)`
   const fromVal = (val: string) => parseInt(val.split('(')[1]!.split('deg)')[0]!, 10)
 
-  createNumberInput({
+  changeRotation2D = createNumberInput({
     elem: elemRotate2D,
     labelText: `<code>degree</code> (2D rotation)`,
     defaultValue: perspectiveDefault.rotation2D,
@@ -352,8 +365,39 @@ function initReset(resetBtn: HTMLButtonElement) {
   }
 }
 
+function initPresets(presetsEl: Element, hammer: Hammer) {
+  addHeading('Perspective', presetsEl)
+  Object.entries(presets).forEach(([name, preset]) => {
+    const btnEl = document.createElement('button')
+    presetsEl.appendChild(btnEl)
+    btnEl.style.marginRight = '10px'
+    btnEl.style.marginBottom = '7px'
+    btnEl.innerHTML = ` ${name} `
+    btnEl.onclick = () => {
+      hammer.perspective.rotate = fromHumanReadable(preset.rotate)
+      hammer.updatePerspective()
+      changeRotation2D(preset.rotation2D)
+    }
+  })
+  addPadding(presetsEl)
+}
+
+function addHeading(heading: string, el: Element) {
+  const headingEl = document.createElement('h3')
+  headingEl.innerHTML = heading
+  el.prepend(headingEl)
+}
+function addPadding(el: Element) {
+  /*
+  el.appendChild(document.createElement('br'))
+  el.appendChild(document.createElement('br'))
+  */
+}
+
 function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
+  addHeading('Colors', colorPicker)
+
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
@@ -386,6 +430,8 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
       setStoreValue(key, val)
     }
   })
+
+  addPadding(colorPicker)
 }
 
 var isSpinning: boolean

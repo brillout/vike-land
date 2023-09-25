@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: sans-serif;
   --logo-size-large: 400px;
   --logo-size-small: 40px;
   --logo-size: var(--logo-size-large);
