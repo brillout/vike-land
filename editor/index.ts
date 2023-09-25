@@ -169,7 +169,7 @@ function initPerspectiveControlers(
       if (!onPerspectiveChange) onPerspectiveChange = []
       onPerspectiveChange.push((perspectiveUserControlable) => {
         const n = perspectiveUserControlable[axis]
-        changeVal(n)
+        changeVal(n, true)
       })
     }
   })
@@ -263,11 +263,14 @@ function createNumberInput({
     setStoreValue(storeKey, val)
   }
 
-  const changeVal = (n: number) => {
+  const changeVal = (n: number, alreadyApplied?: true) => {
     // console.log('change', n)
     const val = String(n)
     inputEl.value = val
     setStoreValue(storeKey, val)
+    if (!alreadyApplied) {
+      setValue(n)
+    }
   }
   return changeVal
 }
@@ -375,9 +378,9 @@ function initDownload(download: HTMLButtonElement) {
   }
 }
 
-function downloadFile(content: string, mimeType: string, filename: string){
+function downloadFile(content: string, mimeType: string, filename: string) {
   const a = document.createElement('a')
-  const blob = new Blob([content], {type: mimeType})
+  const blob = new Blob([content], { type: mimeType })
   const url = URL.createObjectURL(blob)
   a.setAttribute('href', url)
   a.setAttribute('download', filename)
