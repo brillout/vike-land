@@ -57,7 +57,8 @@ function getElements() {
     zdogView: document.getElementById('zdogView')!,
     faviconSize: document.getElementById('faviconSize')!,
     autoSpinning: document.getElementById('autoSpinning')!,
-    resetBtn: document.querySelector('button')!,
+    reset: document.querySelector('button#reset') as HTMLButtonElement,
+    download: document.querySelector('button#download') as HTMLButtonElement,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
     rotateX: document.getElementById('rotate-x')!,
     rotateY: document.getElementById('rotate-y')!,
@@ -83,7 +84,8 @@ function main() {
   initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
-  initReset(elements.resetBtn)
+  initReset(elements.reset)
+  initDownload(elements.download)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initPerspectiveControlers(hammer, elements)
   initRotate2D(elements.rotate2D)
@@ -356,17 +358,34 @@ function createCheckboxInput({
   updateUI(true)
 }
 
-function initReset(resetBtn: HTMLButtonElement) {
-  resetBtn.onclick = () => {
+function initReset(reset: HTMLButtonElement) {
+  reset.onclick = () => {
     isSpinning = false
     clearStore()
     // @ts-ignore
     window.navigation.reload()
   }
 }
+function initDownload(download: HTMLButtonElement) {
+  download.onclick = () => {
+    const hammerSvg = document.querySelector('.hammer')!
+    let content = hammerSvg.outerHTML
+    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+    downloadFile(content, 'image/svg+xml', 'vike-generated.svg')
+  }
+}
+
+function downloadFile(content: string, mimeType: string, filename: string){
+  const a = document.createElement('a')
+  const blob = new Blob([content], {type: mimeType})
+  const url = URL.createObjectURL(blob)
+  a.setAttribute('href', url)
+  a.setAttribute('download', filename)
+  a.click()
+}
 
 function initPresets(presetsEl: Element, hammer: Hammer) {
-  addHeading('Perspective', presetsEl)
+  addHeading('Settings', presetsEl)
   Object.entries(presets).forEach(([name, preset]) => {
     const btnEl = document.createElement('button')
     presetsEl.appendChild(btnEl)
