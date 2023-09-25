@@ -1,4 +1,5 @@
 import {
+  colorsDefault,
   fromHumanReadable,
   fromHumanReadableAxis,
   Hammer,
@@ -7,6 +8,36 @@ import {
   type PerspectiveUserControlable,
 } from '../Hammer'
 
+const presetsColor: Record<string, Colors> = {
+  oldest: {
+    metal1: '#949494',
+    metal2: '#828282',
+    metal3: '#696969',
+    metal4: '#707070',
+    metal5: '#696969',
+    wood: '#96511d',
+    lightningBolt: '#ecb018',
+  },
+  ['too-bright']: {
+    metal1: '#bdbdbd',
+    metal2: '#b3b3b3',
+    metal3: '#a6a6a6',
+    metal4: '#9e9e9e',
+    metal5: '#a6a6a6',
+    wood: '#a56c4a',
+    lightningBolt: '#fbcc56',
+  },
+  brighter: {
+    metal1: '#b5b5b5',
+    metal2: '#949494',
+    metal3: '#7a7a7a',
+    metal4: '#787878',
+    metal5: '#7a7a7a',
+    wood: '#91512b',
+    lightningBolt: '#f7bc26',
+  },
+  default: colorsDefault,
+}
 const presets: Record<string, Preset> = {
   oldest: {
     rotation2D: 0,
@@ -72,6 +103,7 @@ main()
 function getElements() {
   return {
     presets: document.getElementById('presets')!,
+    presetsColor: document.getElementById('presetsColor')!,
     colorPicker: document.getElementById('colorPicker')!,
     handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
     handleLengthPicker: document.getElementById('handleLengthPicker')!,
@@ -100,6 +132,7 @@ function main() {
   zdogViewInit(elements.zdogView)
 
   initPresets(elements.presets, hammer)
+  initPresetsColor(elements.presetsColor, hammer)
   initColorInputs(elements.colorPicker, hammer)
   changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter').changeVal
   changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength').changeVal
@@ -122,10 +155,12 @@ function initPerspectiveControlers(
     rotateX,
     rotateY,
     rotateZ,
+  }: /*
     translateX,
     translateY,
     translateZ,
-  }: {
+    */
+  {
     rotateX: HTMLElement
     rotateY: HTMLElement
     rotateZ: HTMLElement
@@ -416,20 +451,32 @@ function downloadFile(content: string, mimeType: string, filename: string) {
 function initPresets(presetsEl: Element, hammer: Hammer) {
   addHeading('Settings', presetsEl)
   Object.entries(presets).forEach(([name, preset]) => {
-    const btnEl = document.createElement('button')
-    presetsEl.appendChild(btnEl)
-    btnEl.style.marginRight = '10px'
-    btnEl.style.marginBottom = '7px'
-    btnEl.innerHTML = ` ${name} `
-    btnEl.onclick = () => {
+    genPresetBtn(name, presetsEl, () => {
       changeHandleDiameter(preset.handleDiameter || hammer.handleDiameterDefault)
       changeHandleLength(preset.handleLength || hammer.handleLengthDefault)
       hammer.perspective.rotate = fromHumanReadable(preset.rotate)
       changeRotation2D(preset.rotation2D)
       hammer.reset()
-    }
+    })
   })
-  addPadding(presetsEl)
+}
+function initPresetsColor(presetsColorEl: Element, hammer: Hammer) {
+  addHeading('Colors', presetsColorEl)
+  Object.entries(presetsColor).forEach(([name, colors]) => {
+    genPresetBtn(name, presetsColorEl, () => {
+      hammer.colors = colors
+      hammer.reset()
+    })
+  })
+}
+
+function genPresetBtn(name: string, parentEl: Element, onclick: () => void) {
+  const btnEl = document.createElement('button')
+  btnEl.style.marginRight = '10px'
+  btnEl.style.marginBottom = '7px'
+  btnEl.innerHTML = ` ${name} `
+  btnEl.onclick = onclick
+  parentEl.appendChild(btnEl)
 }
 
 function addHeading(heading: string, el: Element) {
@@ -437,17 +484,9 @@ function addHeading(heading: string, el: Element) {
   headingEl.innerHTML = heading
   el.prepend(headingEl)
 }
-function addPadding(el: Element) {
-  /*
-  el.appendChild(document.createElement('br'))
-  el.appendChild(document.createElement('br'))
-  */
-}
 
 function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
-  addHeading('Colors', colorPicker)
-
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
@@ -480,8 +519,6 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
       setStoreValue(key, val)
     }
   })
-
-  addPadding(colorPicker)
 }
 
 var isSpinning: boolean
