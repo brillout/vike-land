@@ -64,6 +64,7 @@ type Preset = {
 const perspectiveDefault = presets.latest2
 
 let changeRotation2D: (n: number) => void
+let getRotation2D: () => number
 let changeHandleDiameter: (n: number) => void
 let changeHandleLength: (n: number) => void
 main()
@@ -100,8 +101,8 @@ function main() {
 
   initPresets(elements.presets, hammer)
   initColorInputs(elements.colorPicker, hammer)
-  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter')
-  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
+  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter').changeVal
+  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength').changeVal
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
@@ -170,16 +171,14 @@ function initPerspectiveControlers(
     ] as const
   ).forEach(({ elem, axis, type }) => {
     const getCoordinate = () => hammer.perspective[type]
-    const changeVal = createNumberInput({
+    const { changeVal } = createNumberInput({
       elem,
       labelText: `<code>${axis}</code> (${type})`,
       getValue() {
         const n = toHumanReadable(getCoordinate())[axis]
-        // console.log('get', n)
         return n
       },
       setValue(n: number) {
-        // console.log('set', n)
         getCoordinate()[axis] = fromHumanReadableAxis(n)
       },
       defaultValue: perspectiveDefault.rotate[axis],
@@ -201,7 +200,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   const toVal = (n: number) => `rotate(${n}deg)`
   const fromVal = (val: string) => parseInt(val.split('(')[1]!.split('deg)')[0]!, 10)
 
-  changeRotation2D = createNumberInput({
+  const controls = createNumberInput({
     elem: elemRotate2D,
     labelText: `<code>degree</code> (2D rotation)`,
     defaultValue: perspectiveDefault.rotation2D,
@@ -215,6 +214,8 @@ function initRotate2D(elemRotate2D: HTMLElement) {
     },
     step: 1,
   })
+  changeRotation2D = controls.changeVal
+  getRotation2D = controls.getValue
 }
 
 function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
@@ -288,13 +289,13 @@ function createNumberInput({
   }
 
   const changeVal = (n: number, alreadyApplied?: true) => {
-    // console.log('change', n)
     const val = String(n)
     inputEl.value = val
     if (!alreadyApplied) apply(n)
     setStoreValue(storeKey, val)
   }
-  return changeVal
+  const controls = { changeVal, getValue }
+  return controls
 }
 
 function zdogViewInit(zdogView: Element) {
@@ -396,6 +397,9 @@ function initDownload(download: HTMLButtonElement) {
     const hammerSvg = document.querySelector('.hammer')!
     let content = hammerSvg.outerHTML
     content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+    const rotation2D = getRotation2D()
+    content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
+    content = content.replace('</svg>', '</g></svg>')
     downloadFile(content, 'image/svg+xml', 'vike-generated.svg')
   }
 }
