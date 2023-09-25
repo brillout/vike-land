@@ -36,7 +36,7 @@ const presetsColor: Record<string, Colors> = {
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
-  default: colorsDefault,
+  default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
   oldest: {
@@ -491,7 +491,7 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
 
   const updateInputs: (() => void)[] = []
-  updateColorInputs = () => updateInputs.forEach(f => f())
+  updateColorInputs = () => updateInputs.forEach((f) => f())
 
   objectKeys(hammer.colors).forEach((key) => {
     {
