@@ -2,10 +2,10 @@
 <html>
   <head>
     
-    <script type="module" crossorigin src="/assets/editor-ba26b467.js"></script>
+    <script type="module" crossorigin src="/assets/editor-9fa5bb1b.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
-    <link rel="modulepreload" crossorigin href="/assets/Hammer-ca3f0a0c.js">
-    <link rel="stylesheet" href="/assets/editor-b1f231e0.css">
+    <link rel="modulepreload" crossorigin href="/assets/Hammer-0de90919.js">
+    <link rel="stylesheet" href="/assets/editor-b3978e7f.css">
   </head>
   <body>
     <div style="display: flex; margin: 30px;">
@@ -13,7 +13,12 @@
         <div id="logo"></div>
       </div>
       <div style="margin-left: 50px">
+        <div><button id="reset">reset</button> to original values (settings are persisted to <code>localStorage</code>)</div>
+        <br />
+        <div><button id="download">download</button> file <code>vike-generated.svg</code>
+        <div id="presetsColor"></div>
         <div id="colorPicker"></div>
+        <div id="presets"></div>
         <div id="handleDiameterPicker"></div>
         <div id="handleLengthPicker"></div>
         <div id="rotate-x"></div>
@@ -29,8 +34,6 @@
         <div id="hideBackLightningBolt"></div>
         <br />
         <div>Drag'n'drop to change perspective.</div>
-        <br />
-        <div>Parameters are persisted to <code>localStorage</code>. You can <button id="reset">reset</button> to original values.</div>
         <br />
         <div>Embedded: <a href="embed.html">/embed.html</a>.</div>
         <br />
