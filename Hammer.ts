@@ -106,8 +106,10 @@ class Hammer {
     this.illoElem = illoElem
     this.colors = colorsDefault
     this.perspective = perspectiveDefault
+    this.handleDiameterDefault = handleDiameterDefault
     this.handleDiameter = handleDiameterDefault
     this.handleLength = handleLengthDefault
+    this.handleLengthDefault = handleLengthDefault
     this.hideBackLightningBolt = false
   }
   illo: Zdog.Illustration | undefined = undefined
@@ -116,7 +118,9 @@ class Hammer {
   dragRotate: boolean = false
   onDragStart: (() => void) | undefined = undefined
   handleDiameter: number
+  handleDiameterDefault: number
   handleLength: number
+  handleLengthDefault: number
   hideBackLightningBolt: boolean
   reset() {
     this.init()

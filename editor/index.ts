@@ -7,7 +7,7 @@ import {
   type PerspectiveUserControlable,
 } from '../Hammer'
 
-const presets = {
+const presets: Record<string, Preset> = {
   oldest: {
     rotation2D: 0,
     rotate: { x: -0.13, y: -6.63, z: -1.2 },
@@ -41,11 +41,31 @@ const presets = {
     rotation2D: 13,
     rotate: { x: -0.4, y: 23.5, z: 0 },
   },
+  vertical: {
+    handleDiameter: 8.2,
+    handleLength: 21.8,
+    rotation2D: 0,
+    rotate: { x: -0.4, y: -56.41, z: 0 },
+  },
+  vertical2: {
+    handleDiameter: 8.2,
+    handleLength: 21.8,
+    rotation2D: 0,
+    rotate: { x: -0.4, y: -55.6, z: 0 },
+  },
+}
+type Preset = {
+  rotation2D: number
+  rotate: { x: number; y: number; z: number }
+  handleDiameter?: number
+  handleLength?: number
 }
 
 const perspectiveDefault = presets.latest2
 
 let changeRotation2D: (n: number) => void
+let changeHandleDiameter: (n: number) => void
+let changeHandleLength: (n: number) => void
 main()
 
 function getElements() {
@@ -80,8 +100,8 @@ function main() {
 
   initPresets(elements.presets, hammer)
   initColorInputs(elements.colorPicker, hammer)
-  initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter')
-  initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
+  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter')
+  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength')
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
@@ -198,7 +218,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
 }
 
 function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
-  createNumberInput({
+  return createNumberInput({
     elem: handlePicker,
     labelText: `<code>${handleProp}</code>`,
     getValue() {
@@ -255,11 +275,15 @@ function createNumberInput({
   const val = getValue()
   inputEl.value = String(val)
 
+  const apply = (n: number) => {
+    setValue(n)
+    hammer?.reset()
+  }
+
   inputEl.oninput = (ev: any) => {
     const val: string = ev.target!.value
     const n = toFloat(val)
-    setValue(n)
-    hammer?.reset()
+    apply(n)
     setStoreValue(storeKey, val)
   }
 
@@ -267,10 +291,8 @@ function createNumberInput({
     // console.log('change', n)
     const val = String(n)
     inputEl.value = val
+    if (!alreadyApplied) apply(n)
     setStoreValue(storeKey, val)
-    if (!alreadyApplied) {
-      setValue(n)
-    }
   }
   return changeVal
 }
@@ -396,9 +418,11 @@ function initPresets(presetsEl: Element, hammer: Hammer) {
     btnEl.style.marginBottom = '7px'
     btnEl.innerHTML = ` ${name} `
     btnEl.onclick = () => {
+      changeHandleDiameter(preset.handleDiameter || hammer.handleDiameterDefault)
+      changeHandleLength(preset.handleLength || hammer.handleLengthDefault)
       hammer.perspective.rotate = fromHumanReadable(preset.rotate)
-      hammer.updatePerspective()
       changeRotation2D(preset.rotation2D)
+      hammer.reset()
     }
   })
   addPadding(presetsEl)
