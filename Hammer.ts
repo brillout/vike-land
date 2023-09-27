@@ -456,13 +456,18 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     color: colorCorner,
   })
 
+  /* Failed attempt to remove aliasing issues
+  const y = 0.02
+  */
+  const y = 0
+
   // cover
   shape({
     path: [
-      { x: -1, y: 0, z: 1 },
-      { x: -1, y: 0, z: -1 },
-      { x: 1, y: 0, z: -1 },
-      { x: 1, y: 0, z: 1 },
+      { x: -1, y, z: 1 },
+      { x: -1, y, z: -1 },
+      { x: 1, y, z: -1 },
+      { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
     color: colors.metal3,
