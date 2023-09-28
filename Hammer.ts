@@ -35,7 +35,8 @@ const colorsDefault: Colors = {
   metal2: '#949494',
   metal3: '#757575',
   metal4: '#7d7d7d',
-  metal5: '#8a8a8a',
+  metal5: '#7d7d7d',
+  metal6: '#8a8a8a',
   wood: '#91512b',
   lightningBolt: '#f7bc26',
 }
@@ -78,6 +79,7 @@ type Colors = {
   metal3: string
   metal4: string
   metal5: string
+  metal6: string
   wood: string
   lightningBolt: string
 }
@@ -218,7 +220,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const handleStick = colors.wood
   const mountColor1 = colors.metal4
   const mountColor2 = colors.metal5
-  const mountColor3 = colors.metal5
+  const mountColor3 = colors.metal6
 
   let zOffset = 0
   const mount = (color: string, stroke: number, length: number = 0) => {
@@ -245,8 +247,8 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
 
   mount(mountColor1, 1, 3)
   mount(handleStick, 0, handleLength)
-  mount(mountColor1, 1, 1)
-  mount(mountColor2, 2, 3)
+  mount(mountColor2, 1, 1)
+  mount(mountColor3, 2, 3)
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {
