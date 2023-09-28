@@ -62,6 +62,10 @@ const presets: Record<string, Preset> = {
     rotate: { x: -0.13, y: -6.63, z: -1.2 },
     // translate: { x: -2.6, y: 7, z: 0 },
   },
+  ['oldest-mirrored']: {
+    rotation2D: -21,
+    rotate: { x: -0.7, y: 7.1, z: 0 },
+  },
   previous: {
     rotation2D: 11,
     rotate: { x: -0.3, y: -6.63, z: 0 },
@@ -90,13 +94,13 @@ const presets: Record<string, Preset> = {
     rotation2D: 13,
     rotate: { x: -0.4, y: 23.5, z: 0 },
   },
-  vertical: {
+  ['vertical-mirrored']: {
     handleDiameter: 8.2,
     handleLength: 21.8,
     rotation2D: 0,
     rotate: { x: -0.4, y: -56.41, z: 0 },
   },
-  vertical2: {
+  vertical: {
     handleDiameter: 8.2,
     handleLength: 21.8,
     rotation2D: 0,
