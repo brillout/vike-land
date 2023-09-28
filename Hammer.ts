@@ -31,11 +31,11 @@ const perspectiveDefault: Perspective = {
 }
 
 const colorsDefault: Colors = {
-  metal1: '#a3a3a3',
-  metal2: '#8f8f8f',
+  metal1: '#b5b5b5',
+  metal2: '#949494',
   metal3: '#757575',
-  metal4: '#878787',
-  metal5: '#808080',
+  metal4: '#7d7d7d',
+  metal5: '#8a8a8a',
   wood: '#91512b',
   lightningBolt: '#f7bc26',
 }
@@ -218,6 +218,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const handleStick = colors.wood
   const mountColor1 = colors.metal4
   const mountColor2 = colors.metal5
+  const mountColor3 = colors.metal5
 
   let zOffset = 0
   const mount = (color: string, stroke: number, length: number = 0) => {

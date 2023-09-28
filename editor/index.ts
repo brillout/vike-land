@@ -9,7 +9,7 @@ import {
 } from '../Hammer'
 
 const presetsColor: Record<string, Colors> = {
-  oldest: {
+  old: {
     metal1: '#949494',
     metal2: '#828282',
     metal3: '#696969',
@@ -48,6 +48,15 @@ const presetsColor: Record<string, Colors> = {
   ['previous+']: {
     metal1: '#b0b0b0',
     metal2: '#949494',
+    metal3: '#757575',
+    metal4: '#878787',
+    metal5: '#808080',
+    wood: '#91512b',
+    lightningBolt: '#f7bc26',
+  },
+  ['darker']: {
+    metal1: '#a3a3a3',
+    metal2: '#8f8f8f',
     metal3: '#757575',
     metal4: '#878787',
     metal5: '#808080',
