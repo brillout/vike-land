@@ -36,6 +36,24 @@ const presetsColor: Record<string, Colors> = {
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
+  previous: {
+    metal1: '#b5b5b5',
+    metal2: '#949494',
+    metal3: '#757575',
+    metal4: '#787878',
+    metal5: '#707070',
+    wood: '#91512b',
+    lightningBolt: '#f7bc26',
+  },
+  ['previous+']: {
+    metal1: '#b0b0b0',
+    metal2: '#949494',
+    metal3: '#757575',
+    metal4: '#878787',
+    metal5: '#808080',
+    wood: '#91512b',
+    lightningBolt: '#f7bc26',
+  },
   default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
