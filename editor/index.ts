@@ -82,8 +82,14 @@ const presetsColor: Record<string, Colors> = {
   default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
-  oldest: {
+  classic: {
     rotation2D: 0,
+    rotate: { x: -0.13, y: -6.63, z: -1.2 },
+    // translate: { x: -2.6, y: 7, z: 0 },
+  },
+  ['classic-long-handle']: {
+    rotation2D: 0,
+    handleLength: 20.5,
     rotate: { x: -0.13, y: -6.63, z: -1.2 },
     // translate: { x: -2.6, y: 7, z: 0 },
   },
