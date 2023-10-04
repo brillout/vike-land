@@ -38,7 +38,7 @@ const colorsDefault: Colors = {
   metal5: '#7a7a7a',
   metal6: '#828282',
   wood: '#91512b',
-  lightningBolt: '#f7bc26',
+  lightningBolt: '#fbbf28',
 }
 
 /******************************/
