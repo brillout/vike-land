@@ -9,7 +9,7 @@ import {
 } from '../Hammer'
 
 const presetsColor: Record<string, Colors> = {
-  old: {
+  oldest: {
     metal1: '#949494',
     metal2: '#828282',
     metal3: '#696969',
@@ -39,7 +39,7 @@ const presetsColor: Record<string, Colors> = {
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
-  previous: {
+  older: {
     metal1: '#b5b5b5',
     metal2: '#949494',
     metal3: '#757575',
@@ -49,7 +49,7 @@ const presetsColor: Record<string, Colors> = {
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
-  ['previous+']: {
+  older2: {
     metal1: '#b0b0b0',
     metal2: '#949494',
     metal3: '#757575',
@@ -59,13 +59,23 @@ const presetsColor: Record<string, Colors> = {
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
-  ['darker']: {
+  darker: {
     metal1: '#a3a3a3',
     metal2: '#8f8f8f',
     metal3: '#757575',
     metal4: '#878787',
     metal5: '#878787',
     metal6: '#808080',
+    wood: '#91512b',
+    lightningBolt: '#f7bc26',
+  },
+  previous: {
+    metal1: '#b5b5b5',
+    metal2: '#949494',
+    metal3: '#757575',
+    metal4: '#6e6e6e',
+    metal5: '#767676',
+    metal6: '#828282',
     wood: '#91512b',
     lightningBolt: '#f7bc26',
   },
