@@ -1,4 +1,4 @@
-name: Deploy https://vike.land
+name: Deploy website
 on:
   push:
     # We only run this GitHub action upon new commits to `main`
@@ -17,7 +17,6 @@ jobs:
           version: 6
 
       - name: Install
-        # `pnpm install` will checkout the git submodule `libframe/`
         run: pnpm install
 
       - name: Build
