@@ -8,20 +8,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 6
-
-      - name: Install
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
-
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v3
+      - run: pnpm install
+      - run: pnpm build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
