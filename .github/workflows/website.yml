@@ -1,26 +1,23 @@
-name: Deploy website
+name: Website
 on:
   push:
-    # We only run this GitHub action upon new commits to `main`
     branches:
       - main
+permissions:
+  contents: write
 jobs:
-  build-and-deploy:
+  website:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.1.3
+          version: 9.10.0
       - run: pnpm install
       - run: pnpm build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+      - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
           folder: dist/
-          # Remove previous build files
+          # Remove previous build
           clean: true
-          # Do not remove the `.nojekyll` file: we have manually added an empty `.nojekyll` file at the root of the `gh-pages` branch and we don't want having to re-create it after each build.
-          clean-exclude: |
-            .nojekyll
