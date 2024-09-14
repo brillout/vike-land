@@ -1,3 +1,3 @@
 # Vike: Build Your Own Framework
 
-See [https://vike.land](https://land.vike.dev).
+See [vike.land.dev](https://land.vike.dev).
