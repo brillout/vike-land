@@ -137,6 +137,12 @@ const presets: Record<string, Preset> = {
     rotation2D: 0,
     rotate: { x: -0.4, y: -55.6, z: 0 },
   },
+  laying: {
+    handleDiameter: 8.5,
+    handleLength: 20.9,
+    rotation2D: 66.3,
+    rotate: { x: -0.4, y: -56.41, z: 0 },
+  },
 }
 type Preset = {
   rotation2D: number
