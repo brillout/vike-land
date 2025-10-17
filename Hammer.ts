@@ -480,7 +480,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
 }
 
 function genViteLogo(group: Zdog.Group, colors: Colors) {
-  const scale = 0.04
+  const scale = 0.15
   //const width = 12
 
   //const translate = {x: 0, y: 0, z: 0}
@@ -490,7 +490,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = undefined;
   /*/
   const addTo = group
-  const translate = { x: 6.5, y: (headLength / 2) - 9.3, z: sideLength + slopeSize }
+  const translate = { x: 0, y: (headLength / 2) - 9.3, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
@@ -500,26 +500,26 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     addTo,
     rotate,
     path: [
-      { x: 54.616, y: 2.783 },
-      { x: 54.652, y: 25.572 },
-      { x: 2.663, y: 20.929 },
-      { x: 2.663, y: 20.940 },
-      { x: 1.696, y: 20.831 },
-      { x: -0.753, y: 22.226 },
-      { x: -0.905, y: 23.120 },
-      { x: 0.765, y: 24.363 },
-      { x: 74.597, y: 61.867 },
-      { x: 77.169, y: 61.973 },
-      { x: 79.746, y: 61.870 },
-      { x: 79.503, y: 39.082 },
-      { x: 131.492, y: 43.724 },
-      { x: 131.485, y: 43.711 },
-      { x: 132.452, y: 43.821 },
-      { x: 134.901, y: 42.426 },
-      { x: 135.053, y: 41.532 },
-      { x: 133.387, y: 40.289 },
-      { x: 58.295, y: 0.496 },
-      { x: 55.724, y: 0.390 },
+      { x: 54.616 - 67, y: 2.783 - 31 },
+      { x: 54.652 - 67, y: 25.572 - 31 },
+      { x: 2.663 - 67, y: 20.929 - 31 },
+      { x: 2.663 - 67, y: 20.940 - 31 },
+      { x: 1.696 - 67, y: 20.831 - 31 },
+      { x: -0.753 - 67, y: 22.226 - 31 },
+      { x: -0.905 - 67, y: 23.120 - 31 },
+      { x: 0.765 - 67, y: 24.363 - 31 },
+      { x: 74.597 - 67, y: 61.867 - 31 },
+      { x: 77.169 - 67, y: 61.973 - 31 },
+      { x: 79.746 - 67, y: 61.870 - 31 },
+      { x: 79.503 - 67, y: 39.082 - 31 },
+      { x: 131.492 - 67, y: 43.724 - 31 },
+      { x: 131.485 - 67, y: 43.711 - 31 },
+      { x: 132.452 - 67, y: 43.821 - 31 },
+      { x: 134.901 - 67, y: 42.426 - 31 },
+      { x: 135.053 - 67, y: 41.532 - 31 },
+      { x: 133.387 - 67, y: 40.289 - 31 },
+      { x: 58.295 - 67, y: 0.496 - 31 },
+      { x: 55.724 - 67, y: 0.390 - 31 },
     ],
     closed: true,
     stroke,
