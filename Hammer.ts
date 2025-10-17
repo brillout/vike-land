@@ -15,7 +15,7 @@ const { TAU } = Zdog
 /********** DEFAULTS ***********/
 /*******************************/
 
-const headLength = 35
+const headLength = 30
 
 const handleDiameterDefault = 8.6
 const handleLengthDefault = 16.7
