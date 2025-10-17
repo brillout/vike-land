@@ -82,6 +82,11 @@ const presetsColor: Record<string, Colors> = {
   default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
+  'maud-improved': {
+    rotation2D: 0,
+    handleLength: 10,
+    rotate: { x: 0.06, y: -7.16, z: -2 },
+  },
   maud: {
     rotation2D: 0,
     handleLength: 10,
