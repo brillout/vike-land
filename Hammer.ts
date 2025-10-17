@@ -19,7 +19,7 @@ const headLength = 29
 const lightningBoltSize = 0.13
 
 const handleDiameterDefault = 8.6
-const handleLengthDefault = 16.7
+const handleLengthDefault = 25
 
 const STROKE = 0
 const slopeSize = 2.1
@@ -35,7 +35,7 @@ const colorsDefault: Colors = {
   metal1: '#ababab',
   metal2: '#949494',
   metal3: '#757575',
-  metal4: '#6e6e6e',
+  metal4: 'rgba(0,0,0,0.5)',
   metal5: '#7a7a7a',
   metal6: '#828282',
   wood: '#91512b',
@@ -247,9 +247,24 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   }
 
   mount(mountColor1, 1, 3)
-  mount(handleStick, 0, handleLength)
   mount(mountColor2, 1, 1)
   mount(mountColor3, 2, 3)
+
+  // Draw wood handle last so it appears on top
+  let woodZOffset = 0
+  woodZOffset += (1 / 2 + 3) / 2 // mountColor1
+  woodZOffset += (1 / 2 + 1) / 2 // mountColor2
+  woodZOffset += (2 / 2 + 3) / 2 // mountColor3
+
+  new Zdog.Cylinder({
+    addTo: handle,
+    diameter: handleDiameter,
+    stroke: 0,
+    length: handleLength,
+    fill: true,
+    color: handleStick,
+    translate: { x: 0, y: 0, z: 0 - 1 - woodZOffset },
+  })
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {
