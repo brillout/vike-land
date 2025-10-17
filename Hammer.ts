@@ -16,7 +16,7 @@ const { TAU } = Zdog
 /*******************************/
 
 const headLength = 30
-const lightningBoltSize = 0.15
+const lightningBoltSize = 0.13
 
 const handleDiameterDefault = 8.6
 const handleLengthDefault = 16.7
