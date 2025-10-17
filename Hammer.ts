@@ -490,7 +490,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = undefined;
   /*/
   const addTo = group
-  const translate = { x: 6.5, y: 8.2, z: sideLength + slopeSize }
+  const translate = { x: 6.5, y: headLength / 2, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
