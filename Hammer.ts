@@ -246,10 +246,10 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
     zOffset += zOffsetAddendum / 2
   }
 
-  mount(mountColor1, 1, 3)
+  mount(mountColor1, 1, 2)
   mount(handleStick, 0, handleLength)
-  mount(mountColor2, 1, 1)
-  mount(mountColor3, 2, 3)
+  mount(mountColor2, 1, 0.3)
+  mount(mountColor3, 2, 2.4)
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {
