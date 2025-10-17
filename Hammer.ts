@@ -241,7 +241,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
       length,
       fill: true,
       color,
-      translate: { x: 0, y: 0, z: 0 - 1 - zOffset },
+      translate: { x: 0, y: 0, z: (3 - slopeSize) + 0 - 1 - zOffset },
     })
     zOffset += zOffsetAddendum / 2
   }
