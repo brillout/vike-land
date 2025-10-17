@@ -16,6 +16,7 @@ const { TAU } = Zdog
 /*******************************/
 
 const headLength = 30
+const lightningBoltSize = 0.15
 
 const handleDiameterDefault = 8.6
 const handleLengthDefault = 16.7
@@ -480,7 +481,6 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
 }
 
 function genViteLogo(group: Zdog.Group, colors: Colors) {
-  const scale = 0.15
   //const width = 12
 
   //const translate = {x: 0, y: 0, z: 0}
@@ -490,7 +490,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = undefined;
   /*/
   const addTo = group
-  const translate = { x: 0.0, y: (headLength / 2) - 0.0, z: sideLength + slopeSize }
+  const lightningBoltPosition = { x: 0.0, y: (headLength / 2) - 0.0, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
@@ -525,8 +525,8 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     stroke,
     fill: true,
     color: colors.lightningBolt,
-    translate: { x: translate.x, y: translate.y, z: translate.z + thikness },
-    scale: { x: scale, y: scale, z: scale },
+    translate: { x: lightningBoltPosition.x, y: lightningBoltPosition.y, z: lightningBoltPosition.z + thikness },
+    scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
   })
   return shape
 }
