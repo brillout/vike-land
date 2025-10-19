@@ -15,17 +15,21 @@ const { TAU } = Zdog
 /********** DEFAULTS ***********/
 /*******************************/
 
-const headLength = 29
+const headLength = 27.5
 const lightningBoltSize = 0.13
 
 const handleDiameterDefault = 8.6
 const handleLengthDefault = 16.7
 
-const handleBottomLength1 = 2.4
-const handleBottomLength2 = 0.3
+const handleBottomLength1 = 3
+//*/
+const handleBottomLength2 = null
+/*/
+const handleBottomLength2 = 0.5
+//*/
 
 const STROKE = 0
-const slopeSize = 2.1
+const slopeSize = 1.8
 const sideLength = 8
 
 // perspectiveDefault is meant to be overriden by setting hammer.perspective = /* ... */
@@ -249,10 +253,10 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
     zOffset += zOffsetAddendum / 2
   }
 
-  mount(mountColor1, 1, 2)
+  mount(mountColor1, 1.4, 2)
   mount(handleStick, 0, handleLength)
-  mount(mountColor2, 1, handleBottomLength2)
-  mount(mountColor3, 2, handleBottomLength1)
+  if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
+  mount(mountColor3, 1.4, handleBottomLength1)
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {
