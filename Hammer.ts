@@ -231,7 +231,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const mountColor3 = colors.metal6
 
   let zOffset = 0
-  const mount = (color: string, stroke: number, length: number) => {
+  const mount = (color: string, stroke: number, length: number, extend = 0) => {
     stroke = stroke / 2
     const zOffsetAddendum = stroke + length
     /*
@@ -245,10 +245,10 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
       addTo: handle,
       diameter: handleDiameter,
       stroke: stroke,
-      length,
+      length: length + extend,
       fill: true,
       color,
-      translate: { x: 0, y: 0, z: (3 - slopeSize) + 0 - 1 - zOffset },
+      translate: { x: 0, y: 0, z: (3 - slopeSize) + 0 - 1 - zOffset + (extend/2) },
     })
     zOffset += zOffsetAddendum / 2
   }
