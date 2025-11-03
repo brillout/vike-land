@@ -24,14 +24,14 @@ const colorsDefault: Colors = {
   colorFaceFront: 'url("#gradient-main")',
 }
 
-const perspectiveDefault = {
+const perspectiveDefault: Perspective = {
   rotation2D: 0,
   handleDiameter: 7.7,
   handleLength: 13.5,
   rotate: { x: 0.00, y: -7.16, z: -2 },
 }
 
-type Preset = {
+type Perspective = {
   rotation2D: number
   rotate: { x: number; y: number; z: number }
   handleDiameter?: number
@@ -204,7 +204,7 @@ const presetsColor: Record<string, Colors> = {
   },
 }
 
-const presetsPerspective: Record<string, Preset> = {
+const presetsPerspective: Record<string, Perspective> = {
   'perspective-default': perspectiveDefault,
   'perspective-default-previous': {
     rotation2D: 13,
