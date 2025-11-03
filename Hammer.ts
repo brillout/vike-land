@@ -28,6 +28,12 @@ const handleBottomLength2 = null
 const handleBottomLength2 = 0.5
 //*/
 
+//*/
+const legacyHandle = false
+/*/
+const legacyHandle = true
+//*/
+
 const STROKE = 0
 const slopeSize = 1.8
 const sideLength = 8
@@ -263,9 +269,9 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
     zOffset += zOffsetAddendum / 2
   }
 
-  /* TMP
-  mount(mountColor1, 1.4, 2)
-  //*/
+  if (legacyHandle) {
+    mount(mountColor1, 1.4, 2)
+  }
   mount(handleStick, 0, handleLength, 10)
   if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
   mount(mountColor3, 1.4, handleBottomLength1)
