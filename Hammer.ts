@@ -92,7 +92,7 @@ type Colors = {
   colorSlopeRight?: ColorValue
   colorSlopeTopRight?: ColorValue
   colorSlopeBottom?: ColorValue
-  colorFaceBottom?: ColorValue
+  colorFaceRight?: ColorValue
   colorFaceUpper?: ColorValue
   colorFaceFront?: ColorValue
   colorCornerTopLeft?: ColorValue
@@ -353,7 +353,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSize },
     scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: normalizeColor(colors.colorFaceBottom ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceRight ?? colors.metal3),
     addTo: head,
   })
 
@@ -541,7 +541,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: normalizeColor(colors.colorFaceBottom ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceRight ?? colors.metal3),
   })
 
   return headSide
