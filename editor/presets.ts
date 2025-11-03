@@ -1,8 +1,16 @@
 export { presetsColor }
 export { presetsPerspective }
+export { perspectiveDefault }
 export type { Preset }
 
 import { colorsDefault, type Colors } from '../Hammer'
+
+const perspectiveDefault = {
+  rotation2D: 0,
+  handleDiameter: 7.7,
+  handleLength: 13.5,
+  rotate: { x: 0.00, y: -7.16, z: -2 },
+}
 
 type Preset = {
   rotation2D: number
@@ -178,12 +186,7 @@ const presetsColor: Record<string, Colors> = {
 }
 
 const presetsPerspective: Record<string, Preset> = {
-  'perspective-default': {
-    rotation2D: 0,
-    handleDiameter: 7.7,
-    handleLength: 13.5,
-    rotate: { x: 0.00, y: -7.16, z: -2 },
-  },
+  'perspective-default': perspectiveDefault,
   'perspective-default-previous': {
     rotation2D: 13,
     rotate: { x: -0.4, y: 23.5, z: 0 },
@@ -249,6 +252,3 @@ const presetsPerspective: Record<string, Preset> = {
     rotate: { x: -0.4, y: -56.41, z: 0 },
   },
 }
-
-export const perspectiveDefault = presetsPerspective['perspective-default']
-
