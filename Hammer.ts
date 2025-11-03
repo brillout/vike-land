@@ -41,13 +41,27 @@ const perspectiveDefault: Perspective = {
 const colorsDefault: Colors = {
   metal1: '#ababab',
   metal2: '#949494',
-  metal3: '#757575',
-  metal4: '#6e6e6e',
+  metal3: 'url("#gradient-main")',
+  metal4: 'rgba(0,0,0,0.2)',
   metal5: '#7a7a7a',
   metal6: '#828282',
-  wood: '#91512b',
+  wood: 'url("#gradient-wood")',
   lightningBolt: '#fbbf28',
 }
+
+/*
+const colorSlopeTop = 'red'
+const colorSlopeLeft = 'cyan'
+const colorSlopeRight = 'orange'
+const colorSlopeTopRight = 'yellow'
+const colorSlopeBottom = 'blue'
+/*/
+const colorSlopeTop = '#cccdcd'
+const colorSlopeLeft = '#c4c5c4'
+const colorSlopeRight = '#9c9d9f'
+const colorSlopeTopRight = '#d9d9d9'
+const colorSlopeBottom = '#9c9d9f'
+//*/
 
 /******************************/
 /*********** LOGIC ************/
@@ -253,8 +267,8 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
     zOffset += zOffsetAddendum / 2
   }
 
-  mount(mountColor1, 1.4, 2)
-  mount(handleStick, 0, handleLength)
+  // mount(mountColor1, 1.4, 2)
+  mount(handleStick, 0, handleLength, 10)
   if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
   mount(mountColor3, 1.4, handleBottomLength1)
 }
@@ -357,10 +371,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   const opposite = 2 * sideLength + slopeSize
   faceSlope.copy({
     translate: { x: opposite, y: slopeSize, z: -1 * opposite },
+    color: colorSlopeTop,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
+    color: colorSlopeBottom,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
@@ -393,7 +409,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { x: sideLength },
     scale: { x: slopeSize, y: slopeSize, z: sideLength },
-    color: colorEdge,
+    color: colorSlopeTopRight,
   })
 
   // south slope
@@ -406,7 +422,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: colorEdge,
+    color: colorSlopeLeft,
   })
 
   // south east corner
@@ -424,7 +440,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSize, z: -1 * slopeSize },
     translate: { z: -1 * sideLength },
-    color: colorEdge,
+    color: colorSlopeRight,
   })
 
   // north east corner
