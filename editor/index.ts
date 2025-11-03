@@ -11,12 +11,12 @@ import {
 const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
   vivid: {
-    metal1: '#ff6b6b',
-    metal2: '#ff6b6b',
-    metal3: '#ff6b6b',
-    metal4: '#ff6b6b',
-    metal5: '#ff6b6b',
-    metal6: '#ff6b6b',
+    metal1: 'green',
+    metal2: 'white',
+    metal3: 'blue',
+    metal4: 'white',
+    metal5: 'white',
+    metal6: 'black',
     wood: '#ff8c42',
     lightningBolt: '#ffff00',
     colorSlopeTop: '#ff0000',
