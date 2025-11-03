@@ -8,7 +8,7 @@ import { type Colors } from '../Hammer'
 const colorsDefault: Colors = {
   metal1: '#c0c0c0',
   metal2: '#a8a8a8',
-  metal3: ['#d8d8d8', '#b8b8b8'],
+  metal3: ['#d8d8d8', '#bfbfbf'],
   metal4: 'rgba(0,0,0,0.2)',
   metal5: '#909090',
   metal6: ['#d6d6d6', '#949494'],
@@ -21,11 +21,11 @@ const colorsDefault: Colors = {
   colorSlopeTopRight: '#d9d9d9',
   colorSlopeBottom: ['#b0b0b0', '#909090'],
   colorFaceRight: '#a2a2a3',
-  colorFaceUpper: ['#b0b0b1', '#abacab'],
+  colorFaceUpper: ['#bababa', '#a8a8a8'],
   colorFaceFront: ['#c7cac9', '#b0afaf'],
   colorCornerTopLeft: '#cacbcb',
-  colorCornerTopRight: '#9b9b9a',
-  colorCornerBottomRight: '#949494',
+  colorCornerTopRight: '#c2c2c2',
+  colorCornerBottomRight: '#7d7d7d',
   colorCornerBottomLeft: '#979697',
 }
 
