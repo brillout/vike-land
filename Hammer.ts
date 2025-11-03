@@ -329,15 +329,8 @@ function genFaces(head: Zdog.Anchor, options: Options) {
 
   // Upper face
   const opposite = 2 * (sideLength + slopeSize)
-  const face2 = shape({
-    path: [
-      { x: -1, y: 0, z: 0.5 },
-      { x: -1, y: 0, z: -0.5 },
-      { x: -1, y: 1, z: -0.5 },
-      { x: -1, y: 1, z: 0.5 },
-    ],
+  const face2 = face.copy({
     translate: { x: opposite, y: slopeSize },
-    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
     color: colors.colorFaceUpper,
     addTo: head,
   })
@@ -346,16 +339,9 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   var frontFaceGroup = new Zdog.Group({
     addTo: head,
   })
-  shape({
-    path: [
-      { x: -1, y: 0, z: 0.5 },
-      { x: -1, y: 0, z: -0.5 },
-      { x: -1, y: 1, z: -0.5 },
-      { x: -1, y: 1, z: 0.5 },
-    ],
+  face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize },
-    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
     color: colors.colorFaceFront,
     addTo: frontFaceGroup,
   })
