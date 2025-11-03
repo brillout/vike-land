@@ -21,7 +21,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#828282',
     colorSlopeLeft: '#828282',
     colorSlopeRight: '#828282',
-    colorSlopeTopRight: '#949494',
+    colorSlopeTopRight: '#828282',
     colorSlopeBottom: '#828282',
   },
   ['too-bright']: {
@@ -36,7 +36,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#b3b3b3',
     colorSlopeLeft: '#b3b3b3',
     colorSlopeRight: '#b3b3b3',
-    colorSlopeTopRight: '#bdbdbd',
+    colorSlopeTopRight: '#b3b3b3',
     colorSlopeBottom: '#b3b3b3',
   },
   brighter: {
@@ -51,7 +51,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#949494',
     colorSlopeLeft: '#949494',
     colorSlopeRight: '#949494',
-    colorSlopeTopRight: '#b5b5b5',
+    colorSlopeTopRight: '#949494',
     colorSlopeBottom: '#949494',
   },
   older: {
@@ -66,7 +66,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#949494',
     colorSlopeLeft: '#949494',
     colorSlopeRight: '#949494',
-    colorSlopeTopRight: '#b5b5b5',
+    colorSlopeTopRight: '#949494',
     colorSlopeBottom: '#949494',
   },
   older2: {
@@ -81,7 +81,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#949494',
     colorSlopeLeft: '#949494',
     colorSlopeRight: '#949494',
-    colorSlopeTopRight: '#b0b0b0',
+    colorSlopeTopRight: '#949494',
     colorSlopeBottom: '#949494',
   },
   darker: {
@@ -96,7 +96,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#8f8f8f',
     colorSlopeLeft: '#8f8f8f',
     colorSlopeRight: '#8f8f8f',
-    colorSlopeTopRight: '#a3a3a3',
+    colorSlopeTopRight: '#8f8f8f',
     colorSlopeBottom: '#8f8f8f',
   },
   previous: {
@@ -111,7 +111,7 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTop: '#949494',
     colorSlopeLeft: '#949494',
     colorSlopeRight: '#949494',
-    colorSlopeTopRight: '#b5b5b5',
+    colorSlopeTopRight: '#949494',
     colorSlopeBottom: '#949494',
   },
   default: { ...colorsDefault },
