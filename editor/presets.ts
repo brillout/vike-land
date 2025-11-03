@@ -67,6 +67,16 @@ const presetsColor: Record<string, Colors> = {
     colorCornerBottomRight: 'teal',
     colorCornerBottomLeft: 'gold',
   },
+  gradient: {
+    metal1: ['#ff6b6b', '#ff8c8c'],
+    metal2: ['#4ecdc4', '#45b7aa'],
+    metal3: ['#ffe66d', '#ffd93d'],
+    metal4: ['#ff6b6b', '#ff8c8c'],
+    metal5: ['#ff6b6b', '#ff8c8c'],
+    metal6: ['#a8a8a8', '#c0c0c0'],
+    wood: ['#8b4513', '#a0522d'],
+    lightningBolt: ['#ffeb3b', '#fdd835'],
+  },
   'colors-default-previous': {
     metal1: '#ababab',
     metal2: '#949494',

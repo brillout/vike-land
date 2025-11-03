@@ -76,28 +76,29 @@ type PerspectiveUserControlable = {
   z: number
 }
 
-// TODO: also accept [string, string] => dynamically generate an SVG linearGradient
+type ColorValue = string | [string, string]
+
 type Colors = {
-  metal1: string
-  metal2: string
-  metal3: string
-  metal4: string
-  metal5: string
-  metal6: string
-  wood: string
-  lightningBolt: string
-  colorSlopeTop?: string
-  colorSlopeLeft?: string
-  colorSlopeRight?: string
-  colorSlopeTopRight?: string
-  colorSlopeBottom?: string
-  colorFaceBottom?: string
-  colorFaceUpper?: string
-  colorFaceFront?: string
-  colorCornerTopLeft?: string
-  colorCornerTopRight?: string
-  colorCornerBottomRight?: string
-  colorCornerBottomLeft?: string
+  metal1: ColorValue
+  metal2: ColorValue
+  metal3: ColorValue
+  metal4: ColorValue
+  metal5: ColorValue
+  metal6: ColorValue
+  wood: ColorValue
+  lightningBolt: ColorValue
+  colorSlopeTop?: ColorValue
+  colorSlopeLeft?: ColorValue
+  colorSlopeRight?: ColorValue
+  colorSlopeTopRight?: ColorValue
+  colorSlopeBottom?: ColorValue
+  colorFaceBottom?: ColorValue
+  colorFaceUpper?: ColorValue
+  colorFaceFront?: ColorValue
+  colorCornerTopLeft?: ColorValue
+  colorCornerTopRight?: ColorValue
+  colorCornerBottomRight?: ColorValue
+  colorCornerBottomLeft?: ColorValue
 }
 
 class Hammer {
@@ -143,6 +144,51 @@ class Hammer {
       this.illo.updateRenderGraph()
     }
   }
+}
+
+let gradientCounter = 0
+
+function createGradient(color1: string, color2: string): string {
+  const gradientId = `gradient-dynamic-${gradientCounter++}`
+  const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
+
+  const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
+  linearGradient.setAttribute('id', gradientId)
+  linearGradient.setAttribute('gradientTransform', 'rotate(45)')
+
+  const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop1.setAttribute('offset', '30%')
+  stop1.setAttribute('stop-color', color1)
+
+  const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop2.setAttribute('offset', '100%')
+  stop2.setAttribute('stop-color', color2)
+
+  linearGradient.appendChild(stop1)
+  linearGradient.appendChild(stop2)
+  defs.appendChild(linearGradient)
+
+  return `url("#${gradientId}")`
+}
+
+function createGradientContainer(): SVGDefsElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('class', 'gradient-container')
+  svg.style.display = 'none'
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
+  svg.appendChild(defs)
+  document.body.appendChild(svg)
+
+  return defs
+}
+
+function normalizeColor(color: ColorValue): string {
+  if (typeof color === 'string') {
+    return color
+  }
+  // color is [string, string]
+  return createGradient(color[0], color[1])
 }
 
 function renderOuterHtml(outerElem: HTMLElement) {
@@ -233,10 +279,10 @@ function render(hammer: Hammer) {
 }
 
 function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number) {
-  const handleStick = colors.wood
-  const mountColor1 = colors.metal4
-  const mountColor2 = colors.metal5
-  const mountColor3 = colors.metal6
+  const handleStick = normalizeColor(colors.wood)
+  const mountColor1 = normalizeColor(colors.metal4)
+  const mountColor2 = normalizeColor(colors.metal5)
+  const mountColor3 = normalizeColor(colors.metal6)
 
   let zOffset = 0
   const mount = (color: string, stroke: number, length: number, extend = 0) => {
@@ -307,7 +353,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSize },
     scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: colors.colorFaceBottom ?? colors.metal3,
+    color: normalizeColor(colors.colorFaceBottom ?? colors.metal3),
     addTo: head,
   })
 
@@ -315,7 +361,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   const opposite = 2 * (sideLength + slopeSize)
   const face2 = face.copy({
     translate: { x: opposite, y: slopeSize },
-    color: colors.colorFaceUpper ?? colors.metal3,
+    color: normalizeColor(colors.colorFaceUpper ?? colors.metal3),
     addTo: head,
   })
 
@@ -326,7 +372,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize },
-    color: colors.colorFaceFront ?? colors.metal3,
+    color: normalizeColor(colors.colorFaceFront ?? colors.metal3),
     addTo: frontFaceGroup,
   })
   const viteLogo = genViteLogo(frontFaceGroup, colors)
@@ -363,18 +409,18 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
       { x, y, z: z1 },
     ],
     translate: { y: slopeSize },
-    color: colors.metal2,
+    color: normalizeColor(colors.metal2),
   })
 
   const opposite = 2 * sideLength + slopeSize
   faceSlope.copy({
     translate: { x: opposite, y: slopeSize, z: -1 * opposite },
-    color: colors.colorSlopeTop ?? colors.metal2,
+    color: normalizeColor(colors.colorSlopeTop ?? colors.metal2),
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
-    color: colors.colorSlopeBottom ?? colors.metal2,
+    color: normalizeColor(colors.colorSlopeBottom ?? colors.metal2),
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
@@ -394,8 +440,8 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       ...props,
     })
 
-  const colorEdge = colors.metal2
-  const colorCorner = colors.metal1
+  const colorEdge = normalizeColor(colors.metal2)
+  const colorCorner = normalizeColor(colors.metal1)
 
   // east slope
   var EWSlope = shape({
@@ -407,7 +453,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { x: sideLength },
     scale: { x: slopeSize, y: slopeSize, z: sideLength },
-    color: colors.colorSlopeTopRight ?? colors.metal2,
+    color: normalizeColor(colors.colorSlopeTopRight ?? colors.metal2),
   })
 
   // south slope
@@ -420,7 +466,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: colors.colorSlopeLeft ?? colors.metal2,
+    color: normalizeColor(colors.colorSlopeLeft ?? colors.metal2),
   })
 
   // top left corner
@@ -431,14 +477,14 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: slopeSize },
     ],
     translate: { x: sideLength, z: sideLength },
-    color: colors.colorCornerTopLeft ?? colorCorner,
+    color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
   })
 
   // north slope
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSize, z: -1 * slopeSize },
     translate: { z: -1 * sideLength },
-    color: colors.colorSlopeRight ?? colors.metal2,
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metal2),
   })
 
   // top right corner
@@ -449,7 +495,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: -1 * slopeSize },
     ],
     translate: { x: sideLength, z: -1 * sideLength },
-    color: colors.colorCornerTopRight ?? colorCorner,
+    color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
   })
 
   // west slope
@@ -467,7 +513,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: -1 * slopeSize },
     ],
     translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: colors.colorCornerBottomRight ?? colorCorner,
+    color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
   })
 
   // bottom left corner
@@ -478,7 +524,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: slopeSize },
     ],
     translate: { x: -1 * sideLength, z: sideLength },
-    color: colors.colorCornerBottomLeft ?? colorCorner,
+    color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
   })
 
   /* Failed attempt to remove aliasing issues
@@ -495,7 +541,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: colors.colorFaceBottom ?? colors.metal3,
+    color: normalizeColor(colors.colorFaceBottom ?? colors.metal3),
   })
 
   return headSide
@@ -545,7 +591,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
     closed: true,
     stroke,
     fill: true,
-    color: colors.lightningBolt,
+    color: normalizeColor(colors.lightningBolt),
     translate: { x: lightningBoltPosition.x, y: lightningBoltPosition.y, z: lightningBoltPosition.z + thikness },
     scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
   })
