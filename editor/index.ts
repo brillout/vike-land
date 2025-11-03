@@ -427,9 +427,10 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     const updateInput = () => {
       const val = hammer.colors[key]
       // Convert named colors to hex for the color picker
-      const hexVal = colorNameToHex(val) || val
+      const hexVal = colorNameToHex(val) || (Array.isArray(val) ? val[0] : val)
       inputEl.value = hexVal
-      valEl.innerHTML = ` ${val} <code>${key}</code>`
+      const displayVal = Array.isArray(val) ? `[${val[0]}, ${val[1]}]` : val
+      valEl.innerHTML = ` ${displayVal} <code>${key}</code>`
     }
     const updateStore = () => {
       const val = hammer.colors[key]
@@ -515,7 +516,12 @@ function toFloat(val: string | null): number | null {
   return parseFloat(val)
 }
 
-function colorNameToHex(color: string): string | null {
+function colorNameToHex(color: string | [string, string]): string | null {
+  // If it's a gradient tuple, use the first color
+  if (Array.isArray(color)) {
+    color = color[0]
+  }
+
   // If it's already a hex color, return it
   if (color.startsWith('#')) return color
 
