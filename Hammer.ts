@@ -11,15 +11,14 @@ import * as Zdog from 'zdog'
 import { colorsDefault } from './editor/presets'
 const { TAU } = Zdog
 
-/*******************************/
-/********** DEFAULTS ***********/
-/*******************************/
+/*****************************/
+/********** PARAMS ***********/
+/*****************************/
 
 const headLength = 27.4
+const slopeSize = 2
+const sideLength = 8
 const lightningBoltSize = 0.13
-
-const handleDiameterDefault = 8.6
-const handleLengthDefault = 16.7
 
 const handleBottomLength1 = 3
 //*/
@@ -35,8 +34,13 @@ const legacyHandle = true
 //*/
 
 const STROKE = 0
-const slopeSize = 2
-const sideLength = 8
+
+/*******************************/
+/********** DEFAULTS ***********/
+/*******************************/
+
+const handleDiameterDefault = 8.6
+const handleLengthDefault = 16.7
 
 // perspectiveDefault is meant to be overriden by setting hammer.perspective = /* ... */
 const perspectiveDefault: Perspective = {
