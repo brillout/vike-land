@@ -58,6 +58,10 @@ const colorsDefault: Colors = {
   colorSlopeRight: 'url("#gradient-slope-right")',
   colorSlopeTopRight: 'url("#gradient-slope-top-right")',
   colorSlopeBottom: 'url("#gradient-slope-bottom")',
+  colorFaceBottom: 'url("#gradient-main")',
+  colorFaceUpper: 'url("#gradient-main")',
+  colorFaceFront: 'url("#gradient-main")',
+  colorSlopeWest: '#a8a8a8',
 }
 
 /******************************/
@@ -106,6 +110,10 @@ type Colors = {
   colorSlopeRight: string
   colorSlopeTopRight: string
   colorSlopeBottom: string
+  colorFaceBottom: string
+  colorFaceUpper: string
+  colorFaceFront: string
+  colorSlopeWest: string
 }
 
 class Hammer {
@@ -315,14 +323,22 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSize },
     scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: colors.metal3,
+    color: colors.colorFaceBottom,
     addTo: head,
   })
 
   // Upper face
   const opposite = 2 * (sideLength + slopeSize)
-  const face2 = face.copy({
+  const face2 = shape({
+    path: [
+      { x: -1, y: 0, z: 0.5 },
+      { x: -1, y: 0, z: -0.5 },
+      { x: -1, y: 1, z: -0.5 },
+      { x: -1, y: 1, z: 0.5 },
+    ],
     translate: { x: opposite, y: slopeSize },
+    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
+    color: colors.colorFaceUpper,
     addTo: head,
   })
 
@@ -330,9 +346,17 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   var frontFaceGroup = new Zdog.Group({
     addTo: head,
   })
-  face2.copy({
+  shape({
+    path: [
+      { x: -1, y: 0, z: 0.5 },
+      { x: -1, y: 0, z: -0.5 },
+      { x: -1, y: 1, z: -0.5 },
+      { x: -1, y: 1, z: 0.5 },
+    ],
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize },
+    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
+    color: colors.colorFaceFront,
     addTo: frontFaceGroup,
   })
   const viteLogo = genViteLogo(frontFaceGroup, colors)
@@ -462,7 +486,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   EWSlope.copy({
     scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
     translate: { x: -1 * sideLength },
-    color: colorEdge,
+    color: colors.colorSlopeWest,
   })
 
   // north west corner
@@ -501,7 +525,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: colors.metal3,
+    color: colors.colorFaceBottom,
   })
 
   return headSide
