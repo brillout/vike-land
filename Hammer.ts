@@ -85,14 +85,14 @@ type Colors = {
   metal6: string
   wood: string
   lightningBolt: string
-  colorSlopeTop: string
-  colorSlopeLeft: string
-  colorSlopeRight: string
-  colorSlopeTopRight: string
-  colorSlopeBottom: string
-  colorFaceBottom: string
-  colorFaceUpper: string
-  colorFaceFront: string
+  colorSlopeTop?: string
+  colorSlopeLeft?: string
+  colorSlopeRight?: string
+  colorSlopeTopRight?: string
+  colorSlopeBottom?: string
+  colorFaceBottom?: string
+  colorFaceUpper?: string
+  colorFaceFront?: string
 }
 
 class Hammer {
@@ -302,7 +302,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSize },
     scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: colors.colorFaceBottom,
+    color: colors.colorFaceBottom ?? colors.metal3,
     addTo: head,
   })
 
@@ -310,7 +310,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   const opposite = 2 * (sideLength + slopeSize)
   const face2 = face.copy({
     translate: { x: opposite, y: slopeSize },
-    color: colors.colorFaceUpper,
+    color: colors.colorFaceUpper ?? colors.metal3,
     addTo: head,
   })
 
@@ -321,7 +321,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize },
-    color: colors.colorFaceFront,
+    color: colors.colorFaceFront ?? colors.metal3,
     addTo: frontFaceGroup,
   })
   const viteLogo = genViteLogo(frontFaceGroup, colors)
@@ -364,12 +364,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   const opposite = 2 * sideLength + slopeSize
   faceSlope.copy({
     translate: { x: opposite, y: slopeSize, z: -1 * opposite },
-    color: colors.colorSlopeTop,
+    color: colors.colorSlopeTop ?? colors.metal2,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
-    color: colors.colorSlopeBottom,
+    color: colors.colorSlopeBottom ?? colors.metal2,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
@@ -402,7 +402,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { x: sideLength },
     scale: { x: slopeSize, y: slopeSize, z: sideLength },
-    color: colors.colorSlopeTopRight,
+    color: colors.colorSlopeTopRight ?? colors.metal2,
   })
 
   // south slope
@@ -415,7 +415,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: colors.colorSlopeLeft,
+    color: colors.colorSlopeLeft ?? colors.metal2,
   })
 
   // south east corner
@@ -433,7 +433,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSize, z: -1 * slopeSize },
     translate: { z: -1 * sideLength },
-    color: colors.colorSlopeRight,
+    color: colors.colorSlopeRight ?? colors.metal2,
   })
 
   // north east corner
@@ -490,7 +490,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: colors.colorFaceBottom,
+    color: colors.colorFaceBottom ?? colors.metal3,
   })
 
   return headSide
