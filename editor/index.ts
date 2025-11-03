@@ -114,6 +114,21 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTopRight: '#949494',
     colorSlopeBottom: '#949494',
   },
+  'previous-default': {
+    metal1: '#ababab',
+    metal2: '#949494',
+    metal3: '#757575',
+    metal4: '#6e6e6e',
+    metal5: '#7a7a7a',
+    metal6: '#828282',
+    wood: '#91512b',
+    lightningBolt: '#fbbf28',
+    colorSlopeTop: '#949494',
+    colorSlopeLeft: '#949494',
+    colorSlopeRight: '#949494',
+    colorSlopeTopRight: '#949494',
+    colorSlopeBottom: '#949494',
+  },
   default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
