@@ -54,21 +54,6 @@ const colorsDefault: Colors = {
   colorSlopeBottom: 'url("#gradient-slope-bottom")',
 }
 
-// TODO: why didn't you remove this? Move it to colorsDefault
-/*
-const colorSlopeTop = 'red'
-const colorSlopeLeft = 'cyan'
-const colorSlopeRight = 'orange'
-const colorSlopeTopRight = 'yellow'
-const colorSlopeBottom = 'blue'
-/*/
-const colorSlopeTop = '#cccdcd'
-const colorSlopeLeft = '#c4c5c4'
-const colorSlopeRight = '#9c9d9f'
-const colorSlopeTopRight = '#d9d9d9'
-const colorSlopeBottom = '#9c9d9f'
-//*/
-
 /******************************/
 /*********** LOGIC ************/
 /******************************/
@@ -382,12 +367,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   const opposite = 2 * sideLength + slopeSize
   faceSlope.copy({
     translate: { x: opposite, y: slopeSize, z: -1 * opposite },
-    color: colorSlopeTop,
+    color: colors.colorSlopeTop,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
-    color: colorSlopeBottom,
+    color: colors.colorSlopeBottom,
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
@@ -420,7 +405,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { x: sideLength },
     scale: { x: slopeSize, y: slopeSize, z: sideLength },
-    color: colorSlopeTopRight,
+    color: colors.colorSlopeTopRight,
   })
 
   // south slope
@@ -433,7 +418,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     ],
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: colorSlopeLeft,
+    color: colors.colorSlopeLeft,
   })
 
   // south east corner
@@ -451,7 +436,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSize, z: -1 * slopeSize },
     translate: { z: -1 * sideLength },
-    color: colorSlopeRight,
+    color: colors.colorSlopeRight,
   })
 
   // north east corner
