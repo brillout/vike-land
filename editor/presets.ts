@@ -15,17 +15,18 @@ const colorsDefault: Colors = {
   wood: 'url("#gradient-wood")',
   lightningBolt: '#ffeb3b',
   colorSlopeTop: 'url("#gradient-slope-top")',
-  colorSlopeLeft: 'url("#gradient-slope-left")',
+  // colorSlopeLeft: 'url("#gradient-slope-left")',
+  colorSlopeLeft: '#c1c2c2',
   colorSlopeRight: 'url("#gradient-slope-right")',
   colorSlopeTopRight: 'url("#gradient-slope-top-right")',
   colorSlopeBottom: 'url("#gradient-slope-bottom")',
   colorFaceBottom: 'url("#gradient-main")',
   colorFaceUpper: 'url("#gradient-main")',
   colorFaceFront: 'url("#gradient-main")',
-  colorCornerTopLeft: '#c0c0c0',
-  colorCornerTopRight: '#c0c0c0',
-  colorCornerBottomRight: '#c0c0c0',
-  colorCornerBottomLeft: '#c0c0c0',
+  colorCornerTopLeft: '#cacbcb',
+  colorCornerTopRight: '#9b9b9a',
+  colorCornerBottomRight: '#949494',
+  colorCornerBottomLeft: '#979697',
 }
 
 const perspectiveDefault: Perspective = {
