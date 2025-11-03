@@ -14,7 +14,7 @@ const colorsDefault: Colors = {
   metal6: ['#d6d6d6', '#949494'],
   wood: ['#ffb152', '#aa5422'],
   lightningBolt: ['#ffe507', '#ffc212'],
-  colorSlopeTop: ['#d9d9da', '#b8b7b8'],
+  colorSlopeTop: ['#d6d6d6', '#c2c2c2'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
   colorSlopeLeft: '#c1c2c2',
   colorSlopeRight: '#999999',
@@ -24,7 +24,7 @@ const colorsDefault: Colors = {
   colorFaceUpper: ['#bababa', '#a8a8a8'],
   colorFaceFront: ['#c7cac9', '#b0afaf'],
   colorCornerTopLeft: '#cacbcb',
-  colorCornerTopRight: '#c2c2c2',
+  colorCornerTopRight: '#b0b0b0',
   colorCornerBottomRight: '#7d7d7d',
   colorCornerBottomLeft: '#979697',
 }
