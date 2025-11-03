@@ -1,168 +1,11 @@
 import {
-  colorsDefault,
   fromHumanReadable,
   fromHumanReadableAxis,
   Hammer,
   toHumanReadable,
-  type Colors,
   type PerspectiveUserControlable,
 } from '../Hammer'
-
-const presetsColor: Record<string, Colors> = {
-  oldest: {
-    metal1: '#949494',
-    metal2: '#828282',
-    metal3: '#696969',
-    metal4: '#707070',
-    metal5: '#707070',
-    metal6: '#696969',
-    wood: '#96511d',
-    lightningBolt: '#ecb018',
-  },
-  ['too-bright']: {
-    metal1: '#bdbdbd',
-    metal2: '#b3b3b3',
-    metal3: '#a6a6a6',
-    metal4: '#9e9e9e',
-    metal5: '#9e9e9e',
-    metal6: '#a6a6a6',
-    wood: '#a56c4a',
-    lightningBolt: '#fbcc56',
-  },
-  brighter: {
-    metal1: '#b5b5b5',
-    metal2: '#949494',
-    metal3: '#7a7a7a',
-    metal4: '#787878',
-    metal5: '#787878',
-    metal6: '#7a7a7a',
-    wood: '#91512b',
-    lightningBolt: '#f7bc26',
-  },
-  older: {
-    metal1: '#b5b5b5',
-    metal2: '#949494',
-    metal3: '#757575',
-    metal4: '#787878',
-    metal5: '#787878',
-    metal6: '#707070',
-    wood: '#91512b',
-    lightningBolt: '#f7bc26',
-  },
-  older2: {
-    metal1: '#b0b0b0',
-    metal2: '#949494',
-    metal3: '#757575',
-    metal4: '#878787',
-    metal5: '#878787',
-    metal6: '#808080',
-    wood: '#91512b',
-    lightningBolt: '#f7bc26',
-  },
-  darker: {
-    metal1: '#a3a3a3',
-    metal2: '#8f8f8f',
-    metal3: '#757575',
-    metal4: '#878787',
-    metal5: '#878787',
-    metal6: '#808080',
-    wood: '#91512b',
-    lightningBolt: '#f7bc26',
-  },
-  previous: {
-    metal1: '#b5b5b5',
-    metal2: '#949494',
-    metal3: '#757575',
-    metal4: '#6e6e6e',
-    metal5: '#767676',
-    metal6: '#828282',
-    wood: '#91512b',
-    lightningBolt: '#f7bc26',
-  },
-  default: { ...colorsDefault },
-}
-const presets: Record<string, Preset> = {
-  'maud-improved': {
-    rotation2D: 0,
-    handleDiameter: 7.7,
-    handleLength: 13.5,
-    rotate: { x: 0.06, y: -7.16, z: -2 },
-  },
-  maud: {
-    rotation2D: 0,
-    handleLength: 10,
-    rotate: { x: -0.1, y: -7, z: -2 },
-  },
-  classic: {
-    rotation2D: 0,
-    rotate: { x: -0.13, y: -6.63, z: -1.2 },
-    // translate: { x: -2.6, y: 7, z: 0 },
-  },
-  ['classic-long-handle']: {
-    rotation2D: 0,
-    handleLength: 20.5,
-    rotate: { x: -0.13, y: -6.63, z: -1.2 },
-    // translate: { x: -2.6, y: 7, z: 0 },
-  },
-  ['oldest-mirrored']: {
-    rotation2D: -21,
-    rotate: { x: -0.7, y: 7.1, z: 0 },
-  },
-  previous: {
-    rotation2D: 11,
-    rotate: { x: -0.3, y: -6.63, z: 0 },
-  },
-  new1: {
-    rotation2D: -23,
-    rotate: { x: -0.4, y: 152.8, z: 0 },
-  },
-  new2: {
-    rotation2D: -23,
-    rotate: { x: -0.6, y: 159.19, z: 0 },
-  },
-  new3: {
-    rotation2D: -23,
-    rotate: { x: -0.4, y: 159.3, z: 0 },
-  },
-  favicon: {
-    rotation2D: 29,
-    rotate: { x: -0.4, y: 0.6, z: 0 },
-  },
-  latest: {
-    rotation2D: -30,
-    rotate: { x: -0.5, y: 23.2, z: 0 },
-  },
-  latest2: {
-    rotation2D: 13,
-    rotate: { x: -0.4, y: 23.5, z: 0 },
-  },
-  ['vertical-mirrored']: {
-    handleDiameter: 8.2,
-    handleLength: 21.8,
-    rotation2D: 0,
-    rotate: { x: -0.4, y: -56.41, z: 0 },
-  },
-  vertical: {
-    handleDiameter: 8.2,
-    handleLength: 21.8,
-    rotation2D: 0,
-    rotate: { x: -0.4, y: -55.6, z: 0 },
-  },
-  laying: {
-    handleDiameter: 8.5,
-    handleLength: 20.9,
-    rotation2D: 66.3,
-    rotate: { x: -0.4, y: -56.41, z: 0 },
-  },
-}
-type Preset = {
-  rotation2D: number
-  rotate: { x: number; y: number; z: number }
-  handleDiameter?: number
-  handleLength?: number
-}
-
-const perspectiveDefault = presets.latest2
+import { presetsColor, presetsPerspective, perspectiveDefault } from './presets'
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
@@ -205,8 +48,8 @@ function main() {
   initPresets(elements.presets, hammer)
   initPresetsColor(elements.presetsColor, hammer)
   initColorInputs(elements.colorPicker, hammer)
-  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter').changeVal
-  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength').changeVal
+  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
+  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
@@ -324,7 +167,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   getRotation2D = controls.getValue
 }
 
-function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
+function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength', defaultValue?: number) {
   return createNumberInput({
     elem: handlePicker,
     labelText: `<code>${handleProp}</code>`,
@@ -334,6 +177,7 @@ function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'ha
     setValue(n: number) {
       hammer[handleProp] = n
     },
+    defaultValue,
     hammer,
   })
 }
@@ -503,6 +347,19 @@ function initDownload(download: HTMLButtonElement) {
     const hammerSvg = document.querySelector('.hammer')!
     let content = hammerSvg.outerHTML
     content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+
+    // Extract gradients from the gradient-container
+    const gradientContainer = document.querySelector('svg.gradient-container defs')
+    if (gradientContainer && gradientContainer.children.length > 0) {
+      const defsContent = Array.from(gradientContainer.children)
+        .map(el => el.outerHTML)
+        .join('\n    ')
+      // Insert defs section after the opening svg tag
+      content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
+        `<svg xmlns="http://www.w3.org/2000/svg" `)
+      content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+    }
+
     const rotation2D = getRotation2D()
     content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
     content = content.replace('</svg>', '</g></svg>')
@@ -521,7 +378,7 @@ function downloadFile(content: string, mimeType: string, filename: string) {
 
 function initPresets(presetsEl: Element, hammer: Hammer) {
   addHeading('Settings', presetsEl)
-  Object.entries(presets).forEach(([name, preset]) => {
+  Object.entries(presetsPerspective).forEach(([name, preset]) => {
     genPresetBtn(name, presetsEl, () => {
       changeHandleDiameter(preset.handleDiameter || hammer.handleDiameterDefault)
       changeHandleLength(preset.handleLength || hammer.handleLengthDefault)
@@ -569,21 +426,44 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
       if (val) hammer.colors[key] = val
     }
 
+    const val = hammer.colors[key]
+    const isGradient = Array.isArray(val)
+
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
     const parentEl = document.createElement('div')
     colorPicker.appendChild(parentEl)
     const labelEl = document.createElement('label')
     parentEl.appendChild(labelEl)
+
     const inputEl = document.createElement('input')
     inputEl.setAttribute('type', 'color')
     labelEl.appendChild(inputEl)
+
+    let inputEl2: HTMLInputElement | undefined
+    if (isGradient) {
+      inputEl2 = document.createElement('input')
+      inputEl2.setAttribute('type', 'color')
+      labelEl.appendChild(inputEl2)
+    }
+
     const valEl = document.createElement('span')
     parentEl.appendChild(valEl)
 
     const updateInput = () => {
       const val = hammer.colors[key]
-      inputEl.value = val
-      valEl.innerHTML = ` ${val} <code>${key}</code>`
+      if (Array.isArray(val)) {
+        // Gradient tuple
+        const hexVal1 = colorNameToHex(val[0]) || val[0]
+        const hexVal2 = colorNameToHex(val[1]) || val[1]
+        inputEl.value = hexVal1
+        if (inputEl2) inputEl2.value = hexVal2
+        valEl.innerHTML = ` [${val[0]}, ${val[1]}] <code>${key}</code>`
+      } else {
+        // Solid color
+        const hexVal = colorNameToHex(val) || val
+        inputEl.value = hexVal
+        valEl.innerHTML = ` ${val} <code>${key}</code>`
+      }
     }
     const updateStore = () => {
       const val = hammer.colors[key]
@@ -596,11 +476,27 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     })
 
     inputEl.oninput = (ev: any) => {
-      const val: string = ev.target!.value
-      hammer.colors[key] = val
+      const newVal: string = ev.target!.value
+      if (Array.isArray(hammer.colors[key])) {
+        hammer.colors[key] = [newVal, (hammer.colors[key] as [string, string])[1]]
+      } else {
+        hammer.colors[key] = newVal
+      }
       updateInput()
       hammer.reset()
       updateStore()
+    }
+
+    if (inputEl2) {
+      inputEl2.oninput = (ev: any) => {
+        const newVal: string = ev.target!.value
+        if (Array.isArray(hammer.colors[key])) {
+          hammer.colors[key] = [(hammer.colors[key] as [string, string])[0], newVal]
+        }
+        updateInput()
+        hammer.reset()
+        updateStore()
+      }
     }
   })
 }
@@ -667,6 +563,28 @@ function toFloat(val: string | null): number | null
 function toFloat(val: string | null): number | null {
   if (val === null) return null
   return parseFloat(val)
+}
+
+function colorNameToHex(color: string | [string, string]): string | null {
+  // If it's a gradient tuple, use the first color
+  if (Array.isArray(color)) {
+    color = color[0]
+  }
+
+  // If it's already a hex color, return it
+  if (color.startsWith('#')) return color
+
+  // Create a temporary canvas to convert named colors to hex
+  const ctx = document.createElement('canvas').getContext('2d')
+  if (!ctx) return null
+
+  ctx.fillStyle = color
+  const computedColor = ctx.fillStyle
+
+  // If the color was valid, fillStyle will be set to the hex value
+  if (computedColor.startsWith('#')) return computedColor
+
+  return null
 }
 
 /** Same as Object.keys() but with type inference */
