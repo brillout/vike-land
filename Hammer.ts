@@ -15,7 +15,7 @@ const { TAU } = Zdog
 /********** DEFAULTS ***********/
 /*******************************/
 
-const headLength = 27.5
+const headLength = 27.4
 const lightningBoltSize = 0.13
 
 const handleDiameterDefault = 8.6
@@ -35,7 +35,7 @@ const legacyHandle = true
 //*/
 
 const STROKE = 0
-const slopeSize = 1.8
+const slopeSize = 2
 const sideLength = 8
 
 // perspectiveDefault is meant to be overriden by setting hammer.perspective = /* ... */

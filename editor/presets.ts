@@ -32,7 +32,7 @@ const colorsDefault: Colors = {
 const perspectiveDefault: Perspective = {
   rotation2D: 0,
   handleDiameter: 7.7,
-  handleLength: 13.5,
+  handleLength: 14.5,
   rotate: { x: 0.00, y: -7.16, z: -2 },
 }
 
