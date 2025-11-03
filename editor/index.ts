@@ -132,7 +132,7 @@ const presetsColor: Record<string, Colors> = {
   default: { ...colorsDefault },
 }
 const presets: Record<string, Preset> = {
-  'maud-improved': {
+  'default': {
     rotation2D: 0,
     handleDiameter: 7.7,
     handleLength: 13.5,
@@ -212,7 +212,7 @@ type Preset = {
   handleLength?: number
 }
 
-const perspectiveDefault = presets.latest2
+const perspectiveDefault = presets.default
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
