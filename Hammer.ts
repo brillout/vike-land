@@ -40,11 +40,11 @@ const perspectiveDefault: Perspective = {
 
 const colorsDefault: Colors = {
   metal1: '#d0d0d0',
-  metal2: '#c0c0c0',
+  metal2: '#b8b8b8',
   metal3: 'url("#gradient-main")',
   metal4: 'rgba(0,0,0,0.2)',
-  metal5: '#b0b0b0',
-  metal6: '#c8c8c8',
+  metal5: '#a0a0a0',
+  metal6: '#c0c0c0',
   wood: 'url("#gradient-wood")',
   lightningBolt: '#ffeb3b',
   colorSlopeTop: 'url("#gradient-slope-top")',
