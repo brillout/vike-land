@@ -22,6 +22,10 @@ const colorsDefault: Colors = {
   colorFaceBottom: 'url("#gradient-main")',
   colorFaceUpper: 'url("#gradient-main")',
   colorFaceFront: 'url("#gradient-main")',
+  colorCornerTopLeft: '#c0c0c0',
+  colorCornerTopRight: '#c0c0c0',
+  colorCornerBottomRight: '#c0c0c0',
+  colorCornerBottomLeft: '#c0c0c0',
 }
 
 const perspectiveDefault: Perspective = {
@@ -57,6 +61,10 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: 'blue',
     colorFaceUpper: 'purple',
     colorFaceFront: 'darkblue',
+    colorCornerTopLeft: 'lime',
+    colorCornerTopRight: 'magenta',
+    colorCornerBottomRight: 'teal',
+    colorCornerBottomLeft: 'gold',
   },
   'colors-default-previous': {
     metal1: '#ababab',

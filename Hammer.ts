@@ -93,6 +93,10 @@ type Colors = {
   colorFaceBottom?: string
   colorFaceUpper?: string
   colorFaceFront?: string
+  colorCornerTopLeft?: string
+  colorCornerTopRight?: string
+  colorCornerBottomRight?: string
+  colorCornerBottomLeft?: string
 }
 
 class Hammer {
@@ -418,7 +422,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     color: colors.colorSlopeLeft ?? colors.metal2,
   })
 
-  // south east corner
+  // top left corner
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -426,7 +430,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: slopeSize },
     ],
     translate: { x: sideLength, z: sideLength },
-    color: colorCorner,
+    color: colors.colorCornerTopLeft ?? colorCorner,
   })
 
   // north slope
@@ -436,7 +440,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     color: colors.colorSlopeRight ?? colors.metal2,
   })
 
-  // north east corner
+  // top right corner
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -444,7 +448,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: -1 * slopeSize },
     ],
     translate: { x: sideLength, z: -1 * sideLength },
-    color: colorCorner,
+    color: colors.colorCornerTopRight ?? colorCorner,
   })
 
   // west slope
@@ -454,7 +458,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     color: colorEdge,
   })
 
-  // north west corner
+  // bottom right corner
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -462,10 +466,10 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: -1 * slopeSize },
     ],
     translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: colorCorner,
+    color: colors.colorCornerBottomRight ?? colorCorner,
   })
 
-  // south west corner
+  // bottom left corner
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -473,7 +477,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 0, y: slopeSize, z: slopeSize },
     ],
     translate: { x: -1 * sideLength, z: sideLength },
-    color: colorCorner,
+    color: colors.colorCornerBottomLeft ?? colorCorner,
   })
 
   /* Failed attempt to remove aliasing issues
