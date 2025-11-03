@@ -173,7 +173,7 @@ export const presetsColor: Record<string, Colors> = {
   },
 }
 
-export const presetsPerspecitve: Record<string, Preset> = {
+export const presetsPerspective: Record<string, Preset> = {
   'perspective-default': {
     rotation2D: 0,
     handleDiameter: 7.7,
@@ -246,5 +246,5 @@ export const presetsPerspecitve: Record<string, Preset> = {
   },
 }
 
-export const perspectiveDefault = presetsPerspecitve['perspective-default']
+export const perspectiveDefault = presetsPerspective['perspective-default']
 

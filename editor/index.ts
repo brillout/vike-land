@@ -7,7 +7,7 @@ import {
   type Colors,
   type PerspectiveUserControlable,
 } from '../Hammer'
-import { presetsColor, presetsPerspecitve, perspectiveDefault, type Preset } from './presets'
+import { presetsColor, presetsPerspective, perspectiveDefault, type Preset } from './presets'
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
@@ -367,7 +367,7 @@ function downloadFile(content: string, mimeType: string, filename: string) {
 
 function initPresets(presetsEl: Element, hammer: Hammer) {
   addHeading('Settings', presetsEl)
-  Object.entries(presetsPerspecitve).forEach(([name, preset]) => {
+  Object.entries(presetsPerspective).forEach(([name, preset]) => {
     genPresetBtn(name, presetsEl, () => {
       changeHandleDiameter(preset.handleDiameter || hammer.handleDiameterDefault)
       changeHandleLength(preset.handleLength || hammer.handleLengthDefault)
