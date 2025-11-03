@@ -347,6 +347,19 @@ function initDownload(download: HTMLButtonElement) {
     const hammerSvg = document.querySelector('.hammer')!
     let content = hammerSvg.outerHTML
     content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+
+    // Extract gradients from the gradient-container
+    const gradientContainer = document.querySelector('svg.gradient-container defs')
+    if (gradientContainer && gradientContainer.children.length > 0) {
+      const defsContent = Array.from(gradientContainer.children)
+        .map(el => el.outerHTML)
+        .join('\n    ')
+      // Insert defs section after the opening svg tag
+      content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
+        `<svg xmlns="http://www.w3.org/2000/svg" `)
+      content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+    }
+
     const rotation2D = getRotation2D()
     content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
     content = content.replace('</svg>', '</g></svg>')
