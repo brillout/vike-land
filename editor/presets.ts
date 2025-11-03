@@ -11,7 +11,7 @@ const colorsDefault: Colors = {
   metal3: ['#d8d8d8', '#b8b8b8'],
   metal4: 'rgba(0,0,0,0.2)',
   metal5: '#909090',
-  metal6: '#b0b0b0',
+  metal6: ['#d6d6d6', '#949494'],
   wood: ['#ed983e', '#c35f22'],
   lightningBolt: '#ffeb3b',
   colorSlopeTop: ['#d9d9da', '#b8b7b8'],
