@@ -84,7 +84,8 @@ const presetsColor: Record<string, Colors> = {
 const presets: Record<string, Preset> = {
   'maud-improved': {
     rotation2D: 0,
-    handleLength: 11,
+    handleDiameter: 7.7,
+    handleLength: 13.5,
     rotate: { x: 0.06, y: -7.16, z: -2 },
   },
   maud: {
