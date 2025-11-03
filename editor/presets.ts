@@ -2,7 +2,6 @@ export { presetsColor }
 export { presetsPerspective }
 export { perspectiveDefault }
 export { colorsDefault }
-export type { Preset }
 
 import { type Colors } from '../Hammer'
 
