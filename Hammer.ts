@@ -2,7 +2,6 @@ export { Hammer }
 export { toHumanReadable }
 export { fromHumanReadable }
 export { fromHumanReadableAxis }
-export { colorsDefault }
 export type { IlloElement }
 export type { Colors }
 export type { Perspective }
@@ -42,25 +41,6 @@ const sideLength = 8
 const perspectiveDefault: Perspective = {
   rotate: fromHumanReadable({ x: 0, y: 0, z: 0 }),
   translate: { x: 0, y: 0, z: 0 },
-}
-
-const colorsDefault: Colors = {
-  metal1: '#c0c0c0',
-  metal2: '#a8a8a8',
-  metal3: 'url("#gradient-main")',
-  metal4: 'rgba(0,0,0,0.2)',
-  metal5: '#909090',
-  metal6: '#b0b0b0',
-  wood: 'url("#gradient-wood")',
-  lightningBolt: '#ffeb3b',
-  colorSlopeTop: 'url("#gradient-slope-top")',
-  colorSlopeLeft: 'url("#gradient-slope-left")',
-  colorSlopeRight: 'url("#gradient-slope-right")',
-  colorSlopeTopRight: 'url("#gradient-slope-top-right")',
-  colorSlopeBottom: 'url("#gradient-slope-bottom")',
-  colorFaceBottom: 'url("#gradient-main")',
-  colorFaceUpper: 'url("#gradient-main")',
-  colorFaceFront: 'url("#gradient-main")',
 }
 
 /******************************/
