@@ -47,6 +47,11 @@ const colorsDefault: Colors = {
   metal6: '#828282',
   wood: 'url("#gradient-wood")',
   lightningBolt: '#fbbf28',
+  colorSlopeTop: 'url("#gradient-slope-top")',
+  colorSlopeLeft: 'url("#gradient-slope-left")',
+  colorSlopeRight: 'url("#gradient-slope-right")',
+  colorSlopeTopRight: 'url("#gradient-slope-top-right")',
+  colorSlopeBottom: 'url("#gradient-slope-bottom")',
 }
 
 /*
@@ -104,6 +109,11 @@ type Colors = {
   metal6: string
   wood: string
   lightningBolt: string
+  colorSlopeTop: string
+  colorSlopeLeft: string
+  colorSlopeRight: string
+  colorSlopeTopRight: string
+  colorSlopeBottom: string
 }
 
 class Hammer {
