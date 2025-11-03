@@ -130,6 +130,21 @@ const presetsColor: Record<string, Colors> = {
     colorSlopeTopRight: '#828282',
     colorSlopeBottom: '#828282',
   },
+  vivid: {
+    metal1: '#ff6b6b',
+    metal2: '#ff6b6b',
+    metal3: '#ff6b6b',
+    metal4: '#ff6b6b',
+    metal5: '#ff6b6b',
+    metal6: '#ff6b6b',
+    wood: '#ff8c42',
+    lightningBolt: '#ffff00',
+    colorSlopeTop: '#ff0000',
+    colorSlopeLeft: '#00ffff',
+    colorSlopeRight: '#ff8c00',
+    colorSlopeTopRight: '#ffff00',
+    colorSlopeBottom: '#0000ff',
+  },
 }
 const presets: Record<string, Preset> = {
   'perspective-default': {
