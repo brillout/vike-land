@@ -255,8 +255,8 @@ function main() {
   initPresets(elements.presets, hammer)
   initPresetsColor(elements.presetsColor, hammer)
   initColorInputs(elements.colorPicker, hammer)
-  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter').changeVal
-  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength').changeVal
+  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
+  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
@@ -374,7 +374,7 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   getRotation2D = controls.getValue
 }
 
-function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength') {
+function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength', defaultValue?: number) {
   return createNumberInput({
     elem: handlePicker,
     labelText: `<code>${handleProp}</code>`,
@@ -384,6 +384,7 @@ function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'ha
     setValue(n: number) {
       hammer[handleProp] = n
     },
+    defaultValue,
     hammer,
   })
 }
