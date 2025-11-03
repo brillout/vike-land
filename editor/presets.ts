@@ -1,13 +1,17 @@
+export { presetsColor }
+export { presetsPerspective }
+export type { Preset }
+
 import { colorsDefault, type Colors } from '../Hammer'
 
-export type Preset = {
+type Preset = {
   rotation2D: number
   rotate: { x: number; y: number; z: number }
   handleDiameter?: number
   handleLength?: number
 }
 
-export const presetsColor: Record<string, Colors> = {
+const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
   vivid: {
     metal1: 'cyan',
@@ -173,7 +177,7 @@ export const presetsColor: Record<string, Colors> = {
   },
 }
 
-export const presetsPerspective: Record<string, Preset> = {
+const presetsPerspective: Record<string, Preset> = {
   'perspective-default': {
     rotation2D: 0,
     handleDiameter: 7.7,
