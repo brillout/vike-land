@@ -8,6 +8,7 @@ export type { Perspective }
 export type { PerspectiveUserControlable }
 
 import * as Zdog from 'zdog'
+import { colorsDefault } from './editor/presets'
 const { TAU } = Zdog
 
 /*******************************/

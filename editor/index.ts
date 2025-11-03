@@ -3,10 +3,9 @@ import {
   fromHumanReadableAxis,
   Hammer,
   toHumanReadable,
-  type Colors,
   type PerspectiveUserControlable,
 } from '../Hammer'
-import { presetsColor, presetsPerspective, perspectiveDefault, colorsDefault, type Preset } from './presets'
+import { presetsColor, presetsPerspective, perspectiveDefault } from './presets'
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
