@@ -9,8 +9,8 @@ import {
 } from '../Hammer'
 
 const presetsColor: Record<string, Colors> = {
-  default: { ...colorsDefault },
-  'previous-default': {
+  'colors-default': { ...colorsDefault },
+  'colors-default-previous': {
     metal1: '#ababab',
     metal2: '#949494',
     metal3: '#757575',
@@ -132,13 +132,13 @@ const presetsColor: Record<string, Colors> = {
   },
 }
 const presets: Record<string, Preset> = {
-  'default': {
+  'perspective-default': {
     rotation2D: 0,
     handleDiameter: 7.7,
     handleLength: 13.5,
     rotate: { x: 0.06, y: -7.16, z: -2 },
   },
-  'default-previous': {
+  'perspective-default-previous': {
     rotation2D: 13,
     rotate: { x: -0.4, y: 23.5, z: 0 },
   },
@@ -212,7 +212,7 @@ type Preset = {
   handleLength?: number
 }
 
-const perspectiveDefault = presets.default
+const perspectiveDefault = presets['perspective-default']
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
