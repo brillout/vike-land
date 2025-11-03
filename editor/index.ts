@@ -413,24 +413,44 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
       if (val) hammer.colors[key] = val
     }
 
+    const val = hammer.colors[key]
+    const isGradient = Array.isArray(val)
+
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
     const parentEl = document.createElement('div')
     colorPicker.appendChild(parentEl)
     const labelEl = document.createElement('label')
     parentEl.appendChild(labelEl)
+
     const inputEl = document.createElement('input')
     inputEl.setAttribute('type', 'color')
     labelEl.appendChild(inputEl)
+
+    let inputEl2: HTMLInputElement | undefined
+    if (isGradient) {
+      inputEl2 = document.createElement('input')
+      inputEl2.setAttribute('type', 'color')
+      labelEl.appendChild(inputEl2)
+    }
+
     const valEl = document.createElement('span')
     parentEl.appendChild(valEl)
 
     const updateInput = () => {
       const val = hammer.colors[key]
-      // Convert named colors to hex for the color picker
-      const hexVal = colorNameToHex(val) || (Array.isArray(val) ? val[0] : val)
-      inputEl.value = hexVal
-      const displayVal = Array.isArray(val) ? `[${val[0]}, ${val[1]}]` : val
-      valEl.innerHTML = ` ${displayVal} <code>${key}</code>`
+      if (Array.isArray(val)) {
+        // Gradient tuple
+        const hexVal1 = colorNameToHex(val[0]) || val[0]
+        const hexVal2 = colorNameToHex(val[1]) || val[1]
+        inputEl.value = hexVal1
+        if (inputEl2) inputEl2.value = hexVal2
+        valEl.innerHTML = ` [${val[0]}, ${val[1]}] <code>${key}</code>`
+      } else {
+        // Solid color
+        const hexVal = colorNameToHex(val) || val
+        inputEl.value = hexVal
+        valEl.innerHTML = ` ${val} <code>${key}</code>`
+      }
     }
     const updateStore = () => {
       const val = hammer.colors[key]
@@ -443,11 +463,27 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     })
 
     inputEl.oninput = (ev: any) => {
-      const val: string = ev.target!.value
-      hammer.colors[key] = val
+      const newVal: string = ev.target!.value
+      if (Array.isArray(hammer.colors[key])) {
+        hammer.colors[key] = [newVal, (hammer.colors[key] as [string, string])[1]]
+      } else {
+        hammer.colors[key] = newVal
+      }
       updateInput()
       hammer.reset()
       updateStore()
+    }
+
+    if (inputEl2) {
+      inputEl2.oninput = (ev: any) => {
+        const newVal: string = ev.target!.value
+        if (Array.isArray(hammer.colors[key])) {
+          hammer.colors[key] = [(hammer.colors[key] as [string, string])[0], newVal]
+        }
+        updateInput()
+        hammer.reset()
+        updateStore()
+      }
     }
   })
 }
