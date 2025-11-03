@@ -54,6 +54,7 @@ const colorsDefault: Colors = {
   colorSlopeBottom: 'url("#gradient-slope-bottom")',
 }
 
+// TODO: why didn't you remove this? Move it to colorsDefault
 /*
 const colorSlopeTop = 'red'
 const colorSlopeLeft = 'cyan'
