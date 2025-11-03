@@ -76,6 +76,7 @@ type PerspectiveUserControlable = {
   z: number
 }
 
+// TODO: also accept [string, string] => dynamically generate an SVG linearGradient
 type Colors = {
   metal1: string
   metal2: string
