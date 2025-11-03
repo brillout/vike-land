@@ -648,7 +648,9 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 
     const updateInput = () => {
       const val = hammer.colors[key]
-      inputEl.value = val
+      // Convert named colors to hex for the color picker
+      const hexVal = colorNameToHex(val) || val
+      inputEl.value = hexVal
       valEl.innerHTML = ` ${val} <code>${key}</code>`
     }
     const updateStore = () => {
@@ -733,6 +735,23 @@ function toFloat(val: string | null): number | null
 function toFloat(val: string | null): number | null {
   if (val === null) return null
   return parseFloat(val)
+}
+
+function colorNameToHex(color: string): string | null {
+  // If it's already a hex color, return it
+  if (color.startsWith('#')) return color
+
+  // Create a temporary canvas to convert named colors to hex
+  const ctx = document.createElement('canvas').getContext('2d')
+  if (!ctx) return null
+
+  ctx.fillStyle = color
+  const computedColor = ctx.fillStyle
+
+  // If the color was valid, fillStyle will be set to the hex value
+  if (computedColor.startsWith('#')) return computedColor
+
+  return null
 }
 
 /** Same as Object.keys() but with type inference */
