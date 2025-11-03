@@ -27,7 +27,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: 'blue',
     colorFaceUpper: 'purple',
     colorFaceFront: 'darkblue',
-    colorSlopeWest: 'cyan',
   },
   'colors-default-previous': {
     metal1: '#ababab',
@@ -46,7 +45,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#757575',
     colorFaceUpper: '#757575',
     colorFaceFront: '#757575',
-    colorSlopeWest: '#949494',
   },
   previous: {
     metal1: '#b5b5b5',
@@ -65,7 +63,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#757575',
     colorFaceUpper: '#757575',
     colorFaceFront: '#757575',
-    colorSlopeWest: '#949494',
   },
   darker: {
     metal1: '#a3a3a3',
@@ -84,7 +81,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#757575',
     colorFaceUpper: '#757575',
     colorFaceFront: '#757575',
-    colorSlopeWest: '#8f8f8f',
   },
   older2: {
     metal1: '#b0b0b0',
@@ -103,7 +99,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#757575',
     colorFaceUpper: '#757575',
     colorFaceFront: '#757575',
-    colorSlopeWest: '#949494',
   },
   older: {
     metal1: '#b5b5b5',
@@ -122,7 +117,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#757575',
     colorFaceUpper: '#757575',
     colorFaceFront: '#757575',
-    colorSlopeWest: '#949494',
   },
   brighter: {
     metal1: '#b5b5b5',
@@ -141,7 +135,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#7a7a7a',
     colorFaceUpper: '#7a7a7a',
     colorFaceFront: '#7a7a7a',
-    colorSlopeWest: '#949494',
   },
   ['too-bright']: {
     metal1: '#bdbdbd',
@@ -160,7 +153,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#a6a6a6',
     colorFaceUpper: '#a6a6a6',
     colorFaceFront: '#a6a6a6',
-    colorSlopeWest: '#b3b3b3',
   },
   oldest: {
     metal1: '#949494',
@@ -179,7 +171,6 @@ const presetsColor: Record<string, Colors> = {
     colorFaceBottom: '#696969',
     colorFaceUpper: '#696969',
     colorFaceFront: '#696969',
-    colorSlopeWest: '#828282',
   },
 }
 const presets: Record<string, Preset> = {

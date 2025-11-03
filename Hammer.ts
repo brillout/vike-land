@@ -61,7 +61,6 @@ const colorsDefault: Colors = {
   colorFaceBottom: 'url("#gradient-main")',
   colorFaceUpper: 'url("#gradient-main")',
   colorFaceFront: 'url("#gradient-main")',
-  colorSlopeWest: '#a8a8a8',
 }
 
 /******************************/
@@ -113,7 +112,6 @@ type Colors = {
   colorFaceBottom: string
   colorFaceUpper: string
   colorFaceFront: string
-  colorSlopeWest: string
 }
 
 class Hammer {
@@ -472,7 +470,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   EWSlope.copy({
     scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
     translate: { x: -1 * sideLength },
-    color: colors.colorSlopeWest,
+    color: colorEdge,
   })
 
   // north west corner
