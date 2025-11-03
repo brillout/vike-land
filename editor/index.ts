@@ -138,6 +138,10 @@ const presets: Record<string, Preset> = {
     handleLength: 13.5,
     rotate: { x: 0.06, y: -7.16, z: -2 },
   },
+  'default-previous': {
+    rotation2D: 13,
+    rotate: { x: -0.4, y: 23.5, z: 0 },
+  },
   maud: {
     rotation2D: 0,
     handleLength: 10,
@@ -181,10 +185,6 @@ const presets: Record<string, Preset> = {
   latest: {
     rotation2D: -30,
     rotate: { x: -0.5, y: 23.2, z: 0 },
-  },
-  latest2: {
-    rotation2D: 13,
-    rotate: { x: -0.4, y: 23.5, z: 0 },
   },
   ['vertical-mirrored']: {
     handleDiameter: 8.2,
