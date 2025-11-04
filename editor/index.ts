@@ -391,11 +391,11 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
   addHeading('Colors', presetsColorEl)
   Object.entries(presetsColor).forEach(([name, colors]) => {
     genPresetBtn(name, presetsColorEl, () => {
-      // Clear all color-related localStorage values first
-      objectKeys(colors).forEach((key) => {
+      // Clear ALL color-related localStorage values first
+      objectKeys(hammer.colors).forEach((key) => {
         window.localStorage.removeItem(`__vike_logo__input_${key}`)
       })
-      // Save all colors to localStorage
+      // Save all colors from this preset to localStorage
       objectKeys(colors).forEach((key) => {
         setStoreValue(key, colors[key])
       })
