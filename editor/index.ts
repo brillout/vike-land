@@ -6,6 +6,7 @@ import {
   type PerspectiveUserControlable,
 } from '../Hammer'
 import { presetsColor, presetsPerspective, perspectiveDefault } from './presets'
+const localStorageKeyPrefix = '__vike_logo__input_'
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
@@ -564,7 +565,7 @@ function assert(condition: unknown): asserts condition {
 }
 
 function getStoreValue(key: string): unknown {
-  const stored = window.localStorage[`__vike_logo__input_${key}`]
+  const stored = window.localStorage[`${localStorageKeyPrefix}${key}`]
   if (!stored) return null
   try {
     return JSON.parse(stored)
@@ -573,10 +574,10 @@ function getStoreValue(key: string): unknown {
   }
 }
 function setStoreValue(key: string, val: unknown): void | undefined {
-  window.localStorage[`__vike_logo__input_${key}`] = JSON.stringify(val)
+  window.localStorage[`${localStorageKeyPrefix}${key}`] = JSON.stringify(val)
 }
 function delStoreValue(key: string) {
-  window.localStorage.removeItem(`__vike_logo__input_${key}`)
+  window.localStorage.removeItem(`${localStorageKeyPrefix}${key}`)
 }
 function clearStore() {
   window.localStorage.clear()
