@@ -46,7 +46,7 @@ function main() {
   zdogViewInit(elements.zdogView)
 
   initPresets(elements.presets, hammer)
-  initPresetsColor(elements.presetsColor, hammer)
+  initPresetsColor(elements.presetsColor, hammer, elements.colorPicker)
   initColorInputs(elements.colorPicker, hammer)
   changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
   changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
@@ -388,13 +388,14 @@ function initPresets(presetsEl: Element, hammer: Hammer) {
     })
   })
 }
-function initPresetsColor(presetsColorEl: Element, hammer: Hammer) {
+function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl: Element) {
   addHeading('Colors', presetsColorEl)
   Object.entries(presetsColor).forEach(([name, colors]) => {
     genPresetBtn(name, presetsColorEl, () => {
       hammer.colors = colors
       hammer.reset()
-      updateColorInputs()
+      // Rebuild color inputs to show only colors defined in this preset
+      initColorInputs(colorPickerEl, hammer)
     })
   })
 }
@@ -427,6 +428,10 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     }
 
     const val = hammer.colors[key]
+
+    // Skip if the color is not defined in the current preset
+    if (val === undefined) return
+
     const isGradient = Array.isArray(val)
 
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
