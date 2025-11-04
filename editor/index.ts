@@ -553,11 +553,17 @@ function assert(condition: unknown): asserts condition {
   if (!condition) throw new Error('Assertion failed.')
 }
 
-function getStoreValue(key: string): null | string {
-  return window.localStorage[`__vike_logo__input_${key}`] ?? null
+function getStoreValue(key: string): null | string | [string, string] {
+  const stored = window.localStorage[`__vike_logo__input_${key}`]
+  if (!stored) return null
+  try {
+    return JSON.parse(stored)
+  } catch {
+    return stored
+  }
 }
 function setStoreValue(key: string, val: unknown): void | undefined {
-  window.localStorage[`__vike_logo__input_${key}`] = val
+  window.localStorage[`__vike_logo__input_${key}`] = JSON.stringify(val)
 }
 function clearStore() {
   window.localStorage.clear()
