@@ -201,7 +201,7 @@ function createNumberInput({
   const storeKey = elem.id!
 
   {
-    const val = toFloat(getStoreValue(storeKey))
+    const val = toFloat(getStoreValue(storeKey) as any)
     if (val !== null) setValue(val)
     else if (defaultValue !== undefined) setValue(defaultValue)
   }
@@ -311,7 +311,7 @@ function createCheckboxInput({
 
   const { id } = elem
   assert(id)
-  const storeGet = () => (JSON.parse(getStoreValue(id) ?? '"{}"').isChecked as undefined | boolean) ?? false
+  const storeGet = () => ((getStoreValue(id) as any)?.isChecked as undefined | boolean) ?? false
   const storeToggle = () => {
     let isChecked = storeGet()
     isChecked = !isChecked
@@ -422,7 +422,7 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
-      if (val) hammer.colors[key] = val
+      if (val) hammer.colors[key] = val as any
     }
 
     const val = hammer.colors[key]
@@ -553,7 +553,7 @@ function assert(condition: unknown): asserts condition {
   if (!condition) throw new Error('Assertion failed.')
 }
 
-function getStoreValue(key: string): null | string | [string, string] {
+function getStoreValue(key: string): unknown {
   const stored = window.localStorage[`__vike_logo__input_${key}`]
   if (!stored) return null
   try {
