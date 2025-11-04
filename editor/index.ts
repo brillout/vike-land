@@ -472,9 +472,7 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     }
     const updateStore = () => {
       const val = hammer.colors[key]
-      if (val !== undefined) {
-        setStoreValue(key, JSON.stringify(val))
-      }
+      setStoreValue(key, JSON.stringify(val))
     }
     updateInput()
     updateInputs.push(() => {
