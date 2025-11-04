@@ -6,12 +6,12 @@ import {
   type PerspectiveUserControlable,
 } from '../Hammer'
 import { presetsColor, presetsPerspective, perspectiveDefault } from './presets'
+const localStorageKeyPrefix = '__vike_logo__input_'
 
 let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
 let changeHandleDiameter: (n: number) => void
 let changeHandleLength: (n: number) => void
-let updateColorInputs: () => void
 main()
 
 function getElements() {
@@ -46,7 +46,7 @@ function main() {
   zdogViewInit(elements.zdogView)
 
   initPresets(elements.presets, hammer)
-  initPresetsColor(elements.presetsColor, hammer)
+  initPresetsColor(elements.presetsColor, hammer, elements.colorPicker)
   initColorInputs(elements.colorPicker, hammer)
   changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
   changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
@@ -202,7 +202,7 @@ function createNumberInput({
   const storeKey = elem.id!
 
   {
-    const val = toFloat(getStoreValue(storeKey))
+    const val = toFloat(getStoreValue(storeKey) as any)
     if (val !== null) setValue(val)
     else if (defaultValue !== undefined) setValue(defaultValue)
   }
@@ -312,7 +312,7 @@ function createCheckboxInput({
 
   const { id } = elem
   assert(id)
-  const storeGet = () => (JSON.parse(getStoreValue(id) ?? '"{}"').isChecked as undefined | boolean) ?? false
+  const storeGet = () => ((getStoreValue(id) as any)?.isChecked as undefined | boolean) ?? false
   const storeToggle = () => {
     let isChecked = storeGet()
     isChecked = !isChecked
@@ -388,13 +388,23 @@ function initPresets(presetsEl: Element, hammer: Hammer) {
     })
   })
 }
-function initPresetsColor(presetsColorEl: Element, hammer: Hammer) {
+function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl: Element) {
   addHeading('Colors', presetsColorEl)
   Object.entries(presetsColor).forEach(([name, colors]) => {
     genPresetBtn(name, presetsColorEl, () => {
-      hammer.colors = colors
+      // Clear ALL possible color-related localStorage values
+      objectKeys(hammer.colors).forEach((key) => {
+        delStoreValue(key)
+      })
+      // Save all colors from this preset to localStorage
+      objectKeys(colors).forEach((key) => {
+        setStoreValue(key, colors[key])
+      })
+      // Make a copy of the preset colors to avoid mutating the original preset object
+      hammer.colors = { ...colors }
       hammer.reset()
-      updateColorInputs()
+      // Rebuild color inputs to show only colors defined in this preset
+      initColorInputs(colorPickerEl, hammer)
     })
   })
 }
@@ -418,15 +428,18 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
 
   const updateInputs: (() => void)[] = []
-  updateColorInputs = () => updateInputs.forEach((f) => f())
 
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
-      if (val) hammer.colors[key] = val
+      if (val) hammer.colors[key] = val as any
     }
 
     const val = hammer.colors[key]
+
+    // Skip if the color is not defined in the current preset
+    if (val === undefined) return
+
     const isGradient = Array.isArray(val)
 
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
@@ -451,6 +464,8 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 
     const updateInput = () => {
       const val = hammer.colors[key]
+      if (val === undefined) return
+
       if (Array.isArray(val)) {
         // Gradient tuple
         const hexVal1 = colorNameToHex(val[0]) || val[0]
@@ -548,11 +563,20 @@ function assert(condition: unknown): asserts condition {
   if (!condition) throw new Error('Assertion failed.')
 }
 
-function getStoreValue(key: string): null | string {
-  return window.localStorage[`__vike_logo__input_${key}`] ?? null
+function getStoreValue(key: string): unknown {
+  const stored = window.localStorage[`${localStorageKeyPrefix}${key}`]
+  if (!stored) return null
+  try {
+    return JSON.parse(stored)
+  } catch {
+    return stored
+  }
 }
-function setStoreValue(key: string, val: string): void | undefined {
-  window.localStorage[`__vike_logo__input_${key}`] = val
+function setStoreValue(key: string, val: unknown): void | undefined {
+  window.localStorage[`${localStorageKeyPrefix}${key}`] = JSON.stringify(val)
+}
+function delStoreValue(key: string) {
+  window.localStorage.removeItem(`${localStorageKeyPrefix}${key}`)
 }
 function clearStore() {
   window.localStorage.clear()
