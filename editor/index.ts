@@ -393,6 +393,10 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
     genPresetBtn(name, presetsColorEl, () => {
       hammer.colors = colors
       hammer.reset()
+      // Save all colors to localStorage
+      objectKeys(colors).forEach((key) => {
+        setStoreValue(key, colors[key])
+      })
       // Rebuild color inputs to show only colors defined in this preset
       initColorInputs(colorPickerEl, hammer)
     })
