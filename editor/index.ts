@@ -402,7 +402,8 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
       hammer.colors = colors
       hammer.reset()
       // Rebuild color inputs to show only colors defined in this preset
-      initColorInputs(colorPickerEl, hammer)
+      // Pass false to not load from localStorage since we just set the preset
+      initColorInputs(colorPickerEl, hammer, false)
     })
   })
 }
@@ -422,13 +423,13 @@ function addHeading(heading: string, el: Element) {
   el.prepend(headingEl)
 }
 
-function initColorInputs(colorPicker: Element, hammer: Hammer) {
+function initColorInputs(colorPicker: Element, hammer: Hammer, loadFromStorage = true) {
   colorPicker.innerHTML = ''
 
   const updateInputs: (() => void)[] = []
 
   objectKeys(hammer.colors).forEach((key) => {
-    {
+    if (loadFromStorage) {
       const val = getStoreValue(key)
       if (val) hammer.colors[key] = val as any
     }
