@@ -399,7 +399,8 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
       objectKeys(colors).forEach((key) => {
         setStoreValue(key, colors[key])
       })
-      hammer.colors = colors
+      // Make a copy of the preset colors to avoid mutating the original preset object
+      hammer.colors = { ...colors }
       hammer.reset()
       // Rebuild color inputs to show only colors defined in this preset
       // Pass false to not load from localStorage since we just set the preset
