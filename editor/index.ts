@@ -11,7 +11,6 @@ let changeRotation2D: (n: number) => void
 let getRotation2D: () => number
 let changeHandleDiameter: (n: number) => void
 let changeHandleLength: (n: number) => void
-let updateColorInputs: () => void
 main()
 
 function getElements() {
@@ -419,7 +418,6 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
   colorPicker.innerHTML = ''
 
   const updateInputs: (() => void)[] = []
-  updateColorInputs = () => updateInputs.forEach((f) => f())
 
   objectKeys(hammer.colors).forEach((key) => {
     {
