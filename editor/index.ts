@@ -454,6 +454,8 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 
     const updateInput = () => {
       const val = hammer.colors[key]
+      if (val === undefined) return
+
       if (Array.isArray(val)) {
         // Gradient tuple
         const hexVal1 = colorNameToHex(val[0]) || val[0]
