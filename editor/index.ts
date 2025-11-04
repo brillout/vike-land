@@ -404,7 +404,6 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
       hammer.colors = { ...colors }
       hammer.reset()
       // Rebuild color inputs to show only colors defined in this preset
-      // Pass false to not load from localStorage since we just set the preset
       initColorInputs(colorPickerEl, hammer)
     })
   })
