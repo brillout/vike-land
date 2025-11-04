@@ -472,7 +472,7 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     }
     const updateStore = () => {
       const val = hammer.colors[key]
-      setStoreValue(key, JSON.stringify(val))
+      setStoreValue(key, val)
     }
     updateInput()
     updateInputs.push(() => {
@@ -556,7 +556,7 @@ function assert(condition: unknown): asserts condition {
 function getStoreValue(key: string): null | string {
   return window.localStorage[`__vike_logo__input_${key}`] ?? null
 }
-function setStoreValue(key: string, val: string): void | undefined {
+function setStoreValue(key: string, val: unknown): void | undefined {
   window.localStorage[`__vike_logo__input_${key}`] = val
 }
 function clearStore() {
