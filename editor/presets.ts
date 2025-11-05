@@ -14,19 +14,19 @@ const colorsDefault: Colors = {
   metal6: ['#d6d6d6', '#949494'],
   wood: ['#ffb152', '#aa5422'],
   lightningBolt: ['#ffe507', '#ffc212'],
-  colorSlopeTop: ['#d6d6d6', '#c2c2c2'],
+  colorSlopeTop: ['#dedede', '#c7c7c7'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
-  colorSlopeLeft: '#c1c2c2',
+  colorSlopeLeft: '#cccccc',
   colorSlopeRight: '#999999',
   colorSlopeTopRight: '#d9d9d9',
-  colorSlopeBottom: ['#b0b0b0', '#909090'],
+  colorSlopeBottom: ['#c7c7c7', '#909090'],
   colorFaceRight: '#a2a2a3',
-  colorFaceUpper: ['#bababa', '#a8a8a8'],
-  colorFaceFront: ['#c7cac9', '#b0afaf'],
+  colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
+  colorFaceFront: ['#d6d6d6', '#b0afaf'],
   colorCornerTopLeft: '#cacbcb',
   colorCornerTopRight: '#b0b0b0',
   colorCornerBottomRight: '#7d7d7d',
-  colorCornerBottomLeft: '#979697',
+  colorCornerBottomLeft: '#bfbfbf',
 }
 
 const perspectiveDefault: Perspective = {
@@ -43,8 +43,32 @@ type Perspective = {
   handleLength?: number
 }
 
+
 const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
+  gradient1: {
+    metal1: '#c0c0c0',
+    metal2: '#a8a8a8',
+    metal3: ['#d8d8d8', '#bfbfbf'],
+    metal4: 'rgba(0,0,0,0.2)',
+    metal5: '#909090',
+    metal6: ['#d6d6d6', '#949494'],
+    wood: ['#ffb152', '#aa5422'],
+    lightningBolt: ['#ffe507', '#ffc212'],
+    colorSlopeTop: ['#d6d6d6', '#c2c2c2'],
+    // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
+    colorSlopeLeft: '#c1c2c2',
+    colorSlopeRight: '#999999',
+    colorSlopeTopRight: '#d9d9d9',
+    colorSlopeBottom: ['#b0b0b0', '#909090'],
+    colorFaceRight: '#a2a2a3',
+    colorFaceUpper: ['#bababa', '#a8a8a8'],
+    colorFaceFront: ['#c7cac9', '#b0afaf'],
+    colorCornerTopLeft: '#cacbcb',
+    colorCornerTopRight: '#b0b0b0',
+    colorCornerBottomRight: '#7d7d7d',
+    colorCornerBottomLeft: '#979697',
+  },
   vivid: {
     metal1: 'cyan',
     metal2: 'red',
