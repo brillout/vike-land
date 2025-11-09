@@ -163,7 +163,6 @@ function createGradient(color1: string, color2: string): string {
   linearGradient.setAttribute('y1', '0')
   linearGradient.setAttribute('x2', '1')
   linearGradient.setAttribute('y2', '1')
-  linearGradient.setAttribute('gradientTransform', 'rotate(45)')
 
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
   stop1.setAttribute('offset', '30%')
