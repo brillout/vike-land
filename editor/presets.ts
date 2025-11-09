@@ -24,7 +24,7 @@ const colorsDefault: Colors = {
   colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
   colorFaceFront: ['#d6d6d6', '#b0afaf'],
   colorCornerTopLeft: '#ededed',
-  colorCornerTopRight: '#dbdbdb',
+  colorCornerTopRight: '#cfcfcf',
   colorCornerBottomRight: '#7d7d7d',
   colorCornerBottomLeft: '#d6d6d6',
 }
