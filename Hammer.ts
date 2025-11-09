@@ -165,11 +165,11 @@ function createGradient(color1: string, color2: string): string {
   linearGradient.setAttribute('y2', '1')
 
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
-  stop1.setAttribute('offset', '30%')
+  stop1.setAttribute('offset', '22%')
   stop1.setAttribute('stop-color', color1)
 
   const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
-  stop2.setAttribute('offset', '100%')
+  stop2.setAttribute('offset', '72%')
   stop2.setAttribute('stop-color', color2)
 
   linearGradient.appendChild(stop1)
