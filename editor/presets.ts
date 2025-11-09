@@ -16,7 +16,7 @@ const colorsDefault: Colors = {
   lightningBolt: ['#ffe507', '#ffc212'],
   colorSlopeTop: ['#e6e6e6', '#c4c4c4'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
-  colorSlopeLeft: '#dedede',
+  colorSlopeLeft: '#ebebeb',
   colorSlopeRight: '#9e9e9e',
   colorSlopeTopRight: '#d9d9d9',
   colorSlopeBottom: ['#b8b8b8', '#8a8a8a'],
@@ -24,7 +24,7 @@ const colorsDefault: Colors = {
   colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
   colorFaceFront: ['#d6d6d6', '#b0afaf'],
   colorCornerTopLeft: '#ededed',
-  colorCornerTopRight: '#b8b8b8',
+  colorCornerTopRight: '#dbdbdb',
   colorCornerBottomRight: '#7d7d7d',
   colorCornerBottomLeft: '#d6d6d6',
 }
