@@ -18,7 +18,8 @@ const { TAU } = Zdog
 const headLength = 28.3
 const slopeSize = 2
 const sideLength = 8
-const lightningBoltSize = 0.13
+const lightningBoltSize = 0.135
+const lightningBoltOffset = 0.2
 
 const handleBottomLength1 = 3
 //*/
@@ -565,7 +566,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = undefined;
   /*/
   const addTo = group
-  const lightningBoltPosition = { x: 0.0, y: (headLength / 2) - 0.0, z: sideLength + slopeSize }
+  const lightningBoltPosition = { x: lightningBoltOffset, y: (headLength / 2) - 0.0, z: sideLength + slopeSize }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
