@@ -13,7 +13,7 @@ const colorsDefault: Colors = {
   metal5: 'red',
   metal6: ['#d6d6d6', '#949494'],
   wood: ['#ffb152', '#aa5422'],
-  lightningBolt: ['#ffff00', '#ffdd00'],
+  lightningBolt: ['#ffff00', '#ffdf00'],
   colorSlopeTop: ['#dedede', '#c4c4c4'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
   colorSlopeLeft: '#d1d1d1',
