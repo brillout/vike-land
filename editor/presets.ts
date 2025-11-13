@@ -6,11 +6,11 @@ export { colorsDefault }
 import { type Colors } from '../Hammer'
 
 const colorsDefault: Colors = {
-  metal1: '#c0c0c0',
+  metal1: 'red',
   metal2: '#a8a8a8',
-  metal3: ['#d8d8d8', '#bfbfbf'],
-  metal4: 'rgba(0,0,0,0.2)',
-  metal5: '#909090',
+  metal3: 'red',
+  metal4: 'red',
+  metal5: 'red',
   metal6: ['#d6d6d6', '#949494'],
   wood: ['#ffb152', '#aa5422'],
   lightningBolt: ['#ffde05', '#ffb514'],
