@@ -15,7 +15,7 @@ const { TAU } = Zdog
 /********** PARAMS ***********/
 /*****************************/
 
-const headLength = 27.4
+const headLength = 28.3
 const slopeSize = 2
 const sideLength = 8
 const lightningBoltSize = 0.13
