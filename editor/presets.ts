@@ -11,7 +11,7 @@ const colorsDefault: Colors = {
   metal3: 'red',
   metal4: 'red',
   metal5: 'red',
-  metal6: ['#b5b5b5', '#6b6b6b'],
+  metal6: ['#b0b0b0', '#6b6b6b'],
   wood: ['#ffae00', '#ac501b'],
   lightningBolt: ['#ffff00', '#ffff00'],
   colorSlopeTop: ['#ededed', '#c2c2c2'],
@@ -20,13 +20,13 @@ const colorsDefault: Colors = {
   colorSlopeRight: '#9e9e9e',
   colorSlopeTopRight: '#dcdbdb',
   colorSlopeBottom: ['#ababab', '#6b6b6b'],
-  colorFaceRight: '#707070',
+  colorFaceRight: '#828282',
   colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
   colorFaceFront: ['#cccccc', '#8c8c8c'],
-  colorCornerTopLeft: '#dedede',
+  colorCornerTopLeft: '#f2f2f2',
   colorCornerTopRight: '#cfcfcf',
   colorCornerBottomRight: '#7d7d7d',
-  colorCornerBottomLeft: '#dedede',
+  colorCornerBottomLeft: '#d1d1d1',
 }
 
 const perspectiveDefault: Perspective = {
