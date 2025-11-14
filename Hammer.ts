@@ -21,7 +21,8 @@ const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
 
-const handleBottomLength1 = 3
+const handleBottomLength1 = 3.2
+const handleBottomExtraWidth = 1.4
 //*/
 const handleBottomLength2 = null
 /*/
@@ -321,7 +322,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   }
   mount(handleStick, 0, handleLength, 10)
   if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
-  mount(mountColor3, 1, handleBottomLength1)
+  mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {
