@@ -293,9 +293,9 @@ function initAutoSpinning(autoSpinning: Element) {
 function initHighBackLightningBold(hideBackLightningBolt: HTMLElement, hammer: Hammer) {
   createCheckboxInput({
     elem: hideBackLightningBolt,
-    labelText: 'Hide back lightning bolt',
+    labelText: 'Show back lightning bolt',
     onToggle(isChecked: boolean) {
-      hammer.hideBackLightningBolt = isChecked
+      hammer.hideBackLightningBolt = !isChecked
     },
     applyValue() {
       hammer.reset()
