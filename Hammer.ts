@@ -19,7 +19,7 @@ const headLength = 28.3
 const slopeSize = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
-const lightningBoltOffset = 0.2
+const lightningBoltOffset = 0.3
 
 const handleBottomLength1 = 3
 //*/
