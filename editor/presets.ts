@@ -17,7 +17,7 @@ const colorsDefault: Colors = {
   colorSlopeTop: ['#c9c9c9', '#ababab'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
   colorSlopeLeft: '#cccccc',
-  colorSlopeRight: '#a3a3a3',
+  colorSlopeRight: '#999999',
   colorSlopeTopRight: '#c2c2c2',
   colorSlopeBottom: ['#ababab', '#757575'],
   colorFaceRight: '#878787',
