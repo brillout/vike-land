@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  --logo-size: 100px;
+  --logo-size: 95px;
 }
 body.largeSize {
   --logo-size: 400px;
