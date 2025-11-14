@@ -321,7 +321,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   }
   mount(handleStick, 0, handleLength, 10)
   if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
-  mount(mountColor3, 1.4, handleBottomLength1)
+  mount(mountColor3, 1, handleBottomLength1)
 }
 
 function genHead(head: Zdog.Anchor, options: Options) {

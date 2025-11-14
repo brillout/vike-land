@@ -12,7 +12,7 @@ const colorsDefault: Colors = {
   metal4: 'red',
   metal5: 'red',
   metal6: ['#b5b5b5', '#6b6b6b'],
-  wood: ['#ffb152', '#aa5422'],
+  wood: ['#ffae00', '#ac501b'],
   lightningBolt: ['#ffff00', '#ffff00'],
   colorSlopeTop: ['#ededed', '#c2c2c2'],
   // colorSlopeLeft: ['#c8c8c8', '#a8a8a8'],
@@ -32,7 +32,7 @@ const colorsDefault: Colors = {
 const perspectiveDefault: Perspective = {
   rotation2D: 0,
   handleDiameter: 7.7,
-  handleLength: 14.5,
+  handleLength: 16,
   rotate: { x: 0.00, y: -7.16, z: -2 },
 }
 
