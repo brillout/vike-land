@@ -7,7 +7,7 @@ import { type Colors } from '../Hammer'
 
 const colorsDefault: Colors = {
   metal1: 'red',
-  metal2: '#e3e3e3',
+  metal2: '#a6a6a6',
   metal3: 'red',
   metal4: 'red',
   metal5: 'red',
