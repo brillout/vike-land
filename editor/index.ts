@@ -265,9 +265,7 @@ function initIconSize(iconSize: Element) {
     elem: iconSize,
     labelText: 'Large size',
     onToggle(isChecked: boolean) {
-      console.log('iconSize toggle:', isChecked, 'classList:', document.body.classList)
       document.body.classList[isChecked ? 'add' : 'remove']('largeSize')
-      console.log('After toggle, classList:', document.body.classList)
     },
   })
 }
@@ -326,18 +324,10 @@ function createCheckboxInput({
 
   const { id } = elem
   assert(id)
-  const storeGet = () => {
-    const rawValue = getStoreValue(id)
-    console.log('storeGet raw:', id, rawValue, typeof rawValue)
-    const result = ((rawValue as any)?.isChecked as undefined | boolean) ?? false
-    console.log('storeGet result:', result)
-    return result
-  }
+  const storeGet = () => ((getStoreValue(id) as any)?.isChecked as undefined | boolean) ?? false
   const storeToggle = () => {
     let isChecked = storeGet()
-    console.log('storeToggle before:', id, isChecked)
     isChecked = !isChecked
-    console.log('storeToggle after:', id, isChecked)
     setStoreValue(id, { isChecked })
   }
   const updateUI = (isInit?: true) => {
