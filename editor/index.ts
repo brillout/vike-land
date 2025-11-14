@@ -28,6 +28,7 @@ function getElements() {
     reset: document.querySelector('button#reset') as HTMLButtonElement,
     download: document.querySelector('button#download') as HTMLButtonElement,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
+    darkBackground: document.getElementById('darkBackground')!,
     rotateX: document.getElementById('rotate-x')!,
     rotateY: document.getElementById('rotate-y')!,
     rotateZ: document.getElementById('rotate-z')!,
@@ -57,6 +58,7 @@ function main() {
   initReset(elements.reset)
   initDownload(elements.download)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
+  initDarkBackground(elements.darkBackground)
   initPerspectiveControlers(hammer, elements)
   initRotate2D(elements.rotate2D)
 
@@ -299,6 +301,16 @@ function initHighBackLightningBold(hideBackLightningBolt: HTMLElement, hammer: H
     },
     applyValue() {
       hammer.reset()
+    },
+  })
+}
+
+function initDarkBackground(darkBackground: Element) {
+  createCheckboxInput({
+    elem: darkBackground,
+    labelText: 'Dark background',
+    onToggle(isChecked: boolean) {
+      document.body.style.backgroundColor = isChecked ? '#000000' : '#ffffff'
     },
   })
 }

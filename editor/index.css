@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   --logo-size: 99px;
+  background-color: #ffffff;
 }
 body.largeSize {
   --logo-size: 400px;
