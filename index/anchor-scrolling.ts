@@ -1,6 +1,7 @@
 import './anchor-scrolling.css'
 
 anchorScrolling()
+themeToggle()
 
 // Copied & adapted from https://stackoverflow.com/questions/7717527/smooth-scrolling-when-clicking-an-anchor-link/49910424#49910424
 function anchorScrolling() {
@@ -38,4 +39,18 @@ function scrollTo(hash: string) {
     behavior: 'smooth',
   })
   history.pushState(null, '', hash)
+}
+
+function themeToggle() {
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-theme')
+  }
+
+  const toggleButton = document.getElementById('theme-toggle')
+  toggleButton?.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme')
+    const isDark = document.body.classList.contains('dark-theme')
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  })
 }
