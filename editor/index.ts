@@ -263,9 +263,9 @@ function zdogViewInit(zdogView: Element) {
 function initIconSize(iconSize: Element) {
   createCheckboxInput({
     elem: iconSize,
-    labelText: 'Icon size',
+    labelText: 'Large size',
     onToggle(isChecked: boolean) {
-      document.body.classList[isChecked ? 'add' : 'remove']('iconSize')
+      document.body.classList[isChecked ? 'add' : 'remove']('largeSize')
     },
   })
 }

@@ -1,12 +1,10 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  --logo-size-large: 400px;
-  --logo-size-small: 100px;
-  --logo-size: var(--logo-size-small);
+  --logo-size: 100px;
 }
-body.iconSize {
-  --logo-size: var(--logo-size-large);
+body.largeSize {
+  --logo-size: 400px;
 }
 body.faviconSize {
   --logo-size: 40px;
