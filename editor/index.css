@@ -41,6 +41,7 @@ body.zdogView .circle-square {
 code {
   font-family: monospace;
   background-color: #eaeaea;
+  color: #000000;
   padding: 3px 5px;
   border-radius: 4px;
 }

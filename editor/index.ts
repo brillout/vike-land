@@ -311,6 +311,7 @@ function initDarkBackground(darkBackground: Element) {
     labelText: 'Dark background',
     onToggle(isChecked: boolean) {
       document.body.style.backgroundColor = isChecked ? '#000000' : '#ffffff'
+      document.body.style.color = isChecked ? '#ffffff' : '#000000'
     },
   })
 }
