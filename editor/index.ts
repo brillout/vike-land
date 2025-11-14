@@ -22,6 +22,7 @@ function getElements() {
     handleDiameterPicker: document.getElementById('handleDiameterPicker')!,
     handleLengthPicker: document.getElementById('handleLengthPicker')!,
     zdogView: document.getElementById('zdogView')!,
+    iconSize: document.getElementById('iconSize')!,
     faviconSize: document.getElementById('faviconSize')!,
     autoSpinning: document.getElementById('autoSpinning')!,
     reset: document.querySelector('button#reset') as HTMLButtonElement,
@@ -50,6 +51,7 @@ function main() {
   initColorInputs(elements.colorPicker, hammer)
   changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
   changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
+  initIconSize(elements.iconSize)
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
@@ -254,6 +256,16 @@ function zdogViewInit(zdogView: Element) {
     labelText: 'Icon view',
     onToggle(isChecked: boolean) {
       document.body.classList[!isChecked ? 'add' : 'remove']('zdogView')
+    },
+  })
+}
+
+function initIconSize(iconSize: Element) {
+  createCheckboxInput({
+    elem: iconSize,
+    labelText: 'Icon size',
+    onToggle(isChecked: boolean) {
+      document.body.classList[isChecked ? 'add' : 'remove']('iconSize')
     },
   })
 }

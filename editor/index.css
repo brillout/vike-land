@@ -1,12 +1,15 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  --logo-size-large: 300px;
-  --logo-size-small: 40px;
+  --logo-size-large: 400px;
+  --logo-size-small: 100px;
+  --logo-size: var(--logo-size-small);
+}
+body.iconSize {
   --logo-size: var(--logo-size-large);
 }
 body.faviconSize {
-  --logo-size: var(--logo-size-small);
+  --logo-size: 40px;
 }
 
 .hammer {
