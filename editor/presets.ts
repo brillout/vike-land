@@ -5,6 +5,11 @@ export { colorsDefault }
 
 import { type Colors } from '../Hammer'
 
+/*
+  metalBottom: ['red', 'red'],
+  wood: 'red',
+*/
+
 const colorsDefault: Colors = {
   metalCorner: 'red',
   metalSlope: '#a6a6a6',
@@ -13,7 +18,7 @@ const colorsDefault: Colors = {
   metalBottom2: 'red',
   metalBottom: ['#b0b0b0', '#878787'],
   wood: ['#ffae00', '#ac501b'],
-  lightningBolt: ['#ffff00', '#ffa300'],
+  lightningBolt: ['#ffff00', '#ffb300'],
   colorSlopeTop: ['#d1d1d1', '#ababab'],
   colorSlopeLeft: '#cccccc',
   colorSlopeRight: '#999999',
