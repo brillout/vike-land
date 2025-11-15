@@ -14,7 +14,7 @@ const colorsDefault: Colors = {
   metalBottom: ['#b0b0b0', '#878787'],
   wood: ['#ffae00', '#ac501b'],
   lightningBolt: ['#ffff00', '#ffa300'],
-  colorSlopeTop: ['#c9c9c9', '#ababab'],
+  colorSlopeTop: ['#d1d1d1', '#ababab'],
   colorSlopeLeft: '#cccccc',
   colorSlopeRight: '#999999',
   colorSlopeTopRight: '#c2c2c2',
