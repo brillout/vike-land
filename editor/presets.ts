@@ -8,7 +8,7 @@ import { type Colors } from '../Hammer'
 const colorsDefault: Colors = {
   metal1: 'red',
   metal2: '#a6a6a6',
-  metal3: 'red',
+  metalFace: 'red',
   metalTop: 'red',
   metalBottom2: 'red',
   metalBottom: ['#b0b0b0', '#878787'],
@@ -48,7 +48,7 @@ const presetsColor: Record<string, Colors> = {
   gradient12: {
     metal1: 'red',
     metal2: '#a6a6a6',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -70,7 +70,7 @@ const presetsColor: Record<string, Colors> = {
   gradient11: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -92,7 +92,7 @@ const presetsColor: Record<string, Colors> = {
   gradient10: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -114,7 +114,7 @@ const presetsColor: Record<string, Colors> = {
   gradient9: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#bababa', '#8f8f8f'],
@@ -136,7 +136,7 @@ const presetsColor: Record<string, Colors> = {
   gradient8: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#bababa', '#8f8f8f'],
@@ -158,7 +158,7 @@ const presetsColor: Record<string, Colors> = {
   gradient7: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#6b6b6b'],
@@ -180,7 +180,7 @@ const presetsColor: Record<string, Colors> = {
   gradient6: {
     metal1: 'red',
     metal2: '#e3e3e3',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d4d4d4', '#6b6b6b'],
@@ -202,7 +202,7 @@ const presetsColor: Record<string, Colors> = {
   gradient5: {
     metal1: 'red',
     metal2: '#a8a8a8',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -224,7 +224,7 @@ const presetsColor: Record<string, Colors> = {
   gradient4: {
     metal1: 'red',
     metal2: '#a8a8a8',
-    metal3: 'red',
+    metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -246,7 +246,7 @@ const presetsColor: Record<string, Colors> = {
   gradient3: {
     metal1: '#c0c0c0',
     metal2: '#a8a8a8',
-    metal3: ['#d8d8d8', '#bfbfbf'],
+    metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -268,7 +268,7 @@ const presetsColor: Record<string, Colors> = {
   gradient2: {
     metal1: '#c0c0c0',
     metal2: '#a8a8a8',
-    metal3: ['#d8d8d8', '#bfbfbf'],
+    metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -290,7 +290,7 @@ const presetsColor: Record<string, Colors> = {
   gradient1: {
     metal1: '#c0c0c0',
     metal2: '#a8a8a8',
-    metal3: ['#d8d8d8', '#bfbfbf'],
+    metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -312,7 +312,7 @@ const presetsColor: Record<string, Colors> = {
   vivid: {
     metal1: 'cyan',
     metal2: 'red',
-    metal3: 'blue',
+    metalFace: 'blue',
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: 'gray',
@@ -334,7 +334,7 @@ const presetsColor: Record<string, Colors> = {
   'colors-default-previous': {
     metal1: '#ababab',
     metal2: '#949494',
-    metal3: '#757575',
+    metalFace: '#757575',
     metalTop: '#6e6e6e',
     metalBottom2: '#7a7a7a',
     metalBottom: '#828282',
@@ -344,7 +344,7 @@ const presetsColor: Record<string, Colors> = {
   previous: {
     metal1: '#b5b5b5',
     metal2: '#949494',
-    metal3: '#757575',
+    metalFace: '#757575',
     metalTop: '#6e6e6e',
     metalBottom2: '#767676',
     metalBottom: '#828282',
@@ -354,7 +354,7 @@ const presetsColor: Record<string, Colors> = {
   darker: {
     metal1: '#a3a3a3',
     metal2: '#8f8f8f',
-    metal3: '#757575',
+    metalFace: '#757575',
     metalTop: '#878787',
     metalBottom2: '#878787',
     metalBottom: '#808080',
@@ -364,7 +364,7 @@ const presetsColor: Record<string, Colors> = {
   older2: {
     metal1: '#b0b0b0',
     metal2: '#949494',
-    metal3: '#757575',
+    metalFace: '#757575',
     metalTop: '#878787',
     metalBottom2: '#878787',
     metalBottom: '#808080',
@@ -374,7 +374,7 @@ const presetsColor: Record<string, Colors> = {
   older: {
     metal1: '#b5b5b5',
     metal2: '#949494',
-    metal3: '#757575',
+    metalFace: '#757575',
     metalTop: '#787878',
     metalBottom2: '#787878',
     metalBottom: '#707070',
@@ -384,7 +384,7 @@ const presetsColor: Record<string, Colors> = {
   brighter: {
     metal1: '#b5b5b5',
     metal2: '#949494',
-    metal3: '#7a7a7a',
+    metalFace: '#7a7a7a',
     metalTop: '#787878',
     metalBottom2: '#787878',
     metalBottom: '#7a7a7a',
@@ -394,7 +394,7 @@ const presetsColor: Record<string, Colors> = {
   ['too-bright']: {
     metal1: '#bdbdbd',
     metal2: '#b3b3b3',
-    metal3: '#a6a6a6',
+    metalFace: '#a6a6a6',
     metalTop: '#9e9e9e',
     metalBottom2: '#9e9e9e',
     metalBottom: '#a6a6a6',
@@ -404,7 +404,7 @@ const presetsColor: Record<string, Colors> = {
   oldest: {
     metal1: '#949494',
     metal2: '#828282',
-    metal3: '#696969',
+    metalFace: '#696969',
     metalTop: '#707070',
     metalBottom2: '#707070',
     metalBottom: '#696969',

@@ -87,7 +87,7 @@ type ColorValue = string | [string, string]
 type Colors = {
   metal1: ColorValue
   metal2: ColorValue
-  metal3: ColorValue
+  metalFace: ColorValue
   metalTop: ColorValue
   metalBottom2: ColorValue
   metalBottom: ColorValue
@@ -363,7 +363,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSize },
     scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
     addTo: head,
   })
 
@@ -371,7 +371,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   const opposite = 2 * (sideLength + slopeSize)
   const face2 = face.copy({
     translate: { x: opposite, y: slopeSize },
-    color: normalizeColor(colors.colorFaceUpper ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceUpper ?? colors.metalFace),
     addTo: head,
   })
 
@@ -382,7 +382,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize },
-    color: normalizeColor(colors.colorFaceFront ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     addTo: frontFaceGroup,
   })
   const viteLogo = genViteLogo(frontFaceGroup, colors)
@@ -551,7 +551,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metal3),
+    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
   })
 
   return headSide
