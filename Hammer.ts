@@ -90,7 +90,7 @@ type Colors = {
   metal3: ColorValue
   metal4: ColorValue
   metal5: ColorValue
-  metal6: ColorValue
+  metalBottom: ColorValue
   wood: ColorValue
   lightningBolt: ColorValue
   colorSlopeTop?: ColorValue
@@ -292,7 +292,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const handleStick = normalizeColor(colors.wood)
   const mountColor1 = normalizeColor(colors.metal4)
   const mountColor2 = normalizeColor(colors.metal5)
-  const mountColor3 = normalizeColor(colors.metal6)
+  const mountColor3 = normalizeColor(colors.metalBottom)
 
   let zOffset = 0
   const mount = (color: string, stroke: number, length: number, extend = 0) => {
