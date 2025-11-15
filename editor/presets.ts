@@ -331,6 +331,16 @@ const presetsColor: Record<string, Colors> = {
     colorCornerBottomRight: 'teal',
     colorCornerBottomLeft: 'gold',
   },
+  modern: {
+    metalCorner: '#bababa',
+    metalSlope: '#ababab',
+    metalFace: '#8c8c8c',
+    metalTop: 'red',
+    metalBottom2: 'red',
+    metalBottom: '#878787',
+    wood: '#96511d',
+    lightningBolt: ['#ffff00', '#ffc000'],
+  },
   'colors-default-previous': {
     metalCorner: '#ababab',
     metalSlope: '#949494',
