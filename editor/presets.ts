@@ -7,7 +7,7 @@ import { type Colors } from '../Hammer'
 
 const colorsDefault: Colors = {
   metal1: 'red',
-  metal2: '#a6a6a6',
+  metalSlope: '#a6a6a6',
   metalFace: 'red',
   metalTop: 'red',
   metalBottom2: 'red',
@@ -47,7 +47,7 @@ const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
   gradient12: {
     metal1: 'red',
-    metal2: '#a6a6a6',
+    metalSlope: '#a6a6a6',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -69,7 +69,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient11: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -91,7 +91,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient10: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -113,7 +113,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient9: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -135,7 +135,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient8: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -157,7 +157,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient7: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -179,7 +179,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient6: {
     metal1: 'red',
-    metal2: '#e3e3e3',
+    metalSlope: '#e3e3e3',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -201,7 +201,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient5: {
     metal1: 'red',
-    metal2: '#a8a8a8',
+    metalSlope: '#a8a8a8',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -223,7 +223,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient4: {
     metal1: 'red',
-    metal2: '#a8a8a8',
+    metalSlope: '#a8a8a8',
     metalFace: 'red',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -245,7 +245,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient3: {
     metal1: '#c0c0c0',
-    metal2: '#a8a8a8',
+    metalSlope: '#a8a8a8',
     metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
@@ -267,7 +267,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient2: {
     metal1: '#c0c0c0',
-    metal2: '#a8a8a8',
+    metalSlope: '#a8a8a8',
     metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
@@ -289,7 +289,7 @@ const presetsColor: Record<string, Colors> = {
   },
   gradient1: {
     metal1: '#c0c0c0',
-    metal2: '#a8a8a8',
+    metalSlope: '#a8a8a8',
     metalFace: ['#d8d8d8', '#bfbfbf'],
     metalTop: 'rgba(0,0,0,0.2)',
     metalBottom2: '#909090',
@@ -311,7 +311,7 @@ const presetsColor: Record<string, Colors> = {
   },
   vivid: {
     metal1: 'cyan',
-    metal2: 'red',
+    metalSlope: 'red',
     metalFace: 'blue',
     metalTop: 'red',
     metalBottom2: 'red',
@@ -333,7 +333,7 @@ const presetsColor: Record<string, Colors> = {
   },
   'colors-default-previous': {
     metal1: '#ababab',
-    metal2: '#949494',
+    metalSlope: '#949494',
     metalFace: '#757575',
     metalTop: '#6e6e6e',
     metalBottom2: '#7a7a7a',
@@ -343,7 +343,7 @@ const presetsColor: Record<string, Colors> = {
   },
   previous: {
     metal1: '#b5b5b5',
-    metal2: '#949494',
+    metalSlope: '#949494',
     metalFace: '#757575',
     metalTop: '#6e6e6e',
     metalBottom2: '#767676',
@@ -353,7 +353,7 @@ const presetsColor: Record<string, Colors> = {
   },
   darker: {
     metal1: '#a3a3a3',
-    metal2: '#8f8f8f',
+    metalSlope: '#8f8f8f',
     metalFace: '#757575',
     metalTop: '#878787',
     metalBottom2: '#878787',
@@ -363,7 +363,7 @@ const presetsColor: Record<string, Colors> = {
   },
   older2: {
     metal1: '#b0b0b0',
-    metal2: '#949494',
+    metalSlope: '#949494',
     metalFace: '#757575',
     metalTop: '#878787',
     metalBottom2: '#878787',
@@ -373,7 +373,7 @@ const presetsColor: Record<string, Colors> = {
   },
   older: {
     metal1: '#b5b5b5',
-    metal2: '#949494',
+    metalSlope: '#949494',
     metalFace: '#757575',
     metalTop: '#787878',
     metalBottom2: '#787878',
@@ -383,7 +383,7 @@ const presetsColor: Record<string, Colors> = {
   },
   brighter: {
     metal1: '#b5b5b5',
-    metal2: '#949494',
+    metalSlope: '#949494',
     metalFace: '#7a7a7a',
     metalTop: '#787878',
     metalBottom2: '#787878',
@@ -393,7 +393,7 @@ const presetsColor: Record<string, Colors> = {
   },
   ['too-bright']: {
     metal1: '#bdbdbd',
-    metal2: '#b3b3b3',
+    metalSlope: '#b3b3b3',
     metalFace: '#a6a6a6',
     metalTop: '#9e9e9e',
     metalBottom2: '#9e9e9e',
@@ -403,7 +403,7 @@ const presetsColor: Record<string, Colors> = {
   },
   oldest: {
     metal1: '#949494',
-    metal2: '#828282',
+    metalSlope: '#828282',
     metalFace: '#696969',
     metalTop: '#707070',
     metalBottom2: '#707070',
