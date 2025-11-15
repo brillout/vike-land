@@ -85,7 +85,7 @@ type PerspectiveUserControlable = {
 type ColorValue = string | [string, string]
 
 type Colors = {
-  metal1: ColorValue
+  metalCorner: ColorValue
   metalSlope: ColorValue
   metalFace: ColorValue
   metalTop: ColorValue
@@ -451,7 +451,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     })
 
   const colorEdge = normalizeColor(colors.metalSlope)
-  const colorCorner = normalizeColor(colors.metal1)
+  const colorCorner = normalizeColor(colors.metalCorner)
 
   // east slope
   var EWSlope = shape({
