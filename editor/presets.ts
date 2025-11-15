@@ -13,7 +13,7 @@ const colorsDefault: Colors = {
   metal5: 'red',
   metal6: ['#b0b0b0', '#878787'],
   wood: ['#ffae00', '#ac501b'],
-  lightningBolt: ['#ffff00', '#ffa305'],
+  lightningBolt: ['#ffff00', '#ffa300'],
   colorSlopeTop: ['#c9c9c9', '#ababab'],
   colorSlopeLeft: '#cccccc',
   colorSlopeRight: '#999999',
@@ -415,31 +415,31 @@ const presetsColor: Record<string, Colors> = {
 
 const presetsPerspective: Record<string, Perspective> = {
   'perspective-default': perspectiveDefault,
-  'perspective-default-previous': {
-    rotation2D: 13,
-    rotate: { x: -0.4, y: 23.5, z: 0 },
-  },
   maud: {
     rotation2D: 0,
     handleLength: 10,
     rotate: { x: -0.1, y: -7, z: -2 },
   },
-  classic: {
+  old: {
     rotation2D: 0,
     rotate: { x: -0.13, y: -6.63, z: -1.2 },
   },
-  ['classic-long-handle']: {
+  ['old-long-handle']: {
     rotation2D: 0,
     handleLength: 20.5,
     rotate: { x: -0.13, y: -6.63, z: -1.2 },
   },
-  ['oldest-mirrored']: {
+  ['old-mirrored']: {
     rotation2D: -21,
     rotate: { x: -0.7, y: 7.1, z: 0 },
   },
-  previous: {
+  previous1: {
     rotation2D: 11,
     rotate: { x: -0.3, y: -6.63, z: 0 },
+  },
+  previous2: {
+    rotation2D: 13,
+    rotate: { x: -0.4, y: 23.5, z: 0 },
   },
   new1: {
     rotation2D: -23,
