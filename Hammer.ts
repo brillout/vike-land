@@ -88,7 +88,7 @@ type Colors = {
   metal1: ColorValue
   metal2: ColorValue
   metal3: ColorValue
-  metal4: ColorValue
+  metalTop: ColorValue
   metalBottom2: ColorValue
   metalBottom: ColorValue
   wood: ColorValue
@@ -290,7 +290,7 @@ function render(hammer: Hammer) {
 
 function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number) {
   const handleStick = normalizeColor(colors.wood)
-  const mountColor1 = normalizeColor(colors.metal4)
+  const mountColor1 = normalizeColor(colors.metalTop)
   const mountColor2 = normalizeColor(colors.metalBottom2)
   const mountColor3 = normalizeColor(colors.metalBottom)
 
