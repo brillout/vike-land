@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+// TODO: make this script generic and darken only once instead of twice (I'll apply the script twice)
+
 function darkenTwice(hexColor) {
   // Remove # if present
   let hex = hexColor.replace('#', '');
