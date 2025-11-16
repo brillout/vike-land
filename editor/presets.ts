@@ -11,6 +11,9 @@ import { type Colors } from '../Hammer'
 */
 
 const colorsDefault: Colors = {
+  // TODO:
+  // - Make all colors slightly darker (except of red and lightning bolt)
+  // - Reduce gradients (by making the lightest gray darker)
   metalCorner: 'red',
   metalSlope: '#a6a6a6',
   metalFace: 'red',
