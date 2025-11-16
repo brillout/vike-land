@@ -10,43 +10,27 @@ import { type Colors } from '../Hammer'
   wood: 'red',
 */
 
-function darken(color: string | string[], amount: number = 0.9): string | string[] {
-  if (color === 'red') return color
-  if (Array.isArray(color)) {
-    return color.map(c => darken(c, amount) as string)
-  }
-  if (color.startsWith('#')) {
-    const hex = color.substring(1)
-    const num = parseInt(hex, 16)
-    const r = Math.floor(((num >> 16) & 0xff) * amount)
-    const g = Math.floor(((num >> 8) & 0xff) * amount)
-    const b = Math.floor((num & 0xff) * amount)
-    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
-  }
-  return color
-}
-
 const colorsDefault: Colors = {
   metalCorner: 'red',
-  metalSlope: darken('#a6a6a6') as string,
+  metalSlope: '#a6a6a6',
   metalFace: 'red',
   metalTop: 'red',
   metalBottom2: 'red',
-  metalBottom: darken(['#b0b0b0', '#878787']) as [string, string],
-  wood: darken(['#ffae00', '#ac501b']) as [string, string],
-  lightningBolt: darken(['#ffff00', '#ffb300']) as [string, string],
-  colorSlopeTop: darken(['#d1d1d1', '#ababab']) as [string, string],
-  colorSlopeLeft: darken('#cccccc') as string,
-  colorSlopeRight: darken('#999999') as string,
-  colorSlopeTopRight: darken('#c2c2c2') as string,
-  colorSlopeBottom: darken(['#ababab', '#757575']) as [string, string],
-  colorFaceRight: darken('#878787') as string,
-  colorFaceUpper: darken(['#bababa', '#929090']) as [string, string],
-  colorFaceFront: darken(['#bdbdbd', '#8c8c8c']) as [string, string],
-  colorCornerTopLeft: darken('#dedede') as string,
-  colorCornerTopRight: darken('#bababa') as string,
-  colorCornerBottomRight: darken('#7d7d7d') as string,
-  colorCornerBottomLeft: darken('#cfcfcf') as string,
+  metalBottom: ['#b0b0b0', '#878787'],
+  wood: ['#ffae00', '#ac501b'],
+  lightningBolt: ['#ffff00', '#ffb300'],
+  colorSlopeTop: ['#d1d1d1', '#ababab'],
+  colorSlopeLeft: '#cccccc',
+  colorSlopeRight: '#999999',
+  colorSlopeTopRight: '#c2c2c2',
+  colorSlopeBottom: ['#ababab', '#757575'],
+  colorFaceRight: '#878787',
+  colorFaceUpper: ['#bababa', '#929090'],
+  colorFaceFront: ['#bdbdbd', '#8c8c8c'],
+  colorCornerTopLeft: '#dedede',
+  colorCornerTopRight: '#bababa',
+  colorCornerBottomRight: '#7d7d7d',
+  colorCornerBottomLeft: '#cfcfcf',
 }
 
 const perspectiveDefault: Perspective = {

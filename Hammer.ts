@@ -130,6 +130,7 @@ class Hammer {
   handleLength: number
   handleLengthDefault: number
   hideBackLightningBolt: boolean
+  darken: boolean = false
   reset() {
     this.init()
   }
@@ -145,6 +146,19 @@ class Hammer {
     this.illo = render(this)
     this.illo.updateRenderGraph()
   }
+  getColors(): Colors {
+    if (!this.darken) return this.colors
+    const darkened: any = {}
+    for (const key in this.colors) {
+      const value = this.colors[key as keyof Colors]
+      if (Array.isArray(value)) {
+        darkened[key] = [darken(value[0]), darken(value[1])]
+      } else {
+        darkened[key] = darken(value as string)
+      }
+    }
+    return darkened
+  }
   update() {
     if (this.illo) {
       this.illo.updateRenderGraph()
@@ -153,6 +167,19 @@ class Hammer {
 }
 
 let gradientCounter = 0
+
+function darken(color: string, amount: number = 0.9): string {
+  if (color === 'red') return color
+  if (color.startsWith('#')) {
+    const hex = color.substring(1)
+    const num = parseInt(hex, 16)
+    const r = Math.floor(((num >> 16) & 0xff) * amount)
+    const g = Math.floor(((num >> 8) & 0xff) * amount)
+    const b = Math.floor((num & 0xff) * amount)
+    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
+  }
+  return color
+}
 
 function createGradient(color1: string, color2: string): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
@@ -255,7 +282,8 @@ function render(hammer: Hammer) {
     translate: perspective.translate,
   })
 
-  const { colors, hideBackLightningBolt } = hammer
+  const colors = hammer.getColors()
+  const { hideBackLightningBolt } = hammer
   const options = { colors, hideBackLightningBolt }
 
   // anchor
