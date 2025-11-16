@@ -323,7 +323,7 @@ function initDarkBackground(darkBackground: Element) {
 function initDarkenColors(darkenColors: Element, hammer: Hammer) {
   createCheckboxInput({
     elem: darkenColors,
-    labelText: 'Darken colors',
+    labelText: 'Darken colors (or use darken-svg.js script)',
     onToggle(isChecked: boolean) {
       hammer.darken = isChecked
     },
