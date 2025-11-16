@@ -1,9 +1,5 @@
 const fs = require('fs');
 
-// TODO:
-// - require argument to determine file path: show help if no argument
-// - Don't darken yellow/orange colors (the ligthning bolt) — only darken gray & braun colors — it work I just tried!
-
 function darken(hexColor, amount = 0.9) {
   // Remove # if present
   let hex = hexColor.replace('#', '');
@@ -45,16 +41,15 @@ function extractColors(content) {
 
 function showHelp() {
   console.log(`
-Usage: node darken-svg.js [input] [output] [amount] [exclude]
+Usage: node darken-svg.js <input> [output] [amount] [exclude]
 
 Arguments:
-  input    Input SVG file (default: vike.svg)
+  input    Input SVG file (required)
   output   Output SVG file (default: same as input)
   amount   Darken amount as decimal (default: 0.9, meaning multiply RGB by 0.9)
   exclude  Regex pattern for colors to exclude (e.g., "ff[0-9a-f]" for yellows)
 
 Examples:
-  node darken-svg.js                           # Darken vike.svg by 0.9
   node darken-svg.js logo.svg                  # Darken logo.svg by 0.9
   node darken-svg.js logo.svg out.svg 0.8      # Darken logo.svg by 0.8, save to out.svg
   node darken-svg.js logo.svg out.svg 0.9 "ff" # Darken logo.svg, exclude colors with "ff"
@@ -69,7 +64,14 @@ if (args.includes('--help') || args.includes('-h')) {
   process.exit(0);
 }
 
-const inputFile = args[0] || 'vike.svg';
+// Require input file argument
+if (args.length === 0) {
+  console.error('Error: No input file specified\n');
+  showHelp();
+  process.exit(1);
+}
+
+const inputFile = args[0];
 const outputFile = args[1] || inputFile;
 const darkenAmount = parseFloat(args[2]) || 0.9;
 const excludePattern = args[3]; // Optional regex pattern for colors to exclude
