@@ -59,7 +59,7 @@ function main() {
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
   initDownload(elements.download)
-  initDownloadHead(elements.downloadHead)
+  initDownloadHead(elements.downloadHead, hammer)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initDarkBackground(elements.darkBackground)
   initDarkenColors(elements.darkenColors, hammer)
@@ -409,20 +409,30 @@ function initDownload(download: HTMLButtonElement) {
   }
 }
 
-function initDownloadHead(downloadHead: HTMLButtonElement) {
+function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
   downloadHead.onclick = () => {
-    const hammerSvg = document.querySelector('.hammer')! as SVGElement
-    const clonedSvg = hammerSvg.cloneNode(true) as SVGElement
-    
-    // The structure is: svg > g (hammerGroup) > [g (handle), g (head)]
-    // We need to remove the handle (first child) and keep only the head (second child)
-    const hammerGroup = clonedSvg.querySelector('g')
-    if (hammerGroup && hammerGroup.children.length >= 2) {
-      // Remove the first child (handle)
-      hammerGroup.removeChild(hammerGroup.children[0])
+    if (!hammer || !hammer.illo) {
+      console.error('Hammer instance not found')
+      return
     }
     
-    let content = clonedSvg.outerHTML
+    // Find the handle in the Zdog tree and hide it
+    const illo = hammer.illo as any
+    const hammerGroup = illo.children?.[0]
+    if (!hammerGroup) return
+    
+    // The first child should be the handle
+    const handleAnchor = hammerGroup.children?.[0]
+    const originalVisible = handleAnchor?.visible
+    
+    if (handleAnchor) {
+      handleAnchor.visible = false
+      hammer.illo.updateRenderGraph()
+    }
+    
+    // Now download the SVG
+    const hammerSvg = document.querySelector('.hammer')!
+    let content = hammerSvg.outerHTML
     content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
 
     // Extract gradients from the gradient-container
@@ -439,6 +449,13 @@ function initDownloadHead(downloadHead: HTMLButtonElement) {
     const rotation2D = getRotation2D()
     content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
     content = content.replace('</svg>', '</g></svg>')
+    
+    // Restore handle visibility
+    if (handleAnchor) {
+      handleAnchor.visible = originalVisible !== false
+      hammer.illo.updateRenderGraph()
+    }
+    
     downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
   }
 }
