@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-// TODO: make this script generic and darken only once instead of twice (I'll apply the script twice)
-
-function darkenTwice(hexColor) {
+function darken(hexColor, amount = 0.9) {
   // Remove # if present
   let hex = hexColor.replace('#', '');
   
@@ -16,10 +14,10 @@ function darkenTwice(hexColor) {
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
   
-  // Apply darkening twice (0.9 * 0.9 = 0.81)
-  const newR = Math.floor(r * 0.81);
-  const newG = Math.floor(g * 0.81);
-  const newB = Math.floor(b * 0.81);
+  // Apply darkening
+  const newR = Math.floor(r * amount);
+  const newG = Math.floor(g * amount);
+  const newB = Math.floor(b * amount);
   
   // Convert back to hex
   return '#' + 
@@ -28,32 +26,77 @@ function darkenTwice(hexColor) {
     newB.toString(16).padStart(2, '0');
 }
 
-// Colors to darken (grays and browns, not yellows/oranges)
-const colorMap = {
-  '#000000': darkenTwice('#000000'),
-  '#757575': darkenTwice('#757575'),
-  '#7d7d7d': darkenTwice('#7d7d7d'),
-  '#848484': darkenTwice('#848484'),
-  '#878787': darkenTwice('#878787'),
-  '#8c8c8c': darkenTwice('#8c8c8c'),
-  '#929090': darkenTwice('#929090'),
-  '#979797': darkenTwice('#979797'),
-  '#999': darkenTwice('#999999'),
-  '#a6a6a6': darkenTwice('#a6a6a6'),
-  '#ababab': darkenTwice('#ababab'),
-  '#ac501b': darkenTwice('#ac501b'),
-  '#b0b0b0': darkenTwice('#b0b0b0'),
-  '#bababa': darkenTwice('#bababa'),
-  '#bdbdbd': darkenTwice('#bdbdbd'),
-  '#c2c2c2': darkenTwice('#c2c2c2'),
-  '#ccc': darkenTwice('#cccccc'),
-  '#cfcfcf': darkenTwice('#cfcfcf'),
-  '#d1d1d1': darkenTwice('#d1d1d1'),
-  '#dedede': darkenTwice('#dedede'),
-};
+function extractColors(content) {
+  // Extract all unique hex colors from the content
+  const colorRegex = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g;
+  const colors = new Set();
+  let match;
+  
+  while ((match = colorRegex.exec(content)) !== null) {
+    colors.add(match[0].toLowerCase());
+  }
+  
+  return Array.from(colors).sort();
+}
+
+function showHelp() {
+  console.log(`
+Usage: node darken-svg.js [input] [output] [amount] [exclude]
+
+Arguments:
+  input    Input SVG file (default: vike.svg)
+  output   Output SVG file (default: same as input)
+  amount   Darken amount as decimal (default: 0.9, meaning multiply RGB by 0.9)
+  exclude  Regex pattern for colors to exclude (e.g., "ff[0-9a-f]" for yellows)
+
+Examples:
+  node darken-svg.js                           # Darken vike.svg by 0.9
+  node darken-svg.js logo.svg                  # Darken logo.svg by 0.9
+  node darken-svg.js logo.svg out.svg 0.8      # Darken logo.svg by 0.8, save to out.svg
+  node darken-svg.js logo.svg out.svg 0.9 "ff" # Darken logo.svg, exclude colors with "ff"
+`);
+}
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+
+if (args.includes('--help') || args.includes('-h')) {
+  showHelp();
+  process.exit(0);
+}
+
+const inputFile = args[0] || 'vike.svg';
+const outputFile = args[1] || inputFile;
+const darkenAmount = parseFloat(args[2]) || 0.9;
+const excludePattern = args[3]; // Optional regex pattern for colors to exclude
+
+// Check if input file exists
+if (!fs.existsSync(inputFile)) {
+  console.error(`Error: Input file '${inputFile}' not found`);
+  console.log('\nRun with --help to see usage');
+  process.exit(1);
+}
 
 // Read SVG file
-let content = fs.readFileSync('vike.svg', 'utf8');
+let content = fs.readFileSync(inputFile, 'utf8');
+
+// Extract all colors from the file
+const allColors = extractColors(content);
+
+// Build color map, excluding specified patterns
+const colorMap = {};
+for (const color of allColors) {
+  // Skip if color matches exclude pattern (e.g., yellow/orange colors)
+  if (excludePattern) {
+    const excludeRegex = new RegExp(excludePattern, 'i');
+    if (excludeRegex.test(color)) {
+      console.log(`Skipping excluded color: ${color}`);
+      continue;
+    }
+  }
+  
+  colorMap[color] = darken(color, darkenAmount);
+}
 
 // Replace all colors
 for (const [oldColor, newColor] of Object.entries(colorMap)) {
@@ -62,10 +105,13 @@ for (const [oldColor, newColor] of Object.entries(colorMap)) {
 }
 
 // Write back
-fs.writeFileSync('vike.svg', content);
+fs.writeFileSync(outputFile, content);
 
-console.log('SVG colors darkened successfully!');
-console.log('Color mappings:');
+console.log(`\nSVG colors darkened successfully!`);
+console.log(`Input: ${inputFile}`);
+console.log(`Output: ${outputFile}`);
+console.log(`Darken amount: ${darkenAmount} (multiply RGB by ${darkenAmount})`);
+console.log(`\nColor mappings:`);
 for (const [old, newColor] of Object.entries(colorMap)) {
   console.log(`${old} -> ${newColor}`);
 }
