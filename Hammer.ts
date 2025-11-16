@@ -160,12 +160,13 @@ class Hammer {
 
 let gradientCounter = 0
 
-// TODO: don't darken lightningBolt
 function darkenColors(colors: Colors): Colors {
   const darkened: any = {}
   for (const key in colors) {
     const value = colors[key as keyof Colors]
-    if (Array.isArray(value)) {
+    if (key === 'lightningBolt') {
+      darkened[key] = value
+    } else if (Array.isArray(value)) {
       darkened[key] = [darkenColor(value[0]), darkenColor(value[1])]
     } else {
       darkened[key] = darkenColor(value as string)
