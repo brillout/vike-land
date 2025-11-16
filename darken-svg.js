@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-// TODO: Don't darken yellow/orange colors (the ligthning bolt) by default — don't accept any arguments for that
-
 function darken(hexColor, amount = 0.9) {
   // Remove # if present
   let hex = hexColor.replace('#', '');
@@ -41,6 +39,30 @@ function extractColors(content) {
   return Array.from(colors).sort();
 }
 
+function isYellowOrange(hexColor) {
+  // Remove # if present
+  let hex = hexColor.replace('#', '');
+  
+  // Handle 3-char hex colors
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  
+  // Convert to RGB
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  
+  // Yellow/orange detection: high red, medium-to-high green, low blue
+  // Typical yellow: #ffff00 (255, 255, 0) or #ff0 (shorthand)
+  // Typical orange: #ffb300 (255, 179, 0), #ffae00 (255, 174, 0)
+  const isHighRed = r > 200;
+  const isMediumToHighGreen = g > 100;
+  const isLowBlue = b < 50;
+  
+  return isHighRed && isMediumToHighGreen && isLowBlue;
+}
+
 function showHelp() {
   console.log(`
 Usage: node darken-svg.js <input> [output] [amount] [exclude]
@@ -49,12 +71,14 @@ Arguments:
   input    Input SVG file (required)
   output   Output SVG file (default: same as input)
   amount   Darken amount as decimal (default: 0.9, meaning multiply RGB by 0.9)
-  exclude  Regex pattern for colors to exclude (e.g., "ff[0-9a-f]" for yellows)
+  exclude  Regex pattern for additional colors to exclude
+
+Note: Yellow/orange colors are automatically excluded by default (for lightning bolt)
 
 Examples:
-  node darken-svg.js logo.svg                  # Darken logo.svg by 0.9
+  node darken-svg.js logo.svg                  # Darken logo.svg by 0.9, auto-skip yellow/orange
   node darken-svg.js logo.svg out.svg 0.8      # Darken logo.svg by 0.8, save to out.svg
-  node darken-svg.js logo.svg out.svg 0.9 "ff" # Darken logo.svg, exclude colors with "ff"
+  node darken-svg.js logo.svg out.svg 0.9 "cc" # Also exclude colors matching "cc"
 `);
 }
 
@@ -91,10 +115,16 @@ let content = fs.readFileSync(inputFile, 'utf8');
 // Extract all colors from the file
 const allColors = extractColors(content);
 
-// Build color map, excluding specified patterns
+// Build color map, excluding yellow/orange colors by default
 const colorMap = {};
 for (const color of allColors) {
-  // Skip if color matches exclude pattern (e.g., yellow/orange colors)
+  // Skip yellow/orange colors (lightning bolt) by default
+  if (isYellowOrange(color)) {
+    console.log(`Skipping yellow/orange color: ${color}`);
+    continue;
+  }
+  
+  // Skip if color matches exclude pattern
   if (excludePattern) {
     const excludeRegex = new RegExp(excludePattern, 'i');
     if (excludeRegex.test(color)) {
