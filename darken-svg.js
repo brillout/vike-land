@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 // TODO:
-// - Accept argument to determine file path
-// - Don't darken yellow/orange colors (the ligthning bolt) — only darken gray & braun colors
+// - require argument to determine file path: show help if no argument
+// - Don't darken yellow/orange colors (the ligthning bolt) — only darken gray & braun colors — it work I just tried!
 
 function darken(hexColor, amount = 0.9) {
   // Remove # if present
