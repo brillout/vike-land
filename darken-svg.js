@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+// TODO: Don't darken yellow/orange colors (the ligthning bolt) by default — don't accept any arguments for that
+
 function darken(hexColor, amount = 0.9) {
   // Remove # if present
   let hex = hexColor.replace('#', '');
