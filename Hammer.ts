@@ -147,8 +147,9 @@ class Hammer {
     this.illo.updateRenderGraph()
   }
   getColors(): Colors {
-    if (!this.darken) return this.colors
-    return darkenColors(this.colors)
+    let { colors } = this
+    if (this.darken) colors = darkenColors(this.colors)
+    return colors
   }
   update() {
     if (this.illo) {
