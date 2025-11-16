@@ -53,9 +53,6 @@ const colorMap = {
 // Read SVG file
 let content = fs.readFileSync('vike.svg', 'utf8');
 
-// Remove TODO comment
-content = content.replace('<!-- TODO: Update all gray & brown hex colors (i.e. don\'t change yellow/orange) by applying darken() twice -->\n', '');
-
 // Replace all colors
 for (const [oldColor, newColor] of Object.entries(colorMap)) {
   const regex = new RegExp(oldColor.replace('#', '#'), 'gi');
