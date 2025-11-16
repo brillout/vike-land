@@ -27,6 +27,7 @@ function getElements() {
     autoSpinning: document.getElementById('autoSpinning')!,
     reset: document.querySelector('button#reset') as HTMLButtonElement,
     download: document.querySelector('button#download') as HTMLButtonElement,
+    downloadHead: document.querySelector('button#download-head') as HTMLButtonElement,
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
     darkBackground: document.getElementById('darkBackground')!,
     darkenColors: document.getElementById('darkenColors')!,
@@ -58,6 +59,7 @@ function main() {
   initAutoSpinning(elements.autoSpinning)
   initReset(elements.reset)
   initDownload(elements.download)
+  initDownloadHead(elements.downloadHead)
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initDarkBackground(elements.darkBackground)
   initDarkenColors(elements.darkenColors, hammer)
@@ -404,6 +406,40 @@ function initDownload(download: HTMLButtonElement) {
     content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
     content = content.replace('</svg>', '</g></svg>')
     downloadFile(content, 'image/svg+xml', 'vike-generated.svg')
+  }
+}
+
+function initDownloadHead(downloadHead: HTMLButtonElement) {
+  downloadHead.onclick = () => {
+    const hammerSvg = document.querySelector('.hammer')! as SVGElement
+    const clonedSvg = hammerSvg.cloneNode(true) as SVGElement
+    
+    // The structure is: svg > g (hammerGroup) > [g (handle), g (head)]
+    // We need to remove the handle (first child) and keep only the head (second child)
+    const hammerGroup = clonedSvg.querySelector('g')
+    if (hammerGroup && hammerGroup.children.length >= 2) {
+      // Remove the first child (handle)
+      hammerGroup.removeChild(hammerGroup.children[0])
+    }
+    
+    let content = clonedSvg.outerHTML
+    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+
+    // Extract gradients from the gradient-container
+    const gradientContainer = document.querySelector('svg.gradient-container defs')
+    if (gradientContainer && gradientContainer.children.length > 0) {
+      const defsContent = Array.from(gradientContainer.children)
+        .map(el => el.outerHTML)
+        .join('\n    ')
+      content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
+        `<svg xmlns="http://www.w3.org/2000/svg" `)
+      content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+    }
+
+    const rotation2D = getRotation2D()
+    content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
+    content = content.replace('</svg>', '</g></svg>')
+    downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
   }
 }
 
