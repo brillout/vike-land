@@ -11,6 +11,7 @@ import { type Colors } from '../Hammer'
 */
 
 const colorsDefault: Colors = {
+  // TODO: Make all colors slightly darker (except of red)
   metalCorner: 'red',
   metalSlope: '#a6a6a6',
   metalFace: 'red',
