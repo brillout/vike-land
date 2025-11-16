@@ -11,30 +11,26 @@ import { type Colors } from '../Hammer'
 */
 
 const colorsDefault: Colors = {
-  // TODO:
-  // - Make all colors slightly darker (except of red and lightning bolt)
-  // - Reduce gradients (by making the lightest gray darker)
-  // - Don't use darkenColor() instead directly change the hex values below (so that I can easly polish things then)
   metalCorner: 'red',
-  metalSlope: '#a6a6a6',
+  metalSlope: '#959595',
   metalFace: 'red',
   metalTop: 'red',
   metalBottom2: 'red',
-  metalBottom: ['#b0b0b0', '#878787'],
-  wood: ['#ffae00', '#ac501b'],
+  metalBottom: ['#9f9f9f', '#7a7a7a'],
+  wood: ['#e69d00', '#9b4818'],
   lightningBolt: ['#ffff00', '#ffb300'],
-  colorSlopeTop: ['#d1d1d1', '#ababab'],
-  colorSlopeLeft: '#cccccc',
-  colorSlopeRight: '#999999',
-  colorSlopeTopRight: '#c2c2c2',
-  colorSlopeBottom: ['#ababab', '#757575'],
-  colorFaceRight: '#878787',
-  colorFaceUpper: ['#bababa', '#929090'],
-  colorFaceFront: ['#bdbdbd', '#8c8c8c'],
-  colorCornerTopLeft: '#dedede',
-  colorCornerTopRight: '#bababa',
-  colorCornerBottomRight: '#7d7d7d',
-  colorCornerBottomLeft: '#cfcfcf',
+  colorSlopeTop: ['#bcbcbc', '#9a9a9a'],
+  colorSlopeLeft: '#b8b8b8',
+  colorSlopeRight: '#8a8a8a',
+  colorSlopeTopRight: '#afafaf',
+  colorSlopeBottom: ['#9a9a9a', '#696969'],
+  colorFaceRight: '#7a7a7a',
+  colorFaceUpper: ['#a8a8a8', '#838181'],
+  colorFaceFront: ['#aaaaaa', '#7e7e7e'],
+  colorCornerTopLeft: '#c8c8c8',
+  colorCornerTopRight: '#a8a8a8',
+  colorCornerBottomRight: '#707070',
+  colorCornerBottomLeft: '#bababa',
 }
 
 const perspectiveDefault: Perspective = {
