@@ -148,16 +148,7 @@ class Hammer {
   }
   getColors(): Colors {
     if (!this.darken) return this.colors
-    const darkened: any = {}
-    for (const key in this.colors) {
-      const value = this.colors[key as keyof Colors]
-      if (Array.isArray(value)) {
-        darkened[key] = [darken(value[0]), darken(value[1])]
-      } else {
-        darkened[key] = darken(value as string)
-      }
-    }
-    return darkened
+    return darkenColors(this.colors)
   }
   update() {
     if (this.illo) {
@@ -179,6 +170,19 @@ function darken(color: string, amount: number = 0.9): string {
     return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
   }
   return color
+}
+
+function darkenColors(colors: Colors): Colors {
+  const darkened: any = {}
+  for (const key in colors) {
+    const value = colors[key as keyof Colors]
+    if (Array.isArray(value)) {
+      darkened[key] = [darken(value[0]), darken(value[1])]
+    } else {
+      darkened[key] = darken(value as string)
+    }
+  }
+  return darkened
 }
 
 function createGradient(color1: string, color2: string): string {
