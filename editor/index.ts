@@ -411,52 +411,44 @@ function initDownload(download: HTMLButtonElement) {
 
 function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
   downloadHead.onclick = () => {
-    if (!hammer || !hammer.illo) {
-      console.error('Hammer instance not found')
+    if (!hammer || !hammer.illo || !hammer.handleAnchor) {
+      console.error('Hammer instance or handleAnchor not found')
       return
     }
     
-    // Find the handle in the Zdog tree and hide it
-    const illo = hammer.illo as any
-    const hammerGroup = illo.children?.[0]
-    if (!hammerGroup) return
+    // Hide the handle
+    const originalVisible = (hammer.handleAnchor as any).visible
+    ;(hammer.handleAnchor as any).visible = false
+    hammer.illo.updateRenderGraph()
     
-    // The first child should be the handle
-    const handleAnchor = hammerGroup.children?.[0]
-    const originalVisible = handleAnchor?.visible
-    
-    if (handleAnchor) {
-      handleAnchor.visible = false
-      hammer.illo.updateRenderGraph()
-    }
-    
-    // Now download the SVG
-    const hammerSvg = document.querySelector('.hammer')!
-    let content = hammerSvg.outerHTML
-    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
+    // Small delay to ensure render is complete
+    setTimeout(() => {
+      // Now download the SVG
+      const hammerSvg = document.querySelector('.hammer')!
+      let content = hammerSvg.outerHTML
+      content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
 
-    // Extract gradients from the gradient-container
-    const gradientContainer = document.querySelector('svg.gradient-container defs')
-    if (gradientContainer && gradientContainer.children.length > 0) {
-      const defsContent = Array.from(gradientContainer.children)
-        .map(el => el.outerHTML)
-        .join('\n    ')
-      content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
-        `<svg xmlns="http://www.w3.org/2000/svg" `)
-      content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
-    }
+      // Extract gradients from the gradient-container
+      const gradientContainer = document.querySelector('svg.gradient-container defs')
+      if (gradientContainer && gradientContainer.children.length > 0) {
+        const defsContent = Array.from(gradientContainer.children)
+          .map(el => el.outerHTML)
+          .join('\n    ')
+        content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
+          `<svg xmlns="http://www.w3.org/2000/svg" `)
+        content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+      }
 
-    const rotation2D = getRotation2D()
-    content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
-    content = content.replace('</svg>', '</g></svg>')
-    
-    // Restore handle visibility
-    if (handleAnchor) {
-      handleAnchor.visible = originalVisible !== false
-      hammer.illo.updateRenderGraph()
-    }
-    
-    downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
+      const rotation2D = getRotation2D()
+      content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
+      content = content.replace('</svg>', '</g></svg>')
+      
+      // Restore handle visibility
+      ;(hammer.handleAnchor as any).visible = originalVisible !== false
+      hammer.illo!.updateRenderGraph()
+      
+      downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
+    }, 50)
   }
 }
 
