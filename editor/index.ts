@@ -411,15 +411,14 @@ function initDownload(download: HTMLButtonElement) {
 
 function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
   downloadHead.onclick = () => {
-    if (!hammer || !hammer.illo || !hammer.handleAnchor) {
-      console.error('Hammer instance or handleAnchor not found')
+    if (!hammer || !hammer.illo) {
+      console.error('Hammer instance not found')
       return
     }
     
-    // Hide the handle
-    const originalVisible = (hammer.handleAnchor as any).visible
-    ;(hammer.handleAnchor as any).visible = false
-    hammer.illo.updateRenderGraph()
+    // Set flag to hide handle and re-render
+    hammer.hideHandle = true
+    hammer.reset()
     
     // Small delay to ensure render is complete
     setTimeout(() => {
@@ -443,12 +442,12 @@ function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
       content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
       content = content.replace('</svg>', '</g></svg>')
       
-      // Restore handle visibility
-      ;(hammer.handleAnchor as any).visible = originalVisible !== false
-      hammer.illo!.updateRenderGraph()
+      // Restore handle and re-render
+      hammer.hideHandle = false
+      hammer.reset()
       
       downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
-    }, 50)
+    }, 100)
   }
 }
 

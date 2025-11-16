@@ -131,6 +131,7 @@ class Hammer {
   handleLengthDefault: number
   hideBackLightningBolt: boolean
   darken: boolean = false
+  hideHandle: boolean = false
   handleAnchor: any = undefined
   headAnchor: any = undefined
   reset() {
@@ -318,7 +319,9 @@ function render(hammer: Hammer) {
 
   {
     const { handleDiameter, handleLength } = hammer
-    genHandle(handle, colors, handleDiameter, handleLength)
+    if (!hammer.hideHandle) {
+      genHandle(handle, colors, handleDiameter, handleLength)
+    }
   }
   
   // Store references for later use
