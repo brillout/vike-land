@@ -415,11 +415,11 @@ function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
       console.error('Hammer instance not found')
       return
     }
-    
+
     // Set flag to hide handle and re-render
     hammer.hideHandle = true
     hammer.reset()
-    
+
     // Small delay to ensure render is complete
     setTimeout(() => {
       // Now download the SVG
@@ -441,12 +441,12 @@ function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
       const rotation2D = getRotation2D()
       content = content.replace('<path', `<g transform="rotate(${rotation2D},0,0)"><path`)
       content = content.replace('</svg>', '</g></svg>')
-      
+
       // Restore handle and re-render
       hammer.hideHandle = false
       hammer.reset()
-      
-      downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
+
+      downloadFile(content, 'image/svg+xml', 'vike-generated.svg')
     }, 100)
   }
 }
