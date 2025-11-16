@@ -416,11 +416,6 @@ function initDownload(download: HTMLButtonElement) {
 
 function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
   downloadHead.onclick = () => {
-    if (!hammer || !hammer.illo) {
-      console.error('Hammer instance not found')
-      return
-    }
-
     // Set flag to hide handle and re-render
     hammer.hideHandle = true
     hammer.reset()
@@ -428,12 +423,11 @@ function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
     // Small delay to ensure render is complete
     setTimeout(() => {
       const content = generateSvgContent()
-      
+      downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
+
       // Restore handle and re-render
       hammer.hideHandle = false
       hammer.reset()
-
-      downloadFile(content, 'image/svg+xml', 'vike-head-generated.svg')
     }, 100)
   }
 }
