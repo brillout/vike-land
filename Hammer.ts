@@ -159,7 +159,7 @@ class Hammer {
 
 let gradientCounter = 0
 
-function darken(color: string, amount: number = 0.9): string {
+function darkenColor(color: string, amount: number = 0.9): string {
   if (color === 'red') return color
   if (color.startsWith('#')) {
     const hex = color.substring(1)
@@ -177,9 +177,9 @@ function darkenColors(colors: Colors): Colors {
   for (const key in colors) {
     const value = colors[key as keyof Colors]
     if (Array.isArray(value)) {
-      darkened[key] = [darken(value[0]), darken(value[1])]
+      darkened[key] = [darkenColor(value[0]), darkenColor(value[1])]
     } else {
-      darkened[key] = darken(value as string)
+      darkened[key] = darkenColor(value as string)
     }
   }
   return darkened
