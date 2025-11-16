@@ -159,19 +159,6 @@ class Hammer {
 
 let gradientCounter = 0
 
-function darkenColor(color: string, amount: number = 0.9): string {
-  if (color === 'red') return color
-  if (color.startsWith('#')) {
-    const hex = color.substring(1)
-    const num = parseInt(hex, 16)
-    const r = Math.floor(((num >> 16) & 0xff) * amount)
-    const g = Math.floor(((num >> 8) & 0xff) * amount)
-    const b = Math.floor((num & 0xff) * amount)
-    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
-  }
-  return color
-}
-
 function darkenColors(colors: Colors): Colors {
   const darkened: any = {}
   for (const key in colors) {
@@ -183,6 +170,18 @@ function darkenColors(colors: Colors): Colors {
     }
   }
   return darkened
+}
+function darkenColor(color: string, amount: number = 0.9): string {
+  if (color === 'red') return color
+  if (color.startsWith('#')) {
+    const hex = color.substring(1)
+    const num = parseInt(hex, 16)
+    const r = Math.floor(((num >> 16) & 0xff) * amount)
+    const g = Math.floor(((num >> 8) & 0xff) * amount)
+    const b = Math.floor((num & 0xff) * amount)
+    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
+  }
+  return color
 }
 
 function createGradient(color1: string, color2: string): string {
