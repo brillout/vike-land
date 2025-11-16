@@ -160,6 +160,7 @@ class Hammer {
 
 let gradientCounter = 0
 
+// TODO: don't darken lightningBolt
 function darkenColors(colors: Colors): Colors {
   const darkened: any = {}
   for (const key in colors) {
