@@ -447,32 +447,49 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
 
   const x = -1 * sideLength
   const y = headLength - 2 * slopeSize
-  const z1 = sideLength + slopeSize
+  const z1_south = sideLength + slopeSize2
+  const z1_north = sideLength + slopeSize
   const z2 = sideLength
-  const faceSlope = shape({
+  
+  // South side face slopes
+  const faceSlopeSouth = shape({
     path: [
-      { x, y: 0, z: z1 },
+      { x, y: 0, z: z1_south },
       { x: x - slopeSize, y: 0, z: z2 },
       { x: x - slopeSize, y, z: z2 },
-      { x, y, z: z1 },
+      { x, y, z: z1_south },
+    ],
+    translate: { y: slopeSize },
+    color: normalizeColor(colors.metalSlope),
+  })
+  
+  // North side face slopes
+  const faceSlopeNorth = shape({
+    path: [
+      { x, y: 0, z: -z1_north },
+      { x: x - slopeSize, y: 0, z: -z2 },
+      { x: x - slopeSize, y, z: -z2 },
+      { x, y, z: -z1_north },
     ],
     translate: { y: slopeSize },
     color: normalizeColor(colors.metalSlope),
   })
 
   const opposite = 2 * sideLength + slopeSize
-  faceSlope.copy({
-    translate: { x: opposite, y: slopeSize, z: -1 * opposite },
+  const oppositeSouth = 2 * sideLength + slopeSize2
+  
+  faceSlopeNorth.copy({
+    translate: { x: opposite, y: slopeSize },
     color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
   })
-  faceSlope.copy({
+  faceSlopeSouth.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
     color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
   })
-  faceSlope.copy({
+  faceSlopeNorth.copy({
     rotate: { x: TAU / 2 },
-    translate: { x: opposite, y: headLength - slopeSize, z: 1 * opposite },
+    translate: { x: opposite, y: headLength - slopeSize },
   })
 }
 
