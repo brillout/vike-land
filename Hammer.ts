@@ -513,7 +513,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
       { z: 1, y: 1, x: 1 },
     ],
     translate: { z: sideLength },
-    scale: { x: sideLength, y: slopeSize, z: slopeSize },
+    scale: { x: sideLength, y: slopeSize, z: slopeSize2 },
     color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
   })
 
@@ -522,7 +522,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     path: [
       { x: 0, y: 0, z: 0 },
       { x: slopeSize, y: slopeSize, z: 0 },
-      { x: 0, y: slopeSize, z: slopeSize },
+      { x: 0, y: slopeSize, z: slopeSize2 },
     ],
     translate: { x: sideLength, z: sideLength },
     color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
@@ -569,7 +569,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
     path: [
       { x: 0, y: 0, z: 0 },
       { x: -1 * slopeSize, y: slopeSize, z: 0 },
-      { x: 0, y: slopeSize, z: slopeSize },
+      { x: 0, y: slopeSize, z: slopeSize2 },
     ],
     translate: { x: -1 * sideLength, z: sideLength },
     color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
