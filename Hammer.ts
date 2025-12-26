@@ -446,14 +446,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
 
   const x = -1 * sideLength
   const y = headLength - 2 * slopeSize
-  const z1 = sideLength + slopeSize
-  const z2 = sideLength
   const faceSlope = shape({
     path: [
-      { x, y: 0, z: z1 },
-      { x: x - slopeSize, y: 0, z: z2 },
-      { x: x - slopeSize, y, z: z2 },
-      { x, y, z: z1 },
+      { x, y: 0, z: sideLength + slopeSize },
+      { x: x - slopeSize, y: 0, z: sideLength },
+      { x: x - slopeSize, y, z: sideLength },
+      { x, y, z: sideLength + slopeSize },
     ],
     translate: { y: slopeSize },
     color: normalizeColor(colors.metalSlope),
