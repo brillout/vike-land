@@ -16,7 +16,8 @@ const { TAU } = Zdog
 /*****************************/
 
 const headLength = 28.3
-const slopeSize = 2
+const slopeSize = 4
+const slopeSizeReduced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
@@ -404,8 +405,8 @@ function genFaces(head: Zdog.Anchor, options: Options) {
       { x: -1, y: 1, z: 0.5 },
     ],
     translate: { y: slopeSize },
-    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+    scale: { x: sideLength + slopeSizeReduced + 1, y: headLength - 2 * slopeSize, z: 2 * sideLength },
+    color: 'yellow',
     addTo: head,
   })
 
@@ -461,16 +462,26 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
     translate: { y: slopeSize },
     color: normalizeColor(colors.metalSlope),
   })
+  const faceSlopeReduced = shape({
+    path: [
+      { x, y: 0, z: z1 },
+      { x: x - slopeSizeReduced, y: 0, z: z2 },
+      { x: x - slopeSizeReduced, y, z: z2 },
+      { x, y, z: z1 },
+    ],
+    translate: { y: slopeSize },
+    color: normalizeColor(colors.metalSlope),
+  })
 
   const opposite = 2 * sideLength + slopeSize
   faceSlope.copy({
     translate: { x: opposite, y: slopeSize, z: -1 * opposite },
     color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
   })
-  faceSlope.copy({
+  faceSlopeReduced.copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
-    color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
+    color: 'blue',
   })
   faceSlope.copy({
     rotate: { x: TAU / 2 },
@@ -559,22 +570,22 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
-      { x: -slopeSize, y: slopeSize, z: 0 },
+      { x: -slopeSizeReduced, y: slopeSize, z: 0 },
       { x: 0, y: slopeSize, z: -1 * slopeSize },
     ],
     translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
+    color: 'green',
   })
 
   // bottom left corner
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
-      { x: -1 * slopeSize, y: slopeSize, z: 0 },
+      { x: -1 * slopeSizeReduced, y: slopeSize, z: 0 },
       { x: 0, y: slopeSize, z: slopeSize },
     ],
     translate: { x: -1 * sideLength, z: sideLength },
-    color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
+    color: 'cyan'
   })
 
   /* Failed attempt to remove aliasing issues
