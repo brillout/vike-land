@@ -407,7 +407,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     ],
     translate: { y: slopeSizeEnhanced },
     scale: { x: sideLength + slopeSize, y: headLength - slopeSize - slopeSizeEnhanced, z: 2 * sideLength },
-    color: 'green',
+    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
     addTo: head,
   })
 
@@ -416,7 +416,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   const face2 = face.copy({
     translate: { x: oppositeEnhanced, y: slopeSizeEnhanced },
     scale: { x: sideLength + slopeSize, y: headLength - slopeSize - slopeSizeEnhanced, z: 2 * sideLength },
-    color: 'orange',
+    color: normalizeColor(colors.colorFaceUpper ?? colors.metalFace),
     addTo: head,
   })
 
@@ -487,12 +487,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   const oppositeEnhanced = 2 * sideLength + slopeSizeEnhanced
   faceSlopeEnhanced.copy({
     translate: { x: oppositeEnhanced, y: slopeSizeEnhanced, z: -1 * oppositeEnhanced },
-    color: 'green',
+    color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
   })
   faceSlope(slopeSizeEnhanced).copy({
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
-    color: 'purple'
+    color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
   })
   faceSlope().copy({
     rotate: { x: TAU / 2 },
@@ -526,7 +526,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
     ],
     translate: { x: sideLength },
     scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
-    color: 'blue',
+    color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
   })
 
   // south slope
@@ -551,14 +551,14 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
       { x: 0, y: slopeSize, z: slopeSizeEnhanced },
     ],
     translate: { x: sideLength, z: sideLength },
-    color: 'black'
+    color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
   })
 
   // north slope
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
-    color: 'cyan',
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope),
   })
 
   // top right corner
@@ -569,7 +569,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
       { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     ],
     translate: { x: sideLength, z: -1 * sideLength },
-    color: 'yellow',
+    color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
   })
 
   // west slope
@@ -587,7 +587,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
       { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     ],
     translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: 'red',
+    color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
   })
 
   // bottom left corner
