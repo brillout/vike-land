@@ -15,8 +15,14 @@ const { TAU } = Zdog
 /********** PARAMS ***********/
 /*****************************/
 
+//*/
+const isForScreenshot = true
+/*/
+const isForScreenshot = true
+///*/
+
 const headLength = 28.3
-const slopeSize = 1.2
+const slopeSize = 1.22
 const slopeSizeEnhanced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
@@ -29,11 +35,7 @@ const handleBottomLength2 = null
 /*/
 const handleBottomLength2 = 0.5
 //*/
-/*/
-const handleExtraLength = 10
-/*/
-const handleExtraLength = 0
-//*/
+const handleExtraLength = isForScreenshot ? 10 : 0
 
 //*/
 const legacyHandle = false
@@ -374,11 +376,9 @@ function genHead(head: Zdog.Anchor, options: Options) {
 }
 
 function genHeadSides(head: Zdog.Anchor, colors: Colors) {
-  const headSide = genHeadSide(head, colors)
+  genHeadSide(head, colors, true)
 
-  // TODO?
-  headSide.copyGraph({
-    addTo: head,
+  genHeadSide(head, colors, false, {
     rotate: { x: TAU / 2 },
     translate: { y: headLength },
   })
@@ -500,9 +500,10 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   })
 }
 
-function genHeadSide(head: Zdog.Anchor, colors: Colors) {
+function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
   const headSide = new Zdog.Anchor({
     addTo: head,
+    ...anchorOptions
   })
 
   const shape = (props: Zdog.ShapeOptions) =>
@@ -543,8 +544,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
 
   // top left corner
   // const cornerTopLeft = (isFront: boolean) => shape({
-  // TODO/ai: question: why is it rendered twice?
-  shape({
+  if (!isFront || !isForScreenshot) shape({
     path: [
       { x: 0, y: 0, z: 0 },
       { x: slopeSizeEnhanced, y: slopeSize, z: 0 },
