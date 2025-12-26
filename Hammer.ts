@@ -22,7 +22,7 @@ const isForScreenshot = true
 ///*/
 
 const headLength = 28.3
-const slopeSize = 1.22
+const slopeSize = 1.4
 const slopeSizeEnhanced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
