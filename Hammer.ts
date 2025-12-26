@@ -16,7 +16,7 @@ const { TAU } = Zdog
 /*****************************/
 
 const headLength = 28.3
-const slopeSize = 1
+const slopeSize = 1.2
 const slopeSizeEnhanced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
@@ -405,9 +405,9 @@ function genFaces(head: Zdog.Anchor, options: Options) {
       { x: -1, y: 1, z: -0.5 },
       { x: -1, y: 1, z: 0.5 },
     ],
-    translate: { y: slopeSize },
-    scale: { x: sideLength + slopeSize, y: headLength - 2 * slopeSize, z: 2 * sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+    translate: { y: slopeSizeEnhanced },
+    scale: { x: sideLength + slopeSize, y: headLength - slopeSize - slopeSizeEnhanced, z: 2 * sideLength },
+    color: 'green',
     addTo: head,
   })
 
@@ -583,11 +583,11 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors) {
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
-      { x: -slopeSize, y: slopeSize, z: 0 },
-      { x: 0, y: slopeSize, z: -1 * slopeSize },
+      { x: -slopeSize, y: slopeSizeEnhanced, z: 0 },
+      { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     ],
     translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
+    color: 'red',
   })
 
   // bottom left corner
@@ -631,7 +631,7 @@ function genViteLogo(group: Zdog.Group, colors: Colors) {
   const rotate = undefined;
   /*/
   const addTo = group
-  const lightningBoltPosition = { x: lightningBoltOffset, y: (headLength / 2) - 0.0, z: sideLength + slopeSize }
+  const lightningBoltPosition = { x: lightningBoltOffset, y: (headLength / 2) - 0.0, z: sideLength + slopeSizeEnhanced }
   const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
