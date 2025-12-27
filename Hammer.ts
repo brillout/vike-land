@@ -22,7 +22,7 @@ const lightningBoltOffset = 0.3
 
 const slopeSizeReduced = 1.4
 const slopeSizeNominal = 2
-const handleExtraLengthScreenshot = 10
+const handleExtraLength_ = 10
 
 const handleBottomLength1 = 3.2
 const handleBottomExtraWidth = 1.4
@@ -301,7 +301,7 @@ function render(hammer: Hammer) {
   // Compute slope sizes once based on screenshot mode
   const slopeSize = isForScreenshot ? slopeSizeReduced : slopeSizeNominal
   const slopeSizeEnhanced = slopeSizeNominal
-  const handleExtraLength = isForScreenshot ? handleExtraLengthScreenshot : 0
+  const handleExtraLength = isForScreenshot ? handleExtraLength_ : 0
 
   // anchor
   var hammerGroup = new Zdog.Group({
