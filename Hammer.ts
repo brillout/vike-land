@@ -452,7 +452,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     addTo: frontFaceGroup,
   })
-  const lightningBolt = genLightningBolt(frontFaceGroup, colors, slopeSizeEnhanced)
+  const lightningBolt = genLightningBolt(frontFaceGroup, colors, ctx)
 
   // Back face
   frontFaceGroup.copyGraph({
@@ -642,7 +642,9 @@ function genHeadSide(
   return headSide
 }
 
-function genLightningBolt(group: Zdog.Group, colors: Colors, slopeSizeEnhanced: number) {
+function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
+  const { slopeSizeEnhanced } = ctx
+
   //const width = 12
 
   //const translate = {x: 0, y: 0, z: 0}
