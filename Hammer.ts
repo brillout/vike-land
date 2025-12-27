@@ -323,6 +323,7 @@ function render(hammer: Hammer) {
     //*/
   })
 
+  // TODO/ai bundle all parameters as a single object parameter ctx genHead(head, ctx)
   genHead(head, options, slopeSize, slopeSizeEnhanced, isForScreenshot)
 
   {
@@ -333,8 +334,6 @@ function render(hammer: Hammer) {
   }
 
   return illo
-
-  // TODO/ai instead of passing parameters around (pesk) move fucntions (e.g. genHandle()) here
 }
 
 function genHandle(
