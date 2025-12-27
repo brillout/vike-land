@@ -276,13 +276,6 @@ type Ctx = {
   slopeSize: number
   slopeSizeEnhanced: number
   isForScreenshot: boolean
-  /*
-  handleDiameter?: number
-  handleLength?: number
-  handleExtraLength?: number
-  isFront?: boolean
-  anchorOptions?: Zdog.AnchorOptions
-  */
 }
 
 function render(hammer: Hammer) {
