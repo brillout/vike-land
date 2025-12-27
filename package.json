@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "typecheck": "tsc --noEmit --watch"
+    "typecheck": "tsc --noEmit --watch",
+    "format": "oxfmt"
   },
   "dependencies": {
     "@types/node": "^17.0.42",
@@ -14,5 +15,8 @@
     "typescript": "^5.9.3",
     "vite": "^4.3.9",
     "zdog": "1.1.3"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.20.0"
   }
 }
