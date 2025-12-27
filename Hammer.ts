@@ -415,7 +415,6 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   const oppositeEnhanced = 2 * sideLength + slopeSize + slopeSizeEnhanced
   const face2 = face.copy({
     translate: { x: oppositeEnhanced, y: slopeSizeEnhanced },
-    scale: { x: sideLength + slopeSize, y: headLength - slopeSize - slopeSizeEnhanced, z: 2 * sideLength },
     color: normalizeColor(colors.colorFaceUpper ?? colors.metalFace),
     addTo: head,
   })
