@@ -643,7 +643,7 @@ function genHeadSide(
 }
 
 function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
-  const { slopeSizeEnhanced } = ctx
+  const { slopeSize, slopeSizeEnhanced } = ctx
 
   //const width = 12
 
@@ -656,7 +656,7 @@ function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
   const addTo = group
   const lightningBoltPosition = {
     x: lightningBoltOffset,
-    y: headLength / 2 - 0.0,
+    y: headLength / 2 - (slopeSizeEnhanced - slopeSize) / 2,
     z: sideLength + slopeSizeEnhanced,
   }
   const rotate = { z: (1 * TAU) / 4 }
