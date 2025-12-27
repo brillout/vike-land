@@ -16,6 +16,9 @@ const { TAU } = Zdog
 /*****************************/
 
 const headLength = 28.3
+// TODO/ai keep these constant defined here — choose the right value dependening on whether screenshot mode
+const slopeSize = 1.4
+const slopeSizeEnhanced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
