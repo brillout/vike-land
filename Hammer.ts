@@ -456,7 +456,6 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
     rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
-    // rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     addTo: faceBackGroup,
   })
 
@@ -653,10 +652,11 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
   const translate = { x: -1 * (headLength / 2) + width / 2 , y: -2 * sideLength, z: sideLength + slopeSize + 2 }
   const rotate = undefined;
   /*/
+  const invert = (isFront ? 1 : -1 )
   const lightningBoltPosition = {
     x: lightningBoltOffset,
-    y: headLength / 2 - (slopeSizeEnhanced - slopeSize) / 2,
-    z: (isFront ? 1 : -1 ) * (sideLength + slopeSizeEnhanced),
+    y: headLength / 2 - invert * (slopeSizeEnhanced - slopeSize) / 2,
+    z: invert * (sideLength + slopeSizeEnhanced),
   }
   var rotate = { z: (1 * TAU) / 4, x: (-1 * TAU) / 2  }
   //*/
@@ -694,7 +694,7 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
     translate: {
       x: lightningBoltPosition.x,
       y: lightningBoltPosition.y,
-      z: lightningBoltPosition.z + (isFront ? 1 : -1) * thikness,
+      z: lightningBoltPosition.z + invert * thikness,
     },
     scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
     ...props,
