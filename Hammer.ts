@@ -270,9 +270,19 @@ function renderOuterHtml(outerElem: HTMLElement) {
   return illoElem
 }
 
-type Options = {
+type Ctx = {
   colors: Colors
   hideBackLightningBolt: boolean
+  slopeSize: number
+  slopeSizeEnhanced: number
+  isForScreenshot: boolean
+  /*
+  handleDiameter?: number
+  handleLength?: number
+  handleExtraLength?: number
+  isFront?: boolean
+  anchorOptions?: Zdog.AnchorOptions
+  */
 }
 
 function render(hammer: Hammer) {
@@ -296,12 +306,19 @@ function render(hammer: Hammer) {
 
   const colors = hammer.getColors()
   const { hideBackLightningBolt, isForScreenshot } = hammer
-  const options = { colors, hideBackLightningBolt }
 
   // Compute slope sizes once based on screenshot mode
   const slopeSize = isForScreenshot ? slopeSize_ : slopeSizeEnhanced_
   const slopeSizeEnhanced = slopeSizeEnhanced_
   const handleExtraLength = isForScreenshot ? handleExtraLength_ : 0
+
+  const ctx: Ctx = {
+    slopeSize,
+    slopeSizeEnhanced,
+    isForScreenshot,
+    colors,
+    hideBackLightningBolt,
+  }
 
   // anchor
   var hammerGroup = new Zdog.Group({
@@ -323,7 +340,7 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  genHead(head, options, slopeSize, slopeSizeEnhanced, isForScreenshot)
+  genHead(head, ctx)
 
   {
     const { handleDiameter, handleLength } = hammer
