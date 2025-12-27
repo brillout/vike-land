@@ -387,20 +387,15 @@ function genHandle(handle: Zdog.Anchor, ctx: Ctx) {
 }
 
 function genHead(head: Zdog.Anchor, ctx: Ctx) {
-  const { options, slopeSize, slopeSizeEnhanced, isForScreenshot } = ctx
-  genHeadSides(head, { colors: options.colors, slopeSize, slopeSizeEnhanced, isForScreenshot })
-  genHeadFaces(head, { options, slopeSize, slopeSizeEnhanced })
+  genHeadSides(head, { ...ctx, colors: ctx.options!.colors })
+  genHeadFaces(head, ctx)
 }
 
 function genHeadSides(head: Zdog.Anchor, ctx: Ctx) {
-  const { colors, slopeSize, slopeSizeEnhanced, isForScreenshot } = ctx
-  genHeadSide(head, { colors, slopeSize, slopeSizeEnhanced, isForScreenshot, isFront: true })
+  genHeadSide(head, { ...ctx, isFront: true })
 
   genHeadSide(head, {
-    colors,
-    slopeSize,
-    slopeSizeEnhanced,
-    isForScreenshot,
+    ...ctx,
     isFront: false,
     anchorOptions: {
       rotate: { x: TAU / 2 },
@@ -410,9 +405,8 @@ function genHeadSides(head: Zdog.Anchor, ctx: Ctx) {
 }
 
 function genHeadFaces(head: Zdog.Anchor, ctx: Ctx) {
-  const { options, slopeSize, slopeSizeEnhanced } = ctx
-  genFaces(head, { options, slopeSize, slopeSizeEnhanced })
-  genFaceSlopes(head, { colors: options.colors, slopeSize, slopeSizeEnhanced })
+  genFaces(head, ctx)
+  genFaceSlopes(head, { ...ctx, colors: ctx.options!.colors })
 }
 function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   const { options, slopeSize, slopeSizeEnhanced } = ctx
