@@ -471,20 +471,9 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
 
   const opposite = 2 * sideLength + slopeSize
 
-  const x = -1 * sideLength
-  const y = headLength - slopeSize - slopeSizeEnhanced
-  const faceSlopeEnhanced = shape({
-    path: [
-      { x, y: 0, z: sideLength + slopeSizeEnhanced },
-      { x: x - slopeSizeEnhanced, y: 0, z: sideLength },
-      { x: x - slopeSizeEnhanced, y, z: sideLength },
-      { x, y, z: sideLength + slopeSizeEnhanced },
-    ],
-    translate: { y: slopeSizeEnhanced },
-    color: normalizeColor(colors.metalSlope),
-  })
+  faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {})
   const oppositeEnhanced = 2 * sideLength + slopeSizeEnhanced
-  faceSlopeEnhanced.copy({
+  faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {
     translate: { x: oppositeEnhanced, y: slopeSizeEnhanced, z: -1 * oppositeEnhanced },
     color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
   })
