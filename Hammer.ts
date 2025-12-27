@@ -443,6 +443,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   // Front face
+  // TODO/ai remove group (face2.copy() and attatch lightningBolt twice instead)
   var frontFaceGroup = new Zdog.Group({
     addTo: head,
   })
