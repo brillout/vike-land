@@ -31,6 +31,7 @@ function getElements() {
     hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
     darkBackground: document.getElementById('darkBackground')!,
     darkenColors: document.getElementById('darkenColors')!,
+    screenshotMode: document.getElementById('screenshotMode')!,
     rotateX: document.getElementById('rotate-x')!,
     rotateY: document.getElementById('rotate-y')!,
     rotateZ: document.getElementById('rotate-z')!,
@@ -63,6 +64,7 @@ function main() {
   initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initDarkBackground(elements.darkBackground)
   initDarkenColors(elements.darkenColors, hammer)
+  initScreenshotMode(elements.screenshotMode, hammer)
   initPerspectiveControlers(hammer, elements)
   initRotate2D(elements.rotate2D)
 
@@ -326,6 +328,19 @@ function initDarkenColors(darkenColors: Element, hammer: Hammer) {
     labelText: 'Darken colors (or use darken-svg.js script)',
     onToggle(isChecked: boolean) {
       hammer.darken = isChecked
+    },
+    applyValue() {
+      hammer.reset()
+    },
+  })
+}
+
+function initScreenshotMode(screenshotMode: Element, hammer: Hammer) {
+  createCheckboxInput({
+    elem: screenshotMode,
+    labelText: 'Screenshot mode',
+    onToggle(isChecked: boolean) {
+      hammer.isForScreenshot = isChecked
     },
     applyValue() {
       hammer.reset()

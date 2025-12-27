@@ -15,16 +15,7 @@ const { TAU } = Zdog
 /********** PARAMS ***********/
 /*****************************/
 
-// TODO/ai implement UI checkbox toggle
-//*/
-const isForScreenshot = true
-/*/
-const isForScreenshot = false
-///*/
-
 const headLength = 28.3
-const slopeSize = isForScreenshot ? 1.4 : 2
-const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
 const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
@@ -36,7 +27,6 @@ const handleBottomLength2 = null
 /*/
 const handleBottomLength2 = 0.5
 //*/
-const handleExtraLength = isForScreenshot ? 10 : 0
 
 //*/
 const legacyHandle = false
@@ -128,6 +118,7 @@ class Hammer {
     this.handleLength = handleLengthDefault
     this.handleLengthDefault = handleLengthDefault
     this.hideBackLightningBolt = false
+    this.isForScreenshot = true
   }
   illo: Zdog.Illustration | undefined = undefined
   illoElem: IlloElement
@@ -141,6 +132,7 @@ class Hammer {
   hideBackLightningBolt: boolean
   darken: boolean = false
   hideHandle: boolean = false
+  isForScreenshot: boolean = true
   reset() {
     this.init()
   }
@@ -322,23 +314,26 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  genHead(head, options)
+  genHead(head, options, hammer.isForScreenshot)
 
   {
-    const { handleDiameter, handleLength } = hammer
+    const { handleDiameter, handleLength, isForScreenshot } = hammer
     if (!hammer.hideHandle) {
-      genHandle(handle, colors, handleDiameter, handleLength)
+      genHandle(handle, colors, handleDiameter, handleLength, isForScreenshot)
     }
   }
 
   return illo
 }
 
-function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number) {
+function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number, isForScreenshot: boolean) {
   const handleStick = normalizeColor(colors.wood)
   const mountColor1 = normalizeColor(colors.metalTop)
   const mountColor2 = normalizeColor(colors.metalBottom2)
   const mountColor3 = normalizeColor(colors.metalBottom)
+  
+  const slopeSize = isForScreenshot ? 1.4 : 2
+  const handleExtraLength = isForScreenshot ? 10 : 0
 
   let zOffset = 0
   const mount = (color: string, stroke: number, length: number, extend = 0) => {
@@ -371,25 +366,27 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
 }
 
-function genHead(head: Zdog.Anchor, options: Options) {
-  genHeadSides(head, options.colors)
-  genHeadFaces(head, options)
+function genHead(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
+  genHeadSides(head, options.colors, isForScreenshot)
+  genHeadFaces(head, options, isForScreenshot)
 }
 
-function genHeadSides(head: Zdog.Anchor, colors: Colors) {
-  genHeadSide(head, colors, true)
+function genHeadSides(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean) {
+  genHeadSide(head, colors, isForScreenshot, true)
 
-  genHeadSide(head, colors, false, {
+  genHeadSide(head, colors, isForScreenshot, false, {
     rotate: { x: TAU / 2 },
     translate: { y: headLength },
   })
 }
 
-function genHeadFaces(head: Zdog.Anchor, options: Options) {
-  genFaces(head, options)
-  genFaceSlopes(head, options.colors)
+function genHeadFaces(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
+  const slopeSize = isForScreenshot ? 1.4 : 2
+  const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
+  genFaces(head, options, slopeSize, slopeSizeEnhanced)
+  genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
 }
-function genFaces(head: Zdog.Anchor, options: Options) {
+function genFaces(head: Zdog.Anchor, options: Options, slopeSize: number, slopeSizeEnhanced: number) {
   const { colors } = options
 
   const shape = (props: Zdog.ShapeOptions) =>
@@ -430,7 +427,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     addTo: frontFaceGroup,
   })
-  const viteLogo = genViteLogo(frontFaceGroup, colors)
+  const viteLogo = genViteLogo(frontFaceGroup, colors, slopeSizeEnhanced)
 
   // Back face
   frontFaceGroup.copyGraph({
@@ -444,7 +441,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   }
 }
 
-function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
+function genFaceSlopes(head: Zdog.Anchor, colors: Colors, slopeSize: number, slopeSizeEnhanced: number) {
   const shape = (props: Zdog.ShapeOptions) =>
     new Zdog.Shape({
       stroke: STROKE,
@@ -488,7 +485,10 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
   })
 }
 
-function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
+function genHeadSide(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
+  const slopeSize = isForScreenshot ? 1.4 : 2
+  const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
+  
   const headSide = new Zdog.Anchor({
     addTo: head,
     ...anchorOptions
@@ -608,7 +608,7 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
   return headSide
 }
 
-function genViteLogo(group: Zdog.Group, colors: Colors) {
+function genViteLogo(group: Zdog.Group, colors: Colors, slopeSizeEnhanced: number) {
   //const width = 12
 
   //const translate = {x: 0, y: 0, z: 0}
