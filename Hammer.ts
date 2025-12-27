@@ -490,6 +490,7 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors, slopeSize: number, slo
 }
 
 function genHeadSide(head: Zdog.Anchor, colors: Colors, slopeSize: number, slopeSizeEnhanced: number, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
+  // TODO/ai ... that's ugly
   const isForScreenshot = slopeSizeEnhanced === slopeSizeNominal && slopeSize === slopeSizeReduced
 
   const headSide = new Zdog.Anchor({
