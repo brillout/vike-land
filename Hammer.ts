@@ -323,8 +323,7 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  // TODO/ai bundle all parameters as a single object parameter ctx genHead(head, ctx)
-  genHead(head, options, slopeSize, slopeSizeEnhanced, isForScreenshot)
+  genHead(head, { options, slopeSize, slopeSizeEnhanced, isForScreenshot })
 
   {
     const { handleDiameter, handleLength } = hammer
@@ -382,11 +381,14 @@ function genHandle(
 
 function genHead(
   head: Zdog.Anchor,
-  options: Options,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-  isForScreenshot: boolean,
+  ctx: {
+    options: Options
+    slopeSize: number
+    slopeSizeEnhanced: number
+    isForScreenshot: boolean
+  },
 ) {
+  const { options, slopeSize, slopeSizeEnhanced, isForScreenshot } = ctx
   genHeadSides(head, options.colors, slopeSize, slopeSizeEnhanced, isForScreenshot)
   genHeadFaces(head, options, slopeSize, slopeSizeEnhanced)
 }
