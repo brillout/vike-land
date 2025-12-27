@@ -459,7 +459,6 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
     addTo: faceBackGroup,
   })
 
-
   genLightningBolt(colors, ctx, true, { addTo: faceFrontGroup })
   genLightningBolt(colors, ctx, false, { addTo: faceBackGroup })
   // if (!hideBackLightningBolt)
@@ -652,13 +651,13 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
   const translate = { x: -1 * (headLength / 2) + width / 2 , y: -2 * sideLength, z: sideLength + slopeSize + 2 }
   const rotate = undefined;
   /*/
-  const invert = (isFront ? 1 : -1 )
+  const invert = isFront ? 1 : -1
   const lightningBoltPosition = {
     x: lightningBoltOffset,
-    y: headLength / 2 - invert * (slopeSizeEnhanced - slopeSize) / 2,
+    y: headLength / 2 - (invert * (slopeSizeEnhanced - slopeSize)) / 2,
     z: invert * (sideLength + slopeSizeEnhanced),
   }
-  var rotate = { z: (1 * TAU) / 4, x: (-1 * TAU) / 2  }
+  var rotate = { z: (1 * TAU) / 4, x: (-1 * TAU) / 2 }
   //*/
   const stroke = 0.6
   // Distance from the hammer => apparent thickness of the lightning bolt
