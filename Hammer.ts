@@ -452,7 +452,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     addTo: frontFaceGroup,
   })
-  const viteLogo = genLightningBolt(frontFaceGroup, colors, slopeSizeEnhanced)
+  const lightningBolt = genLightningBolt(frontFaceGroup, colors, slopeSizeEnhanced)
 
   // Back face
   frontFaceGroup.copyGraph({
@@ -462,7 +462,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   if (hideBackLightningBolt) {
-    viteLogo.remove()
+    lightningBolt.remove()
   }
 }
 
