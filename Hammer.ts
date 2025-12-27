@@ -443,22 +443,26 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   // Front face
-  const faceFront = face2.copy({
+  const faceFrontGroup = new Zdog.Group({ addTo: head })
+  face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
-    addTo: head,
+    addTo: faceFrontGroup,
   })
 
   // Back face
-  const faceBack = face2.copy({
+  const faceBackGroup = new Zdog.Group({ addTo: head })
+  face2.copy({
     rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
+    color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     // rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
-    addTo: head,
+    addTo: faceBackGroup,
   })
 
-  genLightningBolt(colors, ctx, true, { addTo: head })
-  genLightningBolt(colors, ctx, false, { addTo: head })
+
+  genLightningBolt(colors, ctx, true, { addTo: faceFrontGroup })
+  genLightningBolt(colors, ctx, false, { addTo: faceBackGroup })
   // if (!hideBackLightningBolt)
 }
 
