@@ -10,10 +10,13 @@ import { type Colors } from '../Hammer'
   wood: 'red',
 */
 
+// const metaFaceDefault = '#cccccc'
+const metaFaceDefault = '#b0b0b0'
+
 const colorsDefault: Colors = {
   metalCorner: 'red',
   metalSlope: '#a6a6a6',
-  metalFace: 'red',
+  metalFace: metaFaceDefault,
   metalTop: 'red',
   metalBottom2: 'red',
   metalBottom: ['#b0b0b0', '#878787'],
@@ -52,7 +55,7 @@ const presetsColor: Record<string, Colors> = {
   gradientNormal: {
     metalCorner: 'red',
     metalSlope: '#a6a6a6',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -74,7 +77,7 @@ const presetsColor: Record<string, Colors> = {
   gradientDark: {
     metalCorner: 'red',
     metalSlope: '#959595',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#9f9f9f', '#7a7a7a'],
@@ -96,7 +99,7 @@ const presetsColor: Record<string, Colors> = {
   gradientBoring: {
     metalCorner: 'red',
     metalSlope: '#a6a6a6',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -118,7 +121,7 @@ const presetsColor: Record<string, Colors> = {
   gradient12: {
     metalCorner: 'red',
     metalSlope: '#a6a6a6',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -140,7 +143,7 @@ const presetsColor: Record<string, Colors> = {
   gradient11: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -162,7 +165,7 @@ const presetsColor: Record<string, Colors> = {
   gradient10: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#878787'],
@@ -184,7 +187,7 @@ const presetsColor: Record<string, Colors> = {
   gradient9: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#bababa', '#8f8f8f'],
@@ -206,7 +209,7 @@ const presetsColor: Record<string, Colors> = {
   gradient8: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#bababa', '#8f8f8f'],
@@ -228,7 +231,7 @@ const presetsColor: Record<string, Colors> = {
   gradient7: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#b0b0b0', '#6b6b6b'],
@@ -250,7 +253,7 @@ const presetsColor: Record<string, Colors> = {
   gradient6: {
     metalCorner: 'red',
     metalSlope: '#e3e3e3',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d4d4d4', '#6b6b6b'],
@@ -272,7 +275,7 @@ const presetsColor: Record<string, Colors> = {
   gradient5: {
     metalCorner: 'red',
     metalSlope: '#a8a8a8',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d6d6d6', '#949494'],
@@ -294,7 +297,7 @@ const presetsColor: Record<string, Colors> = {
   gradient4: {
     metalCorner: 'red',
     metalSlope: '#a8a8a8',
-    metalFace: 'red',
+    metalFace: metaFaceDefault,
     metalTop: 'red',
     metalBottom2: 'red',
     metalBottom: ['#d6d6d6', '#949494'],

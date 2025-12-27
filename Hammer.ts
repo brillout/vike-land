@@ -430,7 +430,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
       y: headLength - slopeSize - slopeSizeEnhanced,
       z: 2 * sideLength,
     },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+    color: normalizeColor(colors.metalFace),
     addTo: head,
   })
 
@@ -447,6 +447,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
+    color: normalizeColor(colors.metalFace),
     addTo: faceBack,
   })
 
@@ -633,7 +634,9 @@ function genHeadSide(
       { x: 1, y, z: 1 },
     ],
     scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+    color: isFront
+      ? normalizeColor(colors.colorFaceRight ?? colors.metalFace)
+      : normalizeColor(colors.metalFace),
   })
 
   return headSide
