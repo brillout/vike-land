@@ -20,9 +20,6 @@ const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
 
-const getSlopeSize = (isForScreenshot: boolean) => isForScreenshot ? 1.4 : 2
-const getSlopeSizeEnhanced = (isForScreenshot: boolean) => isForScreenshot ? 2 : getSlopeSize(isForScreenshot)
-
 const handleBottomLength1 = 3.2
 const handleBottomExtraWidth = 1.4
 //*/
@@ -317,25 +314,27 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  genHead(head, options, hammer.isForScreenshot)
+  const slopeSize = hammer.isForScreenshot ? 1.4 : 2
+  const slopeSizeEnhanced = hammer.isForScreenshot ? 2 : slopeSize
+
+  genHead(head, options, slopeSize, slopeSizeEnhanced)
 
   {
     const { handleDiameter, handleLength, isForScreenshot } = hammer
     if (!hammer.hideHandle) {
-      genHandle(handle, colors, handleDiameter, handleLength, isForScreenshot)
+      genHandle(handle, colors, handleDiameter, handleLength, slopeSize, isForScreenshot)
     }
   }
 
   return illo
 }
 
-function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number, isForScreenshot: boolean) {
+function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, handleLength: number, slopeSize: number, isForScreenshot: boolean) {
   const handleStick = normalizeColor(colors.wood)
   const mountColor1 = normalizeColor(colors.metalTop)
   const mountColor2 = normalizeColor(colors.metalBottom2)
   const mountColor3 = normalizeColor(colors.metalBottom)
   
-  const slopeSize = getSlopeSize(isForScreenshot)
   const handleExtraLength = isForScreenshot ? 10 : 0
 
   let zOffset = 0
@@ -369,23 +368,21 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
 }
 
-function genHead(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
-  genHeadSides(head, options.colors, isForScreenshot)
-  genHeadFaces(head, options, isForScreenshot)
+function genHead(head: Zdog.Anchor, options: Options, slopeSize: number, slopeSizeEnhanced: number) {
+  genHeadSides(head, options.colors, slopeSize, slopeSizeEnhanced)
+  genHeadFaces(head, options, slopeSize, slopeSizeEnhanced)
 }
 
-function genHeadSides(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean) {
-  genHeadSide(head, colors, isForScreenshot, true)
+function genHeadSides(head: Zdog.Anchor, colors: Colors, slopeSize: number, slopeSizeEnhanced: number) {
+  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, true)
 
-  genHeadSide(head, colors, isForScreenshot, false, {
+  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, false, {
     rotate: { x: TAU / 2 },
     translate: { y: headLength },
   })
 }
 
-function genHeadFaces(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
-  const slopeSize = getSlopeSize(isForScreenshot)
-  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
+function genHeadFaces(head: Zdog.Anchor, options: Options, slopeSize: number, slopeSizeEnhanced: number) {
   genFaces(head, options, slopeSize, slopeSizeEnhanced)
   genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
 }
@@ -488,9 +485,8 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors, slopeSize: number, slo
   })
 }
 
-function genHeadSide(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
-  const slopeSize = getSlopeSize(isForScreenshot)
-  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
+function genHeadSide(head: Zdog.Anchor, colors: Colors, slopeSize: number, slopeSizeEnhanced: number, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
+  const isForScreenshot = slopeSizeEnhanced === 2
   
   const headSide = new Zdog.Anchor({
     addTo: head,
