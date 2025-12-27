@@ -449,24 +449,31 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
     color: 'yellow',
     addTo: head,
   })
-  genLightningBolt(colors, ctx, {
+  const lightningBolt = genLightningBolt(colors, ctx, {
     rotate: { z: (1 * TAU) / 4 },
     addTo: head,
   })
+  lightningBolt.copy({
+    // rotate: { x: (-1 * TAU) / 4 },
+    translate: { x: 0, y: 0, z: 0 },
+    addTo: head,
+  })
+  /*
   genLightningBolt(colors, ctx, {
     rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
     // rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     addTo: head,
   })
+  */
 
   // Back face
-  face2.copy({
-    rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
-    translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
-    color: 'blue',
-    addTo: head,
-  })
+  // face2.copy({
+  //   rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
+  //   translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
+  //   color: 'blue',
+  //   addTo: head,
+  // })
 
   if (!hideBackLightningBolt) {
     lightningBolt.remove()
