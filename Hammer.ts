@@ -20,8 +20,8 @@ const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
 
-const getSlopeSize = (isForScreenshot: boolean) => isForScreenshot ? 1.4 : 2
-const getSlopeSizeEnhanced = (isForScreenshot: boolean) => isForScreenshot ? 2 : getSlopeSize(isForScreenshot)
+const slopeSizeReduced = 1.4
+const slopeSizeNominal = 2
 
 const handleBottomLength1 = 3.2
 const handleBottomExtraWidth = 1.4
@@ -334,8 +334,10 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const mountColor1 = normalizeColor(colors.metalTop)
   const mountColor2 = normalizeColor(colors.metalBottom2)
   const mountColor3 = normalizeColor(colors.metalBottom)
-  
-  const slopeSize = getSlopeSize(isForScreenshot)
+
+  // TODO/ai dedupe this logic
+  const slopeSize = isForScreenshot ? slopeSizeReduced : slopeSizeNominal
+  // TODO/ai move this up
   const handleExtraLength = isForScreenshot ? 10 : 0
 
   let zOffset = 0
@@ -384,8 +386,9 @@ function genHeadSides(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolea
 }
 
 function genHeadFaces(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
-  const slopeSize = getSlopeSize(isForScreenshot)
-  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
+  // TODO/ai dedupe this logic
+  const slopeSize = isForScreenshot ? slopeSizeReduced : slopeSizeNominal
+  const slopeSizeEnhanced = slopeSizeNominal
   genFaces(head, options, slopeSize, slopeSizeEnhanced)
   genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
 }
@@ -489,9 +492,11 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors, slopeSize: number, slo
 }
 
 function genHeadSide(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
-  const slopeSize = getSlopeSize(isForScreenshot)
-  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
-  
+
+  // TODO/ai dedupe this logic
+  const slopeSize = isForScreenshot ? slopeSizeReduced : slopeSizeNominal
+  const slopeSizeEnhanced = slopeSizeNominal
+
   const headSide = new Zdog.Anchor({
     addTo: head,
     ...anchorOptions
