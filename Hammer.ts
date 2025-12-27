@@ -425,8 +425,7 @@ function genFaces(head: Zdog.Anchor, options: Options) {
   })
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
-    // TODO
-    translate: { x: 0, y: slopeSize, z: face2.translate.z + slopeSizeEnhanced - slopeSize },
+    translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
     addTo: frontFaceGroup,
   })
