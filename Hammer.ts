@@ -18,12 +18,12 @@ const { TAU } = Zdog
 //*/
 const isForScreenshot = true
 /*/
-const isForScreenshot = true
+const isForScreenshot = false
 ///*/
 
 const headLength = 28.3
 const slopeSize = 1.4
-const slopeSizeEnhanced = 2
+const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
 const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
