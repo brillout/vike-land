@@ -333,6 +333,8 @@ function render(hammer: Hammer) {
   }
 
   return illo
+
+  // TODO/ai instead of passing parameters around (pesk) move fucntions (e.g. genHandle()) here
 }
 
 function genHandle(
