@@ -340,7 +340,7 @@ function initScreenshotMode(screenshotMode: Element, hammer: Hammer) {
     elem: screenshotMode,
     labelText: '3D mode (not screenshot mode)',
     onToggle(isChecked: boolean) {
-      hammer.isForScreenshot = isChecked
+      hammer.isForScreenshot = !isChecked
     },
     applyValue() {
       hammer.reset()
