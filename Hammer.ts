@@ -453,14 +453,14 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
       ...props,
     })
 
-  const faceSlope = (slopeSizeEnhanced = slopeSize, props: Zdog.ShapeOptions) => {
+  const faceSlope = (slopeSizeEnhanced = slopeSize, slopeSizeEnhanced2 = slopeSize, props: Zdog.ShapeOptions) => {
     const x = -1 * sideLength
     const y = headLength - slopeSize - slopeSizeEnhanced
     return shape({
       path: [
         { x, y: 0, z: sideLength + slopeSizeEnhanced },
-        { x: x - slopeSize, y: 0, z: sideLength },
-        { x: x - slopeSize, y, z: sideLength },
+        { x: x - slopeSizeEnhanced2, y: 0, z: sideLength },
+        { x: x - slopeSizeEnhanced2, y, z: sideLength },
         { x, y, z: sideLength + slopeSizeEnhanced },
       ],
       translate: { y: slopeSizeEnhanced },
@@ -489,12 +489,12 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
     color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
   })
 
-  faceSlope(slopeSizeEnhanced, {
+  faceSlope(slopeSizeEnhanced, undefined, {
     rotate: { x: TAU / 2 },
     translate: { y: headLength - slopeSize },
     color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
   })
-  faceSlope(undefined, {
+  faceSlope(undefined, undefined, {
     rotate: { x: TAU / 2 },
     translate: { x: opposite, y: headLength - slopeSize, z: 1 * opposite },
   })
