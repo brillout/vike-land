@@ -443,40 +443,23 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   // Front face
-  face2.copy({
+  const faceFront = face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
-    color: 'yellow',
     addTo: head,
   })
-  genLightningBolt(colors, ctx, true, { addTo: head, })
-  genLightningBolt(colors, ctx, false, { addTo: head, })
-  /*
-  lightningBolt.copy({
-    // rotate: { x: (-1 * TAU) / 4 },
-    translate: { x: 0, y: 0, z: 0 },
-    addTo: head,
-  })
-  /*
-  genLightningBolt(colors, ctx, {
+
+  // Back face
+  const faceBack = face2.copy({
     rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
     // rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     addTo: head,
   })
-  */
 
-  // Back face
-  // face2.copy({
-  //   rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
-  //   translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
-  //   color: 'blue',
-  //   addTo: head,
-  // })
-
-  if (!hideBackLightningBolt) {
-    lightningBolt.remove()
-  }
+  genLightningBolt(colors, ctx, true, { addTo: head })
+  genLightningBolt(colors, ctx, false, { addTo: head })
+  // if (!hideBackLightningBolt)
 }
 
 function genFaceSlopes(head: Zdog.Anchor, ctx: Ctx) {
@@ -669,9 +652,9 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
   const lightningBoltPosition = {
     x: lightningBoltOffset,
     y: headLength / 2 - (slopeSizeEnhanced - slopeSize) / 2,
-    z: sideLength + slopeSizeEnhanced,
+    z: (isFront ? 1 : -1 ) * (sideLength + slopeSizeEnhanced),
   }
-  const rotate = { z: (1 * TAU) / 4 }
+  var rotate = { z: (1 * TAU) / 4, x: (-1 * TAU) / 2  }
   //*/
   const stroke = 0.6
   // Distance from the hammer => apparent thickness of the lightning bolt
@@ -707,7 +690,7 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
     translate: {
       x: lightningBoltPosition.x,
       y: lightningBoltPosition.y,
-      z: lightningBoltPosition.z + thikness,
+      z: lightningBoltPosition.z + (isFront ? 1 : -1) * thikness,
     },
     scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
     ...props,
