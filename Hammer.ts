@@ -16,12 +16,12 @@ const { TAU } = Zdog
 /*****************************/
 
 const headLength = 28.3
-// TODO/ai keep these constant defined here — choose the right value dependening on whether screenshot mode
-const slopeSize = 1.4
-const slopeSizeEnhanced = 2
 const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
+
+const getSlopeSize = (isForScreenshot: boolean) => isForScreenshot ? 1.4 : 2
+const getSlopeSizeEnhanced = (isForScreenshot: boolean) => isForScreenshot ? 2 : getSlopeSize(isForScreenshot)
 
 const handleBottomLength1 = 3.2
 const handleBottomExtraWidth = 1.4
@@ -335,7 +335,7 @@ function genHandle(handle: Zdog.Anchor, colors: Colors, handleDiameter: number, 
   const mountColor2 = normalizeColor(colors.metalBottom2)
   const mountColor3 = normalizeColor(colors.metalBottom)
   
-  const slopeSize = isForScreenshot ? 1.4 : 2
+  const slopeSize = getSlopeSize(isForScreenshot)
   const handleExtraLength = isForScreenshot ? 10 : 0
 
   let zOffset = 0
@@ -384,8 +384,8 @@ function genHeadSides(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolea
 }
 
 function genHeadFaces(head: Zdog.Anchor, options: Options, isForScreenshot: boolean) {
-  const slopeSize = isForScreenshot ? 1.4 : 2
-  const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
+  const slopeSize = getSlopeSize(isForScreenshot)
+  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
   genFaces(head, options, slopeSize, slopeSizeEnhanced)
   genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
 }
@@ -489,8 +489,8 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors, slopeSize: number, slo
 }
 
 function genHeadSide(head: Zdog.Anchor, colors: Colors, isForScreenshot: boolean, isFront: boolean, anchorOptions: Zdog.AnchorOptions = {}) {
-  const slopeSize = isForScreenshot ? 1.4 : 2
-  const slopeSizeEnhanced = isForScreenshot ? 2 : slopeSize
+  const slopeSize = getSlopeSize(isForScreenshot)
+  const slopeSizeEnhanced = getSlopeSizeEnhanced(isForScreenshot)
   
   const headSide = new Zdog.Anchor({
     addTo: head,
