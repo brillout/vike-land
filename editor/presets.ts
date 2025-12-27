@@ -37,7 +37,7 @@ const perspectiveDefault: Perspective = {
   rotation2D: 0,
   handleDiameter: 7.7,
   handleLength: 12.4,
-  rotate: { x: 0.00, y: -7.16, z: -2 },
+  rotate: { x: 0.0, y: -7.16, z: -2 },
 }
 
 type Perspective = {
@@ -46,7 +46,6 @@ type Perspective = {
   handleDiameter?: number
   handleLength?: number
 }
-
 
 const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
@@ -500,7 +499,7 @@ const presetsPerspective: Record<string, Perspective> = {
     rotation2D: 0,
     handleDiameter: 7.7,
     handleLength: 15,
-    rotate: { x: 0.00, y: -7.16, z: -2 },
+    rotate: { x: 0.0, y: -7.16, z: -2 },
   },
   maud: {
     rotation2D: 0,

@@ -104,7 +104,11 @@ body {
 }
 .header > .title {
   font-size: 5em;
-  font: bold 100px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font:
+    bold 100px/1 'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 .header {
   position: relative;

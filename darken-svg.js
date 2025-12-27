@@ -1,66 +1,68 @@
-const fs = require('fs');
+const fs = require('fs')
 
 function darken(hexColor, amount = 0.9) {
   // Remove # if present
-  let hex = hexColor.replace('#', '');
-  
+  let hex = hexColor.replace('#', '')
+
   // Handle 3-char hex colors
   if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
   }
-  
+
   // Convert to RGB
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  
+  const r = parseInt(hex.substring(0, 2), 16)
+  const g = parseInt(hex.substring(2, 4), 16)
+  const b = parseInt(hex.substring(4, 6), 16)
+
   // Apply darkening
-  const newR = Math.floor(r * amount);
-  const newG = Math.floor(g * amount);
-  const newB = Math.floor(b * amount);
-  
+  const newR = Math.floor(r * amount)
+  const newG = Math.floor(g * amount)
+  const newB = Math.floor(b * amount)
+
   // Convert back to hex
-  return '#' + 
-    newR.toString(16).padStart(2, '0') + 
-    newG.toString(16).padStart(2, '0') + 
-    newB.toString(16).padStart(2, '0');
+  return (
+    '#' +
+    newR.toString(16).padStart(2, '0') +
+    newG.toString(16).padStart(2, '0') +
+    newB.toString(16).padStart(2, '0')
+  )
 }
 
 function extractColors(content) {
   // Extract all unique hex colors from the content
-  const colorRegex = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g;
-  const colors = new Set();
-  let match;
-  
+  const colorRegex = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g
+  const colors = new Set()
+  let match
+
   while ((match = colorRegex.exec(content)) !== null) {
-    colors.add(match[0].toLowerCase());
+    colors.add(match[0].toLowerCase())
   }
-  
-  return Array.from(colors).sort();
+
+  return Array.from(colors).sort()
 }
 
 function isYellowOrange(hexColor) {
   // Remove # if present
-  let hex = hexColor.replace('#', '');
-  
+  let hex = hexColor.replace('#', '')
+
   // Handle 3-char hex colors
   if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
   }
-  
+
   // Convert to RGB
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  
+  const r = parseInt(hex.substring(0, 2), 16)
+  const g = parseInt(hex.substring(2, 4), 16)
+  const b = parseInt(hex.substring(4, 6), 16)
+
   // Yellow/orange detection: high red, medium-to-high green, low blue
   // Typical yellow: #ffff00 (255, 255, 0) or #ff0 (shorthand)
   // Typical orange: #ffb300 (255, 179, 0), #ffae00 (255, 174, 0)
-  const isHighRed = r > 200;
-  const isMediumToHighGreen = g > 100;
-  const isLowBlue = b < 50;
-  
-  return isHighRed && isMediumToHighGreen && isLowBlue;
+  const isHighRed = r > 200
+  const isMediumToHighGreen = g > 100
+  const isLowBlue = b < 50
+
+  return isHighRed && isMediumToHighGreen && isLowBlue
 }
 
 function showHelp() {
@@ -79,77 +81,77 @@ Examples:
   node darken-svg.js logo.svg                  # Darken logo.svg by 0.9, auto-skip yellow/orange
   node darken-svg.js logo.svg out.svg 0.8      # Darken logo.svg by 0.8, save to out.svg
   node darken-svg.js logo.svg out.svg 0.9 "cc" # Also exclude colors matching "cc"
-`);
+`)
 }
 
 // Parse command line arguments
-const args = process.argv.slice(2);
+const args = process.argv.slice(2)
 
 if (args.includes('--help') || args.includes('-h')) {
-  showHelp();
-  process.exit(0);
+  showHelp()
+  process.exit(0)
 }
 
 // Require input file argument
 if (args.length === 0) {
-  console.error('Error: No input file specified\n');
-  showHelp();
-  process.exit(1);
+  console.error('Error: No input file specified\n')
+  showHelp()
+  process.exit(1)
 }
 
-const inputFile = args[0];
-const outputFile = args[1] || inputFile;
-const darkenAmount = parseFloat(args[2]) || 0.9;
-const excludePattern = args[3]; // Optional regex pattern for colors to exclude
+const inputFile = args[0]
+const outputFile = args[1] || inputFile
+const darkenAmount = parseFloat(args[2]) || 0.9
+const excludePattern = args[3] // Optional regex pattern for colors to exclude
 
 // Check if input file exists
 if (!fs.existsSync(inputFile)) {
-  console.error(`Error: Input file '${inputFile}' not found`);
-  console.log('\nRun with --help to see usage');
-  process.exit(1);
+  console.error(`Error: Input file '${inputFile}' not found`)
+  console.log('\nRun with --help to see usage')
+  process.exit(1)
 }
 
 // Read SVG file
-let content = fs.readFileSync(inputFile, 'utf8');
+let content = fs.readFileSync(inputFile, 'utf8')
 
 // Extract all colors from the file
-const allColors = extractColors(content);
+const allColors = extractColors(content)
 
 // Build color map, excluding yellow/orange colors by default
-const colorMap = {};
+const colorMap = {}
 for (const color of allColors) {
   // Skip yellow/orange colors (lightning bolt) by default
   if (isYellowOrange(color)) {
-    console.log(`Skipping yellow/orange color: ${color}`);
-    continue;
+    console.log(`Skipping yellow/orange color: ${color}`)
+    continue
   }
-  
+
   // Skip if color matches exclude pattern
   if (excludePattern) {
-    const excludeRegex = new RegExp(excludePattern, 'i');
+    const excludeRegex = new RegExp(excludePattern, 'i')
     if (excludeRegex.test(color)) {
-      console.log(`Skipping excluded color: ${color}`);
-      continue;
+      console.log(`Skipping excluded color: ${color}`)
+      continue
     }
   }
-  
-  colorMap[color] = darken(color, darkenAmount);
+
+  colorMap[color] = darken(color, darkenAmount)
 }
 
 // Replace all colors
 for (const [oldColor, newColor] of Object.entries(colorMap)) {
-  const regex = new RegExp(oldColor.replace('#', '#'), 'gi');
-  content = content.replace(regex, newColor);
+  const regex = new RegExp(oldColor.replace('#', '#'), 'gi')
+  content = content.replace(regex, newColor)
 }
 
 // Write back
-fs.writeFileSync(outputFile, content);
+fs.writeFileSync(outputFile, content)
 
-console.log(`\nSVG colors darkened successfully!`);
-console.log(`Input: ${inputFile}`);
-console.log(`Output: ${outputFile}`);
-console.log(`Darken amount: ${darkenAmount} (multiply RGB by ${darkenAmount})`);
-console.log(`\nColor mappings:`);
+console.log(`\nSVG colors darkened successfully!`)
+console.log(`Input: ${inputFile}`)
+console.log(`Output: ${outputFile}`)
+console.log(`Darken amount: ${darkenAmount} (multiply RGB by ${darkenAmount})`)
+console.log(`\nColor mappings:`)
 for (const [old, newColor] of Object.entries(colorMap)) {
-  console.log(`${old} -> ${newColor}`);
+  console.log(`${old} -> ${newColor}`)
 }

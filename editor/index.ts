@@ -53,8 +53,18 @@ function main() {
   initPresets(elements.presets, hammer)
   initPresetsColor(elements.presetsColor, hammer, elements.colorPicker)
   initColorInputs(elements.colorPicker, hammer)
-  changeHandleDiameter = initHandlePicker(hammer, elements.handleDiameterPicker, 'handleDiameter', perspectiveDefault.handleDiameter).changeVal
-  changeHandleLength = initHandlePicker(hammer, elements.handleLengthPicker, 'handleLength', perspectiveDefault.handleLength).changeVal
+  changeHandleDiameter = initHandlePicker(
+    hammer,
+    elements.handleDiameterPicker,
+    'handleDiameter',
+    perspectiveDefault.handleDiameter,
+  ).changeVal
+  changeHandleLength = initHandlePicker(
+    hammer,
+    elements.handleLengthPicker,
+    'handleLength',
+    perspectiveDefault.handleLength,
+  ).changeVal
   initIconSize(elements.iconSize)
   initFaviconSize(elements.faviconSize)
   initAutoSpinning(elements.autoSpinning)
@@ -177,7 +187,12 @@ function initRotate2D(elemRotate2D: HTMLElement) {
   getRotation2D = controls.getValue
 }
 
-function initHandlePicker(hammer: Hammer, handlePicker: Element, handleProp: 'handleDiameter' | 'handleLength', defaultValue?: number) {
+function initHandlePicker(
+  hammer: Hammer,
+  handlePicker: Element,
+  handleProp: 'handleDiameter' | 'handleLength',
+  defaultValue?: number,
+) {
   return createNumberInput({
     elem: handlePicker,
     labelText: `<code>${handleProp}</code>`,
@@ -408,11 +423,13 @@ function generateSvgContent(): string {
   const gradientContainer = document.querySelector('svg.gradient-container defs')
   if (gradientContainer && gradientContainer.children.length > 0) {
     const defsContent = Array.from(gradientContainer.children)
-      .map(el => el.outerHTML)
+      .map((el) => el.outerHTML)
       .join('\n    ')
     // Insert defs section after the opening svg tag
-    content = content.replace('<svg xmlns="http://www.w3.org/2000/svg" ',
-      `<svg xmlns="http://www.w3.org/2000/svg" `)
+    content = content.replace(
+      '<svg xmlns="http://www.w3.org/2000/svg" ',
+      `<svg xmlns="http://www.w3.org/2000/svg" `,
+    )
     content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
   }
 
