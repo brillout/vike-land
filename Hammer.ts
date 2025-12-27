@@ -275,19 +275,6 @@ type Options = {
   hideBackLightningBolt: boolean
 }
 
-type Ctx = {
-  options?: Options
-  colors?: Colors
-  slopeSize?: number
-  slopeSizeEnhanced?: number
-  isForScreenshot?: boolean
-  handleDiameter?: number
-  handleLength?: number
-  handleExtraLength?: number
-  isFront?: boolean
-  anchorOptions?: Zdog.AnchorOptions
-}
-
 function render(hammer: Hammer) {
   const { illoElem, perspective, dragRotate } = hammer
   illoElem.setAttribute('width', '100')
@@ -336,20 +323,28 @@ function render(hammer: Hammer) {
     //*/
   })
 
-  genHead(head, { options, slopeSize, slopeSizeEnhanced, isForScreenshot })
+  genHead(head, options, slopeSize, slopeSizeEnhanced, isForScreenshot)
 
   {
     const { handleDiameter, handleLength } = hammer
     if (!hammer.hideHandle) {
-      genHandle(handle, { colors, handleDiameter, handleLength, slopeSize, handleExtraLength })
+      genHandle(handle, colors, handleDiameter, handleLength, slopeSize, handleExtraLength)
     }
   }
 
   return illo
+
+  // TODO/ai instead of passing parameters around (pesk) move fucntions (e.g. genHandle()) here
 }
 
-function genHandle(handle: Zdog.Anchor, ctx: Ctx) {
-  const { colors, handleDiameter, handleLength, slopeSize, handleExtraLength } = ctx
+function genHandle(
+  handle: Zdog.Anchor,
+  colors: Colors,
+  handleDiameter: number,
+  handleLength: number,
+  slopeSize: number,
+  handleExtraLength: number,
+) {
   const handleStick = normalizeColor(colors.wood)
   const mountColor1 = normalizeColor(colors.metalTop)
   const mountColor2 = normalizeColor(colors.metalBottom2)
@@ -386,30 +381,47 @@ function genHandle(handle: Zdog.Anchor, ctx: Ctx) {
   mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
 }
 
-function genHead(head: Zdog.Anchor, ctx: Ctx) {
-  genHeadSides(head, { ...ctx, colors: ctx.options!.colors })
-  genHeadFaces(head, ctx)
+function genHead(
+  head: Zdog.Anchor,
+  options: Options,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+  isForScreenshot: boolean,
+) {
+  genHeadSides(head, options.colors, slopeSize, slopeSizeEnhanced, isForScreenshot)
+  genHeadFaces(head, options, slopeSize, slopeSizeEnhanced)
 }
 
-function genHeadSides(head: Zdog.Anchor, ctx: Ctx) {
-  genHeadSide(head, { ...ctx, isFront: true })
+function genHeadSides(
+  head: Zdog.Anchor,
+  colors: Colors,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+  isForScreenshot: boolean,
+) {
+  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, true)
 
-  genHeadSide(head, {
-    ...ctx,
-    isFront: false,
-    anchorOptions: {
-      rotate: { x: TAU / 2 },
-      translate: { y: headLength },
-    },
+  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, false, {
+    rotate: { x: TAU / 2 },
+    translate: { y: headLength },
   })
 }
 
-function genHeadFaces(head: Zdog.Anchor, ctx: Ctx) {
-  genFaces(head, ctx)
-  genFaceSlopes(head, { ...ctx, colors: ctx.options!.colors })
+function genHeadFaces(
+  head: Zdog.Anchor,
+  options: Options,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+) {
+  genFaces(head, options, slopeSize, slopeSizeEnhanced)
+  genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
 }
-function genFaces(head: Zdog.Anchor, ctx: Ctx) {
-  const { options, slopeSize, slopeSizeEnhanced } = ctx
+function genFaces(
+  head: Zdog.Anchor,
+  options: Options,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+) {
   const { colors } = options
 
   const shape = (props: Zdog.ShapeOptions) =>
@@ -468,8 +480,12 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   }
 }
 
-function genFaceSlopes(head: Zdog.Anchor, ctx: Ctx) {
-  const { colors, slopeSize, slopeSizeEnhanced } = ctx
+function genFaceSlopes(
+  head: Zdog.Anchor,
+  colors: Colors,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+) {
   const shape = (props: Zdog.ShapeOptions) =>
     new Zdog.Shape({
       stroke: STROKE,
@@ -517,8 +533,15 @@ function genFaceSlopes(head: Zdog.Anchor, ctx: Ctx) {
   })
 }
 
-function genHeadSide(head: Zdog.Anchor, ctx: Ctx) {
-  const { colors, slopeSize, slopeSizeEnhanced, isForScreenshot, isFront, anchorOptions = {} } = ctx
+function genHeadSide(
+  head: Zdog.Anchor,
+  colors: Colors,
+  slopeSize: number,
+  slopeSizeEnhanced: number,
+  isForScreenshot: boolean,
+  isFront: boolean,
+  anchorOptions: Zdog.AnchorOptions = {},
+) {
   const headSide = new Zdog.Anchor({
     addTo: head,
     ...anchorOptions,
