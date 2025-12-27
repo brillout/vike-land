@@ -443,25 +443,32 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   // Front face
-  var frontFaceGroup = new Zdog.Group({
-    addTo: head,
-  })
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
-    color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
-    addTo: frontFaceGroup,
+    color: 'yellow',
+    addTo: head,
   })
-  const lightningBolt = genLightningBolt(frontFaceGroup, colors, ctx)
-
-  // Back face
-  frontFaceGroup.copyGraph({
-    rotate: { x: (-1 * TAU) / 2 },
-    translate: { x: 0, y: headLength, z: 0 },
+  genLightningBolt(colors, ctx, {
+    rotate: { z: (1 * TAU) / 4 },
+    addTo: head,
+  })
+  genLightningBolt(colors, ctx, {
+    rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
+    translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
+    // rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
     addTo: head,
   })
 
-  if (hideBackLightningBolt) {
+  // Back face
+  face2.copy({
+    rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
+    translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
+    color: 'blue',
+    addTo: head,
+  })
+
+  if (!hideBackLightningBolt) {
     lightningBolt.remove()
   }
 }
@@ -642,7 +649,7 @@ function genHeadSide(
   return headSide
 }
 
-function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
+function genLightningBolt(colors: Colors, ctx: Ctx, props: Zdog.ShapeOptions) {
   const { slopeSize, slopeSizeEnhanced } = ctx
 
   //const width = 12
@@ -653,20 +660,16 @@ function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
   const translate = { x: -1 * (headLength / 2) + width / 2 , y: -2 * sideLength, z: sideLength + slopeSize + 2 }
   const rotate = undefined;
   /*/
-  const addTo = group
   const lightningBoltPosition = {
     x: lightningBoltOffset,
     y: headLength / 2 - (slopeSizeEnhanced - slopeSize) / 2,
     z: sideLength + slopeSizeEnhanced,
   }
-  const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
   // Distance from the hammer => apparent thickness of the lightning bolt
   const thikness = stroke / 4
   const shape = new Zdog.Shape({
-    addTo,
-    rotate,
     path: [
       { x: 54.616 - 67, y: 2.783 - 31 },
       { x: 54.652 - 67, y: 25.572 - 31 },
@@ -699,6 +702,7 @@ function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
       z: lightningBoltPosition.z + thikness,
     },
     scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
+    ...props,
   })
   return shape
 }
