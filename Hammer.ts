@@ -20,8 +20,8 @@ const sideLength = 8
 const lightningBoltSize = 0.135
 const lightningBoltOffset = 0.3
 
-const slopeSizeReduced = 1.4
-const slopeSizeNominal = 2
+const slopeSize_ = 1.4
+const slopeSizeEnhanced_ = 2
 const handleExtraLength_ = 10
 
 const handleBottomLength1 = 3.2
@@ -299,8 +299,8 @@ function render(hammer: Hammer) {
   const options = { colors, hideBackLightningBolt }
 
   // Compute slope sizes once based on screenshot mode
-  const slopeSize = isForScreenshot ? slopeSizeReduced : slopeSizeNominal
-  const slopeSizeEnhanced = slopeSizeNominal
+  const slopeSize = isForScreenshot ? slopeSize_ : slopeSizeEnhanced_
+  const slopeSizeEnhanced = slopeSizeEnhanced_
   const handleExtraLength = isForScreenshot ? handleExtraLength_ : 0
 
   // anchor
