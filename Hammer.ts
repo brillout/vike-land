@@ -530,7 +530,6 @@ function genHeadSide(head: Zdog.Anchor, colors: Colors, isFront: boolean, anchor
   })
 
   // top left corner
-  // const cornerTopLeft = (isFront: boolean) => shape({
   if (!isFront || !isForScreenshot) shape({
     path: [
       { x: 0, y: 0, z: 0 },
