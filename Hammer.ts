@@ -323,6 +323,332 @@ function render(hammer: Hammer) {
     //*/
   })
 
+  function genHandle(
+    handle: Zdog.Anchor,
+    colors: Colors,
+    handleDiameter: number,
+    handleLength: number,
+    slopeSize: number,
+    handleExtraLength: number,
+  ) {
+    const handleStick = normalizeColor(colors.wood)
+    const mountColor1 = normalizeColor(colors.metalTop)
+    const mountColor2 = normalizeColor(colors.metalBottom2)
+    const mountColor3 = normalizeColor(colors.metalBottom)
+
+    let zOffset = 0
+    const mount = (color: string, stroke: number, length: number, extend = 0) => {
+      stroke = stroke / 2
+      const zOffsetAddendum = stroke + length
+      /*
+      if( zOffset === 0 ) {
+      } else {
+        zOffset += zOffsetAddendum
+      }
+      */
+      zOffset += zOffsetAddendum / 2
+      new Zdog.Cylinder({
+        addTo: handle,
+        diameter: handleDiameter,
+        stroke: stroke,
+        length: length + extend,
+        fill: true,
+        color,
+        translate: { x: 0, y: 0, z: 3 - slopeSize + 0 - 1 - zOffset + extend / 2 },
+      })
+      zOffset += zOffsetAddendum / 2
+    }
+
+    if (legacyHandle) {
+      mount(mountColor1, 1.4, 2)
+    }
+    mount(handleStick, 0, handleLength, handleExtraLength)
+    if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
+    mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
+  }
+
+  function genHeadSide(
+    head: Zdog.Anchor,
+    colors: Colors,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+    isForScreenshot: boolean,
+    isFront: boolean,
+    anchorOptions: Zdog.AnchorOptions = {},
+  ) {
+    const headSide = new Zdog.Anchor({
+      addTo: head,
+      ...anchorOptions,
+    })
+
+    const shape = (props: Zdog.ShapeOptions) =>
+      new Zdog.Shape({
+        stroke: STROKE,
+        addTo: headSide,
+        ...props,
+      })
+
+    const colorEdge = normalizeColor(colors.metalSlope)
+    const colorCorner = normalizeColor(colors.metalCorner)
+
+    // east slope
+    var EWSlope = shape({
+      path: [
+        { x: 0, y: 0, z: 1 },
+        { x: 0, y: 0, z: -1 },
+        { x: 1, y: 1, z: -1 },
+        { x: 1, y: 1, z: 1 },
+      ],
+      translate: { x: sideLength },
+      scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
+      color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
+    })
+
+    // south slope
+    var NSSLope = shape({
+      path: [
+        { z: 0, y: 0, x: 1 },
+        { z: 0, y: 0, x: -1 },
+        { z: 1, y: 1, x: -1 },
+        { z: 1, y: 1, x: 1 },
+      ],
+      translate: { z: sideLength },
+      scale: { x: sideLength, y: slopeSize, z: slopeSize },
+      color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
+    })
+
+    // top left corner
+    if (!isFront || !isForScreenshot)
+      shape({
+        path: [
+          { x: 0, y: 0, z: 0 },
+          { x: slopeSizeEnhanced, y: slopeSize, z: 0 },
+          { x: 0, y: slopeSize, z: slopeSizeEnhanced },
+        ],
+        translate: { x: sideLength, z: sideLength },
+        color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
+      })
+
+    // north slope
+    NSSLope.copy({
+      scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
+      translate: { z: -1 * sideLength },
+      color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope),
+    })
+
+    // top right corner
+    shape({
+      path: [
+        { x: 0, y: 0, z: 0 },
+        { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: 0 },
+        { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
+      ],
+      translate: { x: sideLength, z: -1 * sideLength },
+      color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
+    })
+
+    // west slope
+    EWSlope.copy({
+      scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
+      translate: { x: -1 * sideLength },
+      color: colorEdge,
+    })
+
+    // bottom right corner
+    shape({
+      path: [
+        { x: 0, y: 0, z: 0 },
+        { x: -slopeSize, y: slopeSizeEnhanced, z: 0 },
+        { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
+      ],
+      translate: { x: -1 * sideLength, z: -1 * sideLength },
+      color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
+    })
+
+    // bottom left corner
+    shape({
+      path: [
+        { x: 0, y: 0, z: 0 },
+        { x: -1 * slopeSize, y: slopeSize, z: 0 },
+        { x: 0, y: slopeSize, z: slopeSize },
+      ],
+      translate: { x: -1 * sideLength, z: sideLength },
+      color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
+    })
+
+    /* Failed attempt to remove aliasing issues
+    const y = 0.02
+    */
+    const y = 0
+
+    // cover
+    shape({
+      path: [
+        { x: -1, y, z: 1 },
+        { x: -1, y, z: -1 },
+        { x: 1, y, z: -1 },
+        { x: 1, y, z: 1 },
+      ],
+      scale: { x: sideLength, y: sideLength, z: sideLength },
+      color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+    })
+
+    return headSide
+  }
+
+  function genFaceSlopes(
+    head: Zdog.Anchor,
+    colors: Colors,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+  ) {
+    const shape = (props: Zdog.ShapeOptions) =>
+      new Zdog.Shape({
+        stroke: STROKE,
+        addTo: head,
+        ...props,
+      })
+
+    const faceSlope = (
+      slopeSizeEnhanced = slopeSize,
+      slopeSizeEnhanced2 = slopeSize,
+      props: Zdog.ShapeOptions,
+    ) => {
+      const x = -1 * sideLength
+      const y = headLength - slopeSize - slopeSizeEnhanced
+      return shape({
+        path: [
+          { x, y: 0, z: sideLength + slopeSizeEnhanced },
+          { x: x - slopeSizeEnhanced2, y: 0, z: sideLength },
+          { x: x - slopeSizeEnhanced2, y, z: sideLength },
+          { x, y, z: sideLength + slopeSizeEnhanced },
+        ],
+        translate: { y: slopeSizeEnhanced },
+        color: normalizeColor(colors.metalSlope),
+        ...props,
+      })
+    }
+
+    const opposite = 2 * sideLength + slopeSize
+    const oppositeEnhanced = 2 * sideLength + slopeSizeEnhanced
+
+    faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {})
+    faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {
+      translate: { x: oppositeEnhanced, y: slopeSizeEnhanced, z: -1 * oppositeEnhanced },
+      color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
+    })
+
+    faceSlope(slopeSizeEnhanced, undefined, {
+      rotate: { x: TAU / 2 },
+      translate: { y: headLength - slopeSize },
+      color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
+    })
+    faceSlope(undefined, undefined, {
+      rotate: { x: TAU / 2 },
+      translate: { x: opposite, y: headLength - slopeSize, z: 1 * opposite },
+    })
+  }
+
+  function genFaces(
+    head: Zdog.Anchor,
+    options: Options,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+  ) {
+    const { colors } = options
+
+    const shape = (props: Zdog.ShapeOptions) =>
+      new Zdog.Shape({
+        stroke: STROKE,
+        ...props,
+      })
+
+    // Bottom face
+    const face = shape({
+      path: [
+        { x: -1, y: 0, z: 0.5 },
+        { x: -1, y: 0, z: -0.5 },
+        { x: -1, y: 1, z: -0.5 },
+        { x: -1, y: 1, z: 0.5 },
+      ],
+      translate: { y: slopeSizeEnhanced },
+      scale: {
+        x: sideLength + slopeSize,
+        y: headLength - slopeSize - slopeSizeEnhanced,
+        z: 2 * sideLength,
+      },
+      color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
+      addTo: head,
+    })
+
+    // Upper face
+    const oppositeEnhanced = 2 * sideLength + slopeSize + slopeSizeEnhanced
+    const face2 = face.copy({
+      translate: { x: oppositeEnhanced, y: slopeSizeEnhanced },
+      color: normalizeColor(colors.colorFaceUpper ?? colors.metalFace),
+      addTo: head,
+    })
+
+    // Front face
+    var frontFaceGroup = new Zdog.Group({
+      addTo: head,
+    })
+    face2.copy({
+      rotate: { y: (-1 * TAU) / 4 },
+      translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
+      color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
+      addTo: frontFaceGroup,
+    })
+    const viteLogo = genViteLogo(frontFaceGroup, colors, slopeSizeEnhanced)
+
+    // Back face
+    frontFaceGroup.copyGraph({
+      rotate: { x: (-1 * TAU) / 2 },
+      translate: { x: 0, y: headLength, z: 0 },
+      addTo: head,
+    })
+
+    if (options.hideBackLightningBolt) {
+      viteLogo.remove()
+    }
+  }
+
+  function genHeadFaces(
+    head: Zdog.Anchor,
+    options: Options,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+  ) {
+    genFaces(head, options, slopeSize, slopeSizeEnhanced)
+    genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
+  }
+
+  function genHeadSides(
+    head: Zdog.Anchor,
+    colors: Colors,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+    isForScreenshot: boolean,
+  ) {
+    genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, true)
+
+    genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, false, {
+      rotate: { x: TAU / 2 },
+      translate: { y: headLength },
+    })
+  }
+
+  function genHead(
+    head: Zdog.Anchor,
+    options: Options,
+    slopeSize: number,
+    slopeSizeEnhanced: number,
+    isForScreenshot: boolean,
+  ) {
+    genHeadSides(head, options.colors, slopeSize, slopeSizeEnhanced, isForScreenshot)
+    genHeadFaces(head, options, slopeSize, slopeSizeEnhanced)
+  }
+
   genHead(head, options, slopeSize, slopeSizeEnhanced, isForScreenshot)
 
   {
@@ -333,333 +659,6 @@ function render(hammer: Hammer) {
   }
 
   return illo
-
-  // TODO/ai instead of passing parameters around (pesk) move fucntions (e.g. genHandle()) here
-}
-
-function genHandle(
-  handle: Zdog.Anchor,
-  colors: Colors,
-  handleDiameter: number,
-  handleLength: number,
-  slopeSize: number,
-  handleExtraLength: number,
-) {
-  const handleStick = normalizeColor(colors.wood)
-  const mountColor1 = normalizeColor(colors.metalTop)
-  const mountColor2 = normalizeColor(colors.metalBottom2)
-  const mountColor3 = normalizeColor(colors.metalBottom)
-
-  let zOffset = 0
-  const mount = (color: string, stroke: number, length: number, extend = 0) => {
-    stroke = stroke / 2
-    const zOffsetAddendum = stroke + length
-    /*
-    if( zOffset === 0 ) {
-    } else {
-      zOffset += zOffsetAddendum
-    }
-    */
-    zOffset += zOffsetAddendum / 2
-    new Zdog.Cylinder({
-      addTo: handle,
-      diameter: handleDiameter,
-      stroke: stroke,
-      length: length + extend,
-      fill: true,
-      color,
-      translate: { x: 0, y: 0, z: 3 - slopeSize + 0 - 1 - zOffset + extend / 2 },
-    })
-    zOffset += zOffsetAddendum / 2
-  }
-
-  if (legacyHandle) {
-    mount(mountColor1, 1.4, 2)
-  }
-  mount(handleStick, 0, handleLength, handleExtraLength)
-  if (handleBottomLength2 !== null) mount(mountColor2, 1, handleBottomLength2)
-  mount(mountColor3, handleBottomExtraWidth, handleBottomLength1)
-}
-
-function genHead(
-  head: Zdog.Anchor,
-  options: Options,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-  isForScreenshot: boolean,
-) {
-  genHeadSides(head, options.colors, slopeSize, slopeSizeEnhanced, isForScreenshot)
-  genHeadFaces(head, options, slopeSize, slopeSizeEnhanced)
-}
-
-function genHeadSides(
-  head: Zdog.Anchor,
-  colors: Colors,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-  isForScreenshot: boolean,
-) {
-  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, true)
-
-  genHeadSide(head, colors, slopeSize, slopeSizeEnhanced, isForScreenshot, false, {
-    rotate: { x: TAU / 2 },
-    translate: { y: headLength },
-  })
-}
-
-function genHeadFaces(
-  head: Zdog.Anchor,
-  options: Options,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-) {
-  genFaces(head, options, slopeSize, slopeSizeEnhanced)
-  genFaceSlopes(head, options.colors, slopeSize, slopeSizeEnhanced)
-}
-function genFaces(
-  head: Zdog.Anchor,
-  options: Options,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-) {
-  const { colors } = options
-
-  const shape = (props: Zdog.ShapeOptions) =>
-    new Zdog.Shape({
-      stroke: STROKE,
-      ...props,
-    })
-
-  // Bottom face
-  const face = shape({
-    path: [
-      { x: -1, y: 0, z: 0.5 },
-      { x: -1, y: 0, z: -0.5 },
-      { x: -1, y: 1, z: -0.5 },
-      { x: -1, y: 1, z: 0.5 },
-    ],
-    translate: { y: slopeSizeEnhanced },
-    scale: {
-      x: sideLength + slopeSize,
-      y: headLength - slopeSize - slopeSizeEnhanced,
-      z: 2 * sideLength,
-    },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
-    addTo: head,
-  })
-
-  // Upper face
-  const oppositeEnhanced = 2 * sideLength + slopeSize + slopeSizeEnhanced
-  const face2 = face.copy({
-    translate: { x: oppositeEnhanced, y: slopeSizeEnhanced },
-    color: normalizeColor(colors.colorFaceUpper ?? colors.metalFace),
-    addTo: head,
-  })
-
-  // Front face
-  var frontFaceGroup = new Zdog.Group({
-    addTo: head,
-  })
-  face2.copy({
-    rotate: { y: (-1 * TAU) / 4 },
-    translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
-    color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
-    addTo: frontFaceGroup,
-  })
-  const viteLogo = genViteLogo(frontFaceGroup, colors, slopeSizeEnhanced)
-
-  // Back face
-  frontFaceGroup.copyGraph({
-    rotate: { x: (-1 * TAU) / 2 },
-    translate: { x: 0, y: headLength, z: 0 },
-    addTo: head,
-  })
-
-  if (options.hideBackLightningBolt) {
-    viteLogo.remove()
-  }
-}
-
-function genFaceSlopes(
-  head: Zdog.Anchor,
-  colors: Colors,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-) {
-  const shape = (props: Zdog.ShapeOptions) =>
-    new Zdog.Shape({
-      stroke: STROKE,
-      addTo: head,
-      ...props,
-    })
-
-  const faceSlope = (
-    slopeSizeEnhanced = slopeSize,
-    slopeSizeEnhanced2 = slopeSize,
-    props: Zdog.ShapeOptions,
-  ) => {
-    const x = -1 * sideLength
-    const y = headLength - slopeSize - slopeSizeEnhanced
-    return shape({
-      path: [
-        { x, y: 0, z: sideLength + slopeSizeEnhanced },
-        { x: x - slopeSizeEnhanced2, y: 0, z: sideLength },
-        { x: x - slopeSizeEnhanced2, y, z: sideLength },
-        { x, y, z: sideLength + slopeSizeEnhanced },
-      ],
-      translate: { y: slopeSizeEnhanced },
-      color: normalizeColor(colors.metalSlope),
-      ...props,
-    })
-  }
-
-  const opposite = 2 * sideLength + slopeSize
-  const oppositeEnhanced = 2 * sideLength + slopeSizeEnhanced
-
-  faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {})
-  faceSlope(slopeSizeEnhanced, slopeSizeEnhanced, {
-    translate: { x: oppositeEnhanced, y: slopeSizeEnhanced, z: -1 * oppositeEnhanced },
-    color: normalizeColor(colors.colorSlopeTop ?? colors.metalSlope),
-  })
-
-  faceSlope(slopeSizeEnhanced, undefined, {
-    rotate: { x: TAU / 2 },
-    translate: { y: headLength - slopeSize },
-    color: normalizeColor(colors.colorSlopeBottom ?? colors.metalSlope),
-  })
-  faceSlope(undefined, undefined, {
-    rotate: { x: TAU / 2 },
-    translate: { x: opposite, y: headLength - slopeSize, z: 1 * opposite },
-  })
-}
-
-function genHeadSide(
-  head: Zdog.Anchor,
-  colors: Colors,
-  slopeSize: number,
-  slopeSizeEnhanced: number,
-  isForScreenshot: boolean,
-  isFront: boolean,
-  anchorOptions: Zdog.AnchorOptions = {},
-) {
-  const headSide = new Zdog.Anchor({
-    addTo: head,
-    ...anchorOptions,
-  })
-
-  const shape = (props: Zdog.ShapeOptions) =>
-    new Zdog.Shape({
-      stroke: STROKE,
-      addTo: headSide,
-      ...props,
-    })
-
-  const colorEdge = normalizeColor(colors.metalSlope)
-  const colorCorner = normalizeColor(colors.metalCorner)
-
-  // east slope
-  var EWSlope = shape({
-    path: [
-      { x: 0, y: 0, z: 1 },
-      { x: 0, y: 0, z: -1 },
-      { x: 1, y: 1, z: -1 },
-      { x: 1, y: 1, z: 1 },
-    ],
-    translate: { x: sideLength },
-    scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
-    color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
-  })
-
-  // south slope
-  var NSSLope = shape({
-    path: [
-      { z: 0, y: 0, x: 1 },
-      { z: 0, y: 0, x: -1 },
-      { z: 1, y: 1, x: -1 },
-      { z: 1, y: 1, x: 1 },
-    ],
-    translate: { z: sideLength },
-    scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
-  })
-
-  // top left corner
-  if (!isFront || !isForScreenshot)
-    shape({
-      path: [
-        { x: 0, y: 0, z: 0 },
-        { x: slopeSizeEnhanced, y: slopeSize, z: 0 },
-        { x: 0, y: slopeSize, z: slopeSizeEnhanced },
-      ],
-      translate: { x: sideLength, z: sideLength },
-      color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
-    })
-
-  // north slope
-  NSSLope.copy({
-    scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
-    translate: { z: -1 * sideLength },
-    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope),
-  })
-
-  // top right corner
-  shape({
-    path: [
-      { x: 0, y: 0, z: 0 },
-      { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: 0 },
-      { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
-    ],
-    translate: { x: sideLength, z: -1 * sideLength },
-    color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
-  })
-
-  // west slope
-  EWSlope.copy({
-    scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
-    translate: { x: -1 * sideLength },
-    color: colorEdge,
-  })
-
-  // bottom right corner
-  shape({
-    path: [
-      { x: 0, y: 0, z: 0 },
-      { x: -slopeSize, y: slopeSizeEnhanced, z: 0 },
-      { x: 0, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
-    ],
-    translate: { x: -1 * sideLength, z: -1 * sideLength },
-    color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
-  })
-
-  // bottom left corner
-  shape({
-    path: [
-      { x: 0, y: 0, z: 0 },
-      { x: -1 * slopeSize, y: slopeSize, z: 0 },
-      { x: 0, y: slopeSize, z: slopeSize },
-    ],
-    translate: { x: -1 * sideLength, z: sideLength },
-    color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
-  })
-
-  /* Failed attempt to remove aliasing issues
-  const y = 0.02
-  */
-  const y = 0
-
-  // cover
-  shape({
-    path: [
-      { x: -1, y, z: 1 },
-      { x: -1, y, z: -1 },
-      { x: 1, y, z: -1 },
-      { x: 1, y, z: 1 },
-    ],
-    scale: { x: sideLength, y: sideLength, z: sideLength },
-    color: normalizeColor(colors.colorFaceRight ?? colors.metalFace),
-  })
-
-  return headSide
 }
 
 function genViteLogo(group: Zdog.Group, colors: Colors, slopeSizeEnhanced: number) {
