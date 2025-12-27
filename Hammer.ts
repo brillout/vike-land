@@ -460,8 +460,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   genLightningBolt(colors, ctx, true, { addTo: faceFront })
-  genLightningBolt(colors, ctx, false, { addTo: faceBack })
-  // if (!hideBackLightningBolt)
+  if (!hideBackLightningBolt) genLightningBolt(colors, ctx, false, { addTo: faceBack })
 }
 
 function genFaceSlopes(head: Zdog.Anchor, ctx: Ctx) {
