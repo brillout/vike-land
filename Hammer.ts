@@ -477,8 +477,8 @@ function genFaceSlopes(head: Zdog.Anchor, colors: Colors) {
     path: [
       { x, y: 0, z: sideLength + slopeSizeEnhanced },
       { x: x - slopeSizeEnhanced, y: 0, z: sideLength },
-      { x: x - slopeSizeEnhanced, y: y, z: sideLength },
-      { x, y: y, z: sideLength + slopeSizeEnhanced },
+      { x: x - slopeSizeEnhanced, y, z: sideLength },
+      { x, y, z: sideLength + slopeSizeEnhanced },
     ],
     translate: { y: slopeSizeEnhanced },
     color: normalizeColor(colors.metalSlope),
