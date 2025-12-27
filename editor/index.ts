@@ -338,7 +338,7 @@ function initDarkenColors(darkenColors: Element, hammer: Hammer) {
 function initScreenshotMode(screenshotMode: Element, hammer: Hammer) {
   createCheckboxInput({
     elem: screenshotMode,
-    labelText: 'Screenshot mode',
+    labelText: '3D mode (not screenshot mode)',
     onToggle(isChecked: boolean) {
       hammer.isForScreenshot = isChecked
     },
