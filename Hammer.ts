@@ -443,36 +443,24 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   // Front face
+  // TODO/ai remove group (face2.copy() and attatch lightningBolt twice instead)
+  var frontFaceGroup = new Zdog.Group({
+    addTo: head,
+  })
   face2.copy({
     rotate: { y: (-1 * TAU) / 4 },
     translate: { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
     color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
-    addTo: head,
+    addTo: frontFaceGroup,
   })
-  const lightningBolt = genLightningBolt(
-    head,
-    colors,
-    ctx,
-    { y: (-1 * TAU) / 4 },
-    { x: 0, y: slopeSize, z: slopeSizeEnhanced - slopeSize },
-  )
+  const lightningBolt = genLightningBolt(frontFaceGroup, colors, ctx)
 
   // Back face
-  face2.copy({
-    rotate: { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
-    translate: { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
-    color: normalizeColor(colors.colorFaceFront ?? colors.metalFace),
+  frontFaceGroup.copyGraph({
+    rotate: { x: (-1 * TAU) / 2 },
+    translate: { x: 0, y: headLength, z: 0 },
     addTo: head,
   })
-  if (!hideBackLightningBolt) {
-    genLightningBolt(
-      head,
-      colors,
-      ctx,
-      { y: (-1 * TAU) / 4, x: (-1 * TAU) / 2 },
-      { x: 0, y: headLength - slopeSize, z: -(slopeSizeEnhanced - slopeSize) },
-    )
-  }
 
   if (hideBackLightningBolt) {
     lightningBolt.remove()
@@ -655,13 +643,7 @@ function genHeadSide(
   return headSide
 }
 
-function genLightningBolt(
-  group: Zdog.Group | Zdog.Anchor,
-  colors: Colors,
-  ctx: Ctx,
-  faceRotate?: Zdog.VectorOptions,
-  faceTranslate?: Zdog.VectorOptions,
-) {
+function genLightningBolt(group: Zdog.Group, colors: Colors, ctx: Ctx) {
   const { slopeSize, slopeSizeEnhanced } = ctx
 
   //const width = 12
@@ -678,14 +660,7 @@ function genLightningBolt(
     y: headLength / 2 - (slopeSizeEnhanced - slopeSize) / 2,
     z: sideLength + slopeSizeEnhanced,
   }
-  const rotate = { z: (1 * TAU) / 4, ...(faceRotate || {}) }
-  const translate = faceTranslate
-    ? {
-        x: (faceTranslate.x || 0) + lightningBoltPosition.x,
-        y: (faceTranslate.y || 0) + lightningBoltPosition.y,
-        z: (faceTranslate.z || 0) + lightningBoltPosition.z,
-      }
-    : lightningBoltPosition
+  const rotate = { z: (1 * TAU) / 4 }
   //*/
   const stroke = 0.6
   // Distance from the hammer => apparent thickness of the lightning bolt
@@ -720,9 +695,9 @@ function genLightningBolt(
     fill: true,
     color: normalizeColor(colors.lightningBolt),
     translate: {
-      x: translate.x,
-      y: translate.y,
-      z: (translate.z || 0) + thikness,
+      x: lightningBoltPosition.x,
+      y: lightningBoltPosition.y,
+      z: lightningBoltPosition.z + thikness,
     },
     scale: { x: lightningBoltSize, y: lightningBoltSize, z: lightningBoltSize },
   })
