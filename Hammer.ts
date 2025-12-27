@@ -656,13 +656,12 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
     y: headLength / 2 - (invert * (slopeSizeEnhanced - slopeSize)) / 2,
     z: invert * (sideLength + slopeSizeEnhanced),
   }
-  var rotate = { z: (1 * TAU) / 4, x: (-1 * TAU) / 2 }
   //*/
   const stroke = 0.6
   // Distance from the hammer => apparent thickness of the lightning bolt
   const thikness = stroke / 4
   const shape = new Zdog.Shape({
-    rotate,
+    rotate: { z: (1 * TAU) / 4, x: (-1 * TAU) / 2 },
     path: [
       { x: 54.616 - 67, y: 2.783 - 31 },
       { x: 54.652 - 67, y: 25.572 - 31 },
