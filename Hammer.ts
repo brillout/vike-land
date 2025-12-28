@@ -192,8 +192,9 @@ function darkenColor(color: string, amount: number = 0.9): string {
   return color
 }
 
+type GradientOptions = { isVertical?: true }
 let gradientCounter = 0
-function createGradient(color1: string, color2: string, isVertical: boolean): string {
+function createGradient(color1: string, color2: string, { isVertical }: GradientOptions): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
   const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
 
@@ -232,12 +233,12 @@ function createGradientContainer(): SVGDefsElement {
   return defs
 }
 
-function normalizeColor(color: ColorValue, isVertical = false): string {
+function normalizeColor(color: ColorValue, options: { isVertical?: true } = {}): string {
   if (typeof color === 'string') {
     return color
   }
   // color is [string, string]
-  return createGradient(color[0], color[1], isVertical)
+  return createGradient(color[0], color[1], options)
 }
 
 function renderOuterHtml(outerElem: HTMLElement) {
@@ -577,7 +578,7 @@ function genHeadSide(
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
-    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, true),
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
   })
 
   // top right corner
