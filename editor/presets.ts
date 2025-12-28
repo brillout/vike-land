@@ -157,7 +157,7 @@ const presetsColor: Record<string, Colors> = {
     lightningBolt: ['#ffff00', '#ffa300'],
     colorSlopeTop: ['#c2c2c2', '#ababab'],
     colorSlopeLeft: '#c4c4c4',
-    colorSlopeRight: '#999999',
+    colorSlopeRight: ['#999999', '#999999'],
     colorSlopeTopRight: '#b0b0b0',
     colorSlopeBottom: ['#ababab', '#757575'],
     colorFaceRight: '#878787',
