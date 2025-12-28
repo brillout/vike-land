@@ -52,6 +52,28 @@ type Perspective = {
 
 const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
+  bright: {
+    metalCorner: 'red',
+    metalSlope: '#a8a8a8',
+    metalFace: metaFaceDefault,
+    metalTop: 'red',
+    metalBottom2: 'red',
+    metalBottom: ['#d6d6d6', '#949494'],
+    wood: ['#ffb152', '#aa5422'],
+    lightningBolt: ['#ffff00', '#ffc629'],
+    colorSlopeTop: ['#d1d1d1', '#cfcfcf'],
+    colorSlopeLeft: '#d1d1d1',
+    colorSlopeRight: ['#a3a3a3', '#c4c4c4'],
+    colorSlopeTopRight: '#cdcbcb',
+    colorSlopeBottom: ['#b8b8b8', '#8a8a8a'],
+    colorFaceRight: '#ababab',
+    colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
+    colorFaceFront: ['#d9d9d9', '#b0afaf'],
+    colorCornerTopLeft: '#dedede',
+    colorCornerTopRight: '#cfcfcf',
+    colorCornerBottomRight: '#7d7d7d',
+    colorCornerBottomLeft: '#dedede',
+  },
   gradientNormal: {
     metalCorner: 'red',
     metalSlope: '#a6a6a6',
