@@ -87,28 +87,34 @@ type PerspectiveUserControlable = {
 }
 
 type ColorValue = string | [string, string]
+type ColorSpec =
+  | ColorValue
+  | {
+      value: ColorValue
+      options?: ColorOptions
+    }
 
 type Colors = {
-  metalCorner: ColorValue
-  metalSlope: ColorValue
-  metalFace: ColorValue
-  metalTop: ColorValue
-  metalBottom2: ColorValue
-  metalBottom: ColorValue
-  wood: ColorValue
-  lightningBolt: ColorValue
-  colorSlopeTop?: ColorValue
-  colorSlopeLeft?: ColorValue
-  colorSlopeRight?: ColorValue
-  colorSlopeTopRight?: ColorValue
-  colorSlopeBottom?: ColorValue
-  colorFaceRight?: ColorValue
-  colorFaceUpper?: ColorValue
-  colorFaceFront?: ColorValue
-  colorCornerTopLeft?: ColorValue
-  colorCornerTopRight?: ColorValue
-  colorCornerBottomRight?: ColorValue
-  colorCornerBottomLeft?: ColorValue
+  metalCorner: ColorSpec
+  metalSlope: ColorSpec
+  metalFace: ColorSpec
+  metalTop: ColorSpec
+  metalBottom2: ColorSpec
+  metalBottom: ColorSpec
+  wood: ColorSpec
+  lightningBolt: ColorSpec
+  colorSlopeTop?: ColorSpec
+  colorSlopeLeft?: ColorSpec
+  colorSlopeRight?: ColorSpec
+  colorSlopeTopRight?: ColorSpec
+  colorSlopeBottom?: ColorSpec
+  colorFaceRight?: ColorSpec
+  colorFaceUpper?: ColorSpec
+  colorFaceFront?: ColorSpec
+  colorCornerTopLeft?: ColorSpec
+  colorCornerTopRight?: ColorSpec
+  colorCornerBottomRight?: ColorSpec
+  colorCornerBottomLeft?: ColorSpec
 }
 
 class Hammer {
@@ -192,12 +198,12 @@ function darkenColor(color: string, amount: number = 0.9): string {
   return color
 }
 
-type GradientOptions = { isVertical?: true; offset1?: number; offset2?: number }
+type ColorOptions = { isVertical?: true; offset1?: number; offset2?: number }
 let gradientCounter = 0
 function createGradient(
   color1: string,
   color2: string,
-  { isVertical, offset1 = 22, offset2 = 72 }: GradientOptions,
+  { isVertical, offset1 = 22, offset2 = 72 }: ColorOptions,
 ): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
   const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
@@ -237,12 +243,21 @@ function createGradientContainer(): SVGDefsElement {
   return defs
 }
 
-function normalizeColor(color: ColorValue, options: { isVertical?: true } = {}): string {
+function normalizeColor(colorSpec: ColorSpec, colorOptions: ColorOptions = {}): string {
+  let color: ColorValue
+  if (typeof colorSpec === 'string' || Array.isArray(colorSpec)) {
+    color = colorSpec
+  } else {
+    color = colorSpec.value
+    colorOptions = {
+      ...colorOptions,
+      ...colorSpec.options,
+    }
+  }
   if (typeof color === 'string') {
     return color
   }
-  // color is [string, string]
-  return createGradient(color[0], color[1], options)
+  return createGradient(color[0], color[1], colorOptions)
 }
 
 function renderOuterHtml(outerElem: HTMLElement) {
@@ -648,7 +663,7 @@ function genHeadSide(
 }
 
 function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdog.ShapeOptions) {
-  const { slopeSize, slopeSizeEnhanced } = ctx
+  const { slopeSizeEnhanced } = ctx
 
   //const width = 12
 
