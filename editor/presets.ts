@@ -553,11 +553,11 @@ const presetsPerspective: Record<string, Perspective> = {
     rotation2D: -21,
     rotate: { x: -0.7, y: 7.1, z: 0 },
   },
-  previous1: {
+  before1: {
     rotation2D: 11,
     rotate: { x: -0.3, y: -6.63, z: 0 },
   },
-  previous2: {
+  before2: {
     rotation2D: 13,
     rotate: { x: -0.4, y: 23.5, z: 0 },
   },
