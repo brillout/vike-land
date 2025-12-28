@@ -17,15 +17,16 @@ const { TAU } = Zdog
 
 const headLength = 27.3
 const sideLength = 8
-const lightningBoltSize = 0.125
-const lightningBoltOffset = 0.3
+const lightningBoltSize = 0.121
+const lightningBoltOffsetVertical = 0.2
+const lightningBoltOffsetHorizontal = 0.2
 
-const slopeSize_ = 1.4
-const slopeSizeEnhanced_ = 2
+const slopeSize_ = 1.5
+const slopeSizeEnhanced_ = 2.05
 const handleExtraLength_ = 10
 
 const handleBottomLength1 = 3.2
-const handleBottomExtraWidth = 1.4
+const handleBottomExtraWidth = 1.1
 //*/
 const handleBottomLength2 = null
 /*/
@@ -655,8 +656,8 @@ function genLightningBolt(colors: Colors, ctx: Ctx, isFront: boolean, props: Zdo
   /*/
   const invert = isFront ? -1 : 1
   const lightningBoltPosition = {
-    x: lightningBoltOffset,
-    y: headLength / 2 - (invert * (slopeSizeEnhanced - slopeSize)) / 2,
+    x: lightningBoltOffsetVertical,
+    y: headLength / 2 - invert * lightningBoltOffsetHorizontal,
     z: invert * (sideLength + slopeSizeEnhanced),
   }
   //*/
