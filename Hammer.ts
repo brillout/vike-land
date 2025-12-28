@@ -165,8 +165,6 @@ class Hammer {
   }
 }
 
-let gradientCounter = 0
-
 function darkenColors(colors: Colors): Colors {
   const darkened: any = {}
   for (const key in colors) {
@@ -194,6 +192,7 @@ function darkenColor(color: string, amount: number = 0.9): string {
   return color
 }
 
+let gradientCounter = 0
 function createGradient(color1: string, color2: string): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
   const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
