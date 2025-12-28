@@ -192,9 +192,13 @@ function darkenColor(color: string, amount: number = 0.9): string {
   return color
 }
 
-type GradientOptions = { isVertical?: true }
+type GradientOptions = { isVertical?: true; offset1?: number; offset2?: number }
 let gradientCounter = 0
-function createGradient(color1: string, color2: string, { isVertical }: GradientOptions): string {
+function createGradient(
+  color1: string,
+  color2: string,
+  { isVertical, offset1 = 22, offset2 = 72 }: GradientOptions,
+): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
   const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
 
@@ -207,11 +211,11 @@ function createGradient(color1: string, color2: string, { isVertical }: Gradient
   linearGradient.setAttribute('y2', isVertical ? '0' : '1')
 
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
-  stop1.setAttribute('offset', '22%')
+  stop1.setAttribute('offset', `${offset1}%`)
   stop1.setAttribute('stop-color', color1)
 
   const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
-  stop2.setAttribute('offset', '72%')
+  stop2.setAttribute('offset', `${offset2}%`)
   stop2.setAttribute('stop-color', color2)
 
   linearGradient.appendChild(stop1)
