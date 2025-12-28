@@ -146,6 +146,31 @@ const presetsColor: Record<string, Colors> = {
     colorCornerBottomRight: '#707070',
     colorCornerBottomLeft: '#bababa',
   },
+  gradientBoring2: (() => {
+    const colorBright = '#bdbdbd'
+    return {
+      metalCorner: 'red',
+      metalSlope: colorBright,
+      metalFace: colorBright,
+      metalTop: 'red',
+      metalBottom2: 'red',
+      metalBottom: ['#b0b0b0', '#878787'],
+      wood: ['#ffae00', '#ac501b'],
+      lightningBolt: ['#ffff00', '#ffa300'],
+      colorSlopeTop: ['#c2c2c2', colorBright],
+      colorSlopeLeft: '#c4c4c4',
+      colorSlopeRight: ['#949494', colorBright],
+      colorSlopeTopRight: colorBright,
+      colorSlopeBottom: [colorBright, '#757575'],
+      colorFaceRight: '#878787',
+      colorFaceUpper: ['#b3b3b3', '#929090'],
+      colorFaceFront: ['#b8b8b8', '#8c8c8c'],
+      colorCornerTopLeft: '#cfcfcf',
+      colorCornerTopRight: colorBright,
+      colorCornerBottomRight: '#7d7d7d',
+      colorCornerBottomLeft: '#c4c4c4',
+    }
+  })(),
   gradientBoring: {
     metalCorner: 'red',
     metalSlope: '#a6a6a6',
