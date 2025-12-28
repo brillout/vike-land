@@ -526,6 +526,23 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 
   const updateInputs: (() => void)[] = []
 
+  // Helper to extract color value from ColorSpec (handles both simple values and { value, options } objects)
+  const getColorValue = (colorSpec: any) => {
+    return typeof colorSpec === 'object' && !Array.isArray(colorSpec) && 'value' in colorSpec
+      ? colorSpec.value
+      : colorSpec
+  }
+
+  // Helper to set color value while preserving options if they exist
+  const setColorValue = (key: keyof typeof hammer.colors, newValue: any) => {
+    const currentVal = hammer.colors[key]
+    if (typeof currentVal === 'object' && !Array.isArray(currentVal) && 'value' in currentVal) {
+      hammer.colors[key] = { ...currentVal, value: newValue } as any
+    } else {
+      hammer.colors[key] = newValue
+    }
+  }
+
   objectKeys(hammer.colors).forEach((key) => {
     {
       const val = getStoreValue(key)
@@ -537,7 +554,8 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     // Skip if the color is not defined in the current preset
     if (val === undefined) return
 
-    const isGradient = Array.isArray(val)
+    const colorValue = getColorValue(val)
+    const isGradient = Array.isArray(colorValue)
 
     // <div><label><input type="color" /></label><span id="r2-val"></span></div>
     const parentEl = document.createElement('div')
@@ -563,18 +581,20 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
       const val = hammer.colors[key]
       if (val === undefined) return
 
-      if (Array.isArray(val)) {
+      const colorValue = getColorValue(val)
+
+      if (Array.isArray(colorValue)) {
         // Gradient tuple
-        const hexVal1 = colorNameToHex(val[0]) || val[0]
-        const hexVal2 = colorNameToHex(val[1]) || val[1]
+        const hexVal1 = colorNameToHex(colorValue[0]) || colorValue[0]
+        const hexVal2 = colorNameToHex(colorValue[1]) || colorValue[1]
         inputEl.value = hexVal1
         if (inputEl2) inputEl2.value = hexVal2
-        valEl.innerHTML = ` [${val[0]}, ${val[1]}] <code>${key}</code>`
+        valEl.innerHTML = ` [${colorValue[0]}, ${colorValue[1]}] <code>${key}</code>`
       } else {
         // Solid color
-        const hexVal = colorNameToHex(val) || val
+        const hexVal = colorNameToHex(colorValue) || colorValue
         inputEl.value = hexVal
-        valEl.innerHTML = ` ${val} <code>${key}</code>`
+        valEl.innerHTML = ` ${colorValue} <code>${key}</code>`
       }
     }
     const updateStore = () => {
@@ -589,10 +609,13 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
 
     inputEl.oninput = (ev: any) => {
       const newVal: string = ev.target!.value
-      if (Array.isArray(hammer.colors[key])) {
-        hammer.colors[key] = [newVal, (hammer.colors[key] as [string, string])[1]]
+      const currentVal = hammer.colors[key]
+      const colorValue = getColorValue(currentVal)
+
+      if (Array.isArray(colorValue)) {
+        setColorValue(key, [newVal, colorValue[1]])
       } else {
-        hammer.colors[key] = newVal
+        setColorValue(key, newVal)
       }
       updateInput()
       hammer.reset()
@@ -602,8 +625,11 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     if (inputEl2) {
       inputEl2.oninput = (ev: any) => {
         const newVal: string = ev.target!.value
-        if (Array.isArray(hammer.colors[key])) {
-          hammer.colors[key] = [(hammer.colors[key] as [string, string])[0], newVal]
+        const currentVal = hammer.colors[key]
+        const colorValue = getColorValue(currentVal)
+
+        if (Array.isArray(colorValue)) {
+          setColorValue(key, [colorValue[0], newVal])
         }
         updateInput()
         hammer.reset()
