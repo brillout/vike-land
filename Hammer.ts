@@ -193,7 +193,7 @@ function darkenColor(color: string, amount: number = 0.9): string {
 }
 
 let gradientCounter = 0
-function createGradient(color1: string, color2: string): string {
+function createGradient(color1: string, color2: string, isVertical: boolean): string {
   const gradientId = `gradient-dynamic-${gradientCounter++}`
   const defs = document.querySelector('svg.gradient-container defs') || createGradientContainer()
 
@@ -201,9 +201,9 @@ function createGradient(color1: string, color2: string): string {
   linearGradient.setAttribute('id', gradientId)
   linearGradient.setAttribute('gradientUnits', 'objectBoundingBox')
   linearGradient.setAttribute('x1', '0')
-  linearGradient.setAttribute('y1', '0')
+  linearGradient.setAttribute('y1', isVertical ? '1' : '0')
   linearGradient.setAttribute('x2', '1')
-  linearGradient.setAttribute('y2', '1')
+  linearGradient.setAttribute('y2', isVertical ? '0' : '1')
 
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
   stop1.setAttribute('offset', '22%')
@@ -232,12 +232,12 @@ function createGradientContainer(): SVGDefsElement {
   return defs
 }
 
-function normalizeColor(color: ColorValue): string {
+function normalizeColor(color: ColorValue, isVertical = false): string {
   if (typeof color === 'string') {
     return color
   }
   // color is [string, string]
-  return createGradient(color[0], color[1])
+  return createGradient(color[0], color[1], isVertical)
 }
 
 function renderOuterHtml(outerElem: HTMLElement) {
@@ -577,7 +577,7 @@ function genHeadSide(
   NSSLope.copy({
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
-    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope),
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, true),
   })
 
   // top right corner
