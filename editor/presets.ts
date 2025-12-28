@@ -147,7 +147,7 @@ const presetsColor: Record<string, Colors> = {
     colorCornerBottomLeft: '#bababa',
   },
   gradientBoring2: (() => {
-    const colorBright = '#bdbdbd'
+    const colorBright = '#b0b0b0'
     return {
       metalCorner: 'red',
       metalSlope: colorBright,
@@ -159,7 +159,10 @@ const presetsColor: Record<string, Colors> = {
       lightningBolt: ['#ffff00', '#ffa300'],
       colorSlopeTop: ['#c2c2c2', colorBright],
       colorSlopeLeft: '#c4c4c4',
-      colorSlopeRight: ['#949494', colorBright],
+      colorSlopeRight: {
+        value: ['#9e9e9e', colorBright],
+        options: { offset1: 50, offset2: 90 },
+      },
       colorSlopeTopRight: colorBright,
       colorSlopeBottom: [colorBright, '#757575'],
       colorFaceRight: '#878787',
