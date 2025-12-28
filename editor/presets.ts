@@ -60,7 +60,20 @@ const presetsColor: Record<string, Colors> = {
     metalBottom2: 'red',
     metalBottom: ['#d6d6d6', '#949494'],
     wood: ['#ffb152', '#aa5422'],
-    lightningBolt: ['#ffff00', '#ffc629'],
+    // TODO/ai: fix following Error and see `git show HEAD`
+    //
+    // index.ts:696 Uncaught TypeError: color.startsWith is not a function
+    // at colorNameToHex (index.ts:696:13)
+    // at updateInput (index.ts:575:24)
+    // at index.ts:584:5
+    // at Array.forEach (<anonymous>)
+    // at initColorInputs (index.ts:529:29)
+    // at main (index.ts:55:3)
+    // at index.ts:15:1
+    lightningBolt: {
+      value: ['#ffff00', '#ffc629'],
+      options: { offset1: 35, offset2: 80 },
+    },
     colorSlopeTop: ['#d1d1d1', '#cfcfcf'],
     colorSlopeLeft: '#d1d1d1',
     colorSlopeRight: ['#a3a3a3', '#c4c4c4'],
