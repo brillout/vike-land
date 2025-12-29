@@ -19,7 +19,7 @@ const colorsDefault: Colors = {
   metalFace: metaFaceDefault,
   metalTop: 'red',
   metalBottom2: 'red',
-  metalBottom: ['#b0b0b0', '#878787'],
+  metalBottom: ['#c2c2c2', '#a1a1a1'],
   wood: ['#e9a107', '#a33c00'],
   lightningBolt: ['#ffff00', '#ffb300'],
   colorSlopeTop: ['#d1d1d1', '#ababab'],
@@ -39,7 +39,7 @@ const colorsDefault: Colors = {
 const perspectiveDefault: Perspective = {
   rotation2D: 0,
   handleDiameter: 7.7,
-  handleLength: 13.5,
+  handleLength: 14,
   rotate: { x: 0.0, y: -7.16, z: -2 },
 }
 
