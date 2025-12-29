@@ -414,24 +414,37 @@ function initReset(reset: HTMLButtonElement) {
     window.navigation.reload()
   }
 }
-// TODO/ai remove unused gradients before downloading
 function generateSvgContent(): string {
   const hammerSvg = document.querySelector('.hammer')!
   let content = hammerSvg.outerHTML
   content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
 
-  // Extract gradients from the gradient-container
+  // Extract only used gradients from the gradient-container
   const gradientContainer = document.querySelector('svg.gradient-container defs')
   if (gradientContainer && gradientContainer.children.length > 0) {
-    const defsContent = Array.from(gradientContainer.children)
-      .map((el) => el.outerHTML)
-      .join('\n    ')
-    // Insert defs section after the opening svg tag
-    content = content.replace(
-      '<svg xmlns="http://www.w3.org/2000/svg" ',
-      `<svg xmlns="http://www.w3.org/2000/svg" `,
-    )
-    content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+    // Find all gradient IDs referenced in the SVG content
+    const usedGradientIds = new Set<string>()
+    const gradientUrlPattern = /url\(["']?#([^)"']+)["']?\)/g
+    let match
+    while ((match = gradientUrlPattern.exec(content)) !== null) {
+      usedGradientIds.add(match[1])
+    }
+
+    // Filter to only include used gradients
+    const usedGradients = Array.from(gradientContainer.children).filter((el) => {
+      const id = el.getAttribute('id')
+      return id && usedGradientIds.has(id)
+    })
+
+    if (usedGradients.length > 0) {
+      const defsContent = usedGradients.map((el) => el.outerHTML).join('\n    ')
+      // Insert defs section after the opening svg tag
+      content = content.replace(
+        '<svg xmlns="http://www.w3.org/2000/svg" ',
+        `<svg xmlns="http://www.w3.org/2000/svg" `,
+      )
+      content = content.replace('>', `>\n  <defs>\n    ${defsContent}\n  </defs>`)
+    }
   }
 
   const rotation2D = getRotation2D()
