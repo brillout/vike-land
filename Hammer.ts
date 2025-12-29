@@ -26,7 +26,7 @@ const slopeSizeEnhanced_ = 2.05
 const handleExtraLength_ = 10
 
 const handleBottomLength1 = 2.7
-const handleBottomExtraWidth = 2
+const handleBottomExtraWidth = 1.3
 //*/
 const handleBottomLength2 = null
 /*/
