@@ -61,10 +61,10 @@ const presetsColor: Record<string, Colors> = {
       metalFace: metalBackground,
       metalTop: 'red',
       metalBottom2: 'red',
-      metalBottom: ['#cfcfcf', '#999999'],
+      metalBottom: ['#c4c4c4', '#a3a3a3'],
       wood: ['#f5ae56', '#c76125'],
       lightningBolt: {
-        value: ['#ffff00', '#ffc800'],
+        value: ['#ffff00', '#ffc900'],
         options: { offset1: 35, offset2: 80 },
       },
       colorSlopeTop: ['#e0e0e0', '#cccccc'],
