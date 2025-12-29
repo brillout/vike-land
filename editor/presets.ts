@@ -19,7 +19,7 @@ const colorsDefault: Colors = {
   metalFace: metaFaceDefault,
   metalTop: 'red',
   metalBottom2: 'red',
-  metalBottom: ['#c2c2c2', '#a1a1a1'],
+  metalBottom: ['#b0b0b0', '#878787'],
   wood: ['#e9a107', '#a33c00'],
   lightningBolt: ['#ffff00', '#ffb300'],
   colorSlopeTop: ['#d1d1d1', '#ababab'],
