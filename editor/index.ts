@@ -414,6 +414,7 @@ function initReset(reset: HTMLButtonElement) {
     window.navigation.reload()
   }
 }
+// TODO/ai remove unused gradients before downloading
 function generateSvgContent(): string {
   const hammerSvg = document.querySelector('.hammer')!
   let content = hammerSvg.outerHTML
