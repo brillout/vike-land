@@ -424,7 +424,7 @@ function generateSvgContent(): string {
   if (gradientContainer && gradientContainer.children.length > 0) {
     // Find all gradient IDs referenced in the SVG content
     const usedGradientIds = new Set<string>()
-    const gradientUrlPattern = /url\(["']?#([^)"']+)["']?\)/g
+    const gradientUrlPattern = /url\((?:&quot;|["'])?#([^)"'&]+)(?:&quot;|["'])?\)/g
     let match
     while ((match = gradientUrlPattern.exec(content)) !== null) {
       usedGradientIds.add(match[1])
