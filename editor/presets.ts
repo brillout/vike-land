@@ -52,6 +52,34 @@ type Perspective = {
 
 const presetsColor: Record<string, Colors> = {
   'colors-default': { ...colorsDefault },
+  brightRevived2: (() => {
+    const colorSlopeRight = '#9e9e9e'
+    return {
+      metalCorner: 'red',
+      metalSlope: colorSlopeRight,
+      metalFace: colorSlopeRight,
+      metalTop: 'red',
+      metalBottom2: 'red',
+      metalBottom: ['#c7c7c7', '#949494'],
+      wood: ['#ffb152', '#aa5422'],
+      lightningBolt: {
+        value: ['#ffff00', '#ffc629'],
+        options: { offset1: 35, offset2: 80 },
+      },
+      colorSlopeTop: ['#dedede', '#c7c7c7'],
+      colorSlopeLeft: '#e6e6e6',
+      colorSlopeRight: [colorSlopeRight, colorSlopeRight],
+      colorSlopeTopRight: '#dcdbdb',
+      colorSlopeBottom: ['#b8b8b8', '#7d7d7d'],
+      colorFaceRight: '#ababab',
+      colorFaceUpper: ['#cfcfcf', '#a8a8a8'],
+      colorFaceFront: ['#d9d9d9', '#b0afaf'],
+      colorCornerTopRight: '#dedede',
+      colorCornerTopLeft: '#dedede',
+      colorCornerBottomRight: '#7d7d7d',
+      colorCornerBottomLeft: '#dedede',
+    }
+  })(),
   brightRevived: (() => {
     const colorMain = '#c4c4c4'
     return {
