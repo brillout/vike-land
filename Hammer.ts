@@ -585,12 +585,12 @@ function genHeadSide(
 
   const slopeVertical = (props: Zdog.ShapeOptions) => {
     shape({
-    path: [
-      { z: 0, y: 0, x: 1 },
-      { z: 0, y: 0, x: -1 },
-      { z: 1, y: 1, x: -1 },
-      { z: 1, y: 1, x: 1 },
-    ],
+      path: [
+        { z: 0, y: 0, x: 1 },
+        { z: 0, y: 0, x: -1 },
+        { z: 1, y: 1, x: -1 },
+        { z: 1, y: 1, x: 1 },
+      ],
       ...props,
     })
   }
