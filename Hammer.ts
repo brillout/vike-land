@@ -598,8 +598,8 @@ function genHeadSide(
 
   // Slope right
   slopeLeft.copy({
-    scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
+    scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
   })
 
