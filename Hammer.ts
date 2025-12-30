@@ -555,14 +555,20 @@ function genHeadSide(
   const colorEdge = normalizeColor(colors.metalSlope)
   const colorCorner = normalizeColor(colors.metalCorner)
 
-  // Slope top right
-  const slopeTopRight = shape({
+  const slopeHorizontal = (props: Zdog.ShapeOptions) => {
+  shape({
     path: [
       { x: 0, y: 0, z: 1 },
       { x: 0, y: 0, z: -1 },
       { x: 1, y: 1, z: -1 },
       { x: 1, y: 1, z: 1 },
     ],
+    ...props,
+  })
+  }
+
+  // Slope top right
+  slopeHorizontal({
     translate: { x: sideLength },
     scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
     color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
@@ -570,7 +576,7 @@ function genHeadSide(
 
   // Slope bottom right (hidden with screenshot perspective)
   if (!isFront || !isForScreenshot) {
-    slopeTopRight.copy({
+    slopeHorizontal({
       translate: { x: -1 * sideLength },
       scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
       color: colorEdge,
