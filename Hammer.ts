@@ -611,12 +611,14 @@ function genHeadSide(
     color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
   })
 
-  // Slope bottom right (invisible with screenshot perspective)
+  // Slope bottom right (hidden with screenshot perspective)
+  if (!isFront || !isForScreenshot) {
   slopeTopRight.copy({
     scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
     translate: { x: -1 * sideLength },
     color: colorEdge,
   })
+  }
 
   // Corner bottom right
   shape({
@@ -630,6 +632,7 @@ function genHeadSide(
   })
 
   // Corner bottom left
+  if (!isFront || !isForScreenshot) {
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -639,6 +642,7 @@ function genHeadSide(
     translate: { x: -1 * sideLength, z: sideLength },
     color: normalizeColor(colors.colorCornerBottomLeft ?? colorCorner),
   })
+  }
 
   /* Failed attempt to remove aliasing issues
   const y = 0.02
