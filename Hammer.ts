@@ -583,21 +583,27 @@ function genHeadSide(
     })
   }
 
-  // Slope left
-  const slopeLeft = shape({
+  const slopeVertical = (props: Zdog.ShapeOptions) => {
+    shape({
     path: [
       { z: 0, y: 0, x: 1 },
       { z: 0, y: 0, x: -1 },
       { z: 1, y: 1, x: -1 },
       { z: 1, y: 1, x: 1 },
     ],
+      ...props,
+    })
+  }
+
+  // Slope left
+  slopeVertical({
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
     color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
   })
 
   // Slope right
-  slopeLeft.copy({
+  slopeVertical({
     translate: { z: -1 * sideLength },
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
