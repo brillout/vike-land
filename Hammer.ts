@@ -571,8 +571,8 @@ function genHeadSide(
   // Slope bottom right (hidden with screenshot perspective)
   if (!isFront || !isForScreenshot) {
     slopeTopRight.copy({
-      scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
       translate: { x: -1 * sideLength },
+      scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
       color: colorEdge,
     })
   }
