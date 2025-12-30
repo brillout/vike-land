@@ -556,7 +556,7 @@ function genHeadSide(
   const colorCorner = normalizeColor(colors.metalCorner)
 
   // Slope top right
-  var slopeTopRight = shape({
+  const slopeTopRight = shape({
     path: [
       { x: 0, y: 0, z: 1 },
       { x: 0, y: 0, z: -1 },
@@ -567,6 +567,15 @@ function genHeadSide(
     scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
     color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
   })
+
+  // Slope bottom right (hidden with screenshot perspective)
+  if (!isFront || !isForScreenshot) {
+    slopeTopRight.copy({
+      scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
+      translate: { x: -1 * sideLength },
+      color: colorEdge,
+    })
+  }
 
   // Slope left
   const slopeLeft = shape({
@@ -581,6 +590,13 @@ function genHeadSide(
     color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
   })
 
+  // Slope right
+  slopeLeft.copy({
+    scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
+    translate: { z: -1 * sideLength },
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
+  })
+
   // Corner top left
   if (!isFront || !isForScreenshot)
     shape({
@@ -593,13 +609,6 @@ function genHeadSide(
       color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
     })
 
-  // Slope right
-  slopeLeft.copy({
-    scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
-    translate: { z: -1 * sideLength },
-    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
-  })
-
   // Slope top right
   shape({
     path: [
@@ -610,15 +619,6 @@ function genHeadSide(
     translate: { x: sideLength, z: -1 * sideLength },
     color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
   })
-
-  // Slope bottom right (hidden with screenshot perspective)
-  if (!isFront || !isForScreenshot) {
-    slopeTopRight.copy({
-      scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
-      translate: { x: -1 * sideLength },
-      color: colorEdge,
-    })
-  }
 
   // Corner bottom right
   shape({
