@@ -128,7 +128,6 @@ class Hammer {
     this.handleDiameter = handleDiameterDefault
     this.handleLength = handleLengthDefault
     this.handleLengthDefault = handleLengthDefault
-    this.hideBackLightningBolt = false
     this.isForScreenshot = true
   }
   illo: Zdog.Illustration | undefined = undefined
@@ -140,7 +139,6 @@ class Hammer {
   handleDiameterDefault: number
   handleLength: number
   handleLengthDefault: number
-  hideBackLightningBolt: boolean
   darken: boolean = false
   hideHandle: boolean = false
   isForScreenshot: boolean = true
@@ -292,7 +290,6 @@ function renderOuterHtml(outerElem: HTMLElement) {
 
 type Ctx = {
   colors: Colors
-  hideBackLightningBolt: boolean
   slopeSize: number
   slopeSizeEnhanced: number
   isForScreenshot: boolean
@@ -318,7 +315,7 @@ function render(hammer: Hammer) {
   })
 
   const colors = hammer.getColors()
-  const { hideBackLightningBolt, isForScreenshot } = hammer
+  const { isForScreenshot } = hammer
 
   // Compute slope sizes once based on screenshot mode
   const slopeSize = isForScreenshot ? slopeSize_ : slopeSizeEnhanced_
@@ -330,7 +327,6 @@ function render(hammer: Hammer) {
     slopeSizeEnhanced,
     isForScreenshot,
     colors,
-    hideBackLightningBolt,
   }
 
   // anchor
@@ -428,7 +424,7 @@ function genHeadFaces(head: Zdog.Anchor, ctx: Ctx) {
   genFaceSlopes(head, ctx)
 }
 function genFaces(head: Zdog.Anchor, ctx: Ctx) {
-  const { colors, slopeSize, slopeSizeEnhanced, hideBackLightningBolt } = ctx
+  const { colors, slopeSize, slopeSizeEnhanced, isForScreenshot } = ctx
 
   const shape = (props: Zdog.ShapeOptions) =>
     new Zdog.Shape({
@@ -481,8 +477,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   genLightningBolt(colors, ctx, true, { addTo: faceFront })
-  // TODO/ai remove hideBackLightningBolt and use `!isForScreenshot` instead
-  if (!hideBackLightningBolt) genLightningBolt(colors, ctx, false, { addTo: faceBack })
+  if (!isForScreenshot) genLightningBolt(colors, ctx, false, { addTo: faceBack })
 }
 
 function genFaceSlopes(head: Zdog.Anchor, ctx: Ctx) {

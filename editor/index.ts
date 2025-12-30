@@ -28,7 +28,6 @@ function getElements() {
     reset: document.querySelector('button#reset') as HTMLButtonElement,
     download: document.querySelector('button#download') as HTMLButtonElement,
     downloadHead: document.querySelector('button#download-head') as HTMLButtonElement,
-    hideBackLightningBolt: document.getElementById('hideBackLightningBolt')!,
     darkBackground: document.getElementById('darkBackground')!,
     darkenColors: document.getElementById('darkenColors')!,
     screenshotMode: document.getElementById('screenshotMode')!,
@@ -71,7 +70,6 @@ function main() {
   initReset(elements.reset)
   initDownload(elements.download)
   initDownloadHead(elements.downloadHead, hammer)
-  initHighBackLightningBold(elements.hideBackLightningBolt, hammer)
   initDarkBackground(elements.darkBackground)
   initDarkenColors(elements.darkenColors, hammer)
   initScreenshotMode(elements.screenshotMode, hammer)
@@ -309,19 +307,6 @@ function initAutoSpinning(autoSpinning: Element) {
     labelText: 'Auto spinning',
     onToggle(isChecked: boolean) {
       isSpinning = isChecked
-    },
-  })
-}
-
-function initHighBackLightningBold(hideBackLightningBolt: HTMLElement, hammer: Hammer) {
-  createCheckboxInput({
-    elem: hideBackLightningBolt,
-    labelText: 'Show back lightning bolt',
-    onToggle(isChecked: boolean) {
-      hammer.hideBackLightningBolt = !isChecked
-    },
-    applyValue() {
-      hammer.reset()
     },
   })
 }
