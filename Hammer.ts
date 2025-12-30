@@ -597,11 +597,11 @@ function genHeadSide(
 
   // Slope left
   if (!isFront || !isForScreenshot) {
-  slopeVertical({
-    translate: { z: sideLength },
-    scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
-  })
+    slopeVertical({
+      translate: { z: sideLength },
+      scale: { x: sideLength, y: slopeSize, z: slopeSize },
+      color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
+    })
   }
 
   // Slope right
