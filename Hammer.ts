@@ -555,8 +555,8 @@ function genHeadSide(
   const colorEdge = normalizeColor(colors.metalSlope)
   const colorCorner = normalizeColor(colors.metalCorner)
 
-  // east slope
-  var EWSlope = shape({
+  // Slope top right
+  var slopeTopRight = shape({
     path: [
       { x: 0, y: 0, z: 1 },
       { x: 0, y: 0, z: -1 },
@@ -568,8 +568,8 @@ function genHeadSide(
     color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
   })
 
-  // south slope
-  var NSSLope = shape({
+  // Slope left
+  const slopeLeft = shape({
     path: [
       { z: 0, y: 0, x: 1 },
       { z: 0, y: 0, x: -1 },
@@ -581,7 +581,7 @@ function genHeadSide(
     color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
   })
 
-  // top left corner
+  // Corner top left
   if (!isFront || !isForScreenshot)
     shape({
       path: [
@@ -593,14 +593,14 @@ function genHeadSide(
       color: normalizeColor(colors.colorCornerTopLeft ?? colorCorner),
     })
 
-  // north slope
-  NSSLope.copy({
+  // Slope right
+  slopeLeft.copy({
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
     color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
   })
 
-  // top right corner
+  // Slope top right
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -611,14 +611,14 @@ function genHeadSide(
     color: normalizeColor(colors.colorCornerTopRight ?? colorCorner),
   })
 
-  // west slope
-  EWSlope.copy({
+  // Slope bottom right (invisible with screenshot perspective)
+  slopeTopRight.copy({
     scale: { x: -1 * slopeSize, y: slopeSize, z: sideLength },
     translate: { x: -1 * sideLength },
     color: colorEdge,
   })
 
-  // bottom right corner
+  // Corner bottom right
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -629,7 +629,7 @@ function genHeadSide(
     color: normalizeColor(colors.colorCornerBottomRight ?? colorCorner),
   })
 
-  // bottom left corner
+  // Corner bottom left
   shape({
     path: [
       { x: 0, y: 0, z: 0 },
@@ -645,7 +645,7 @@ function genHeadSide(
   */
   const y = 0
 
-  // cover
+  // Face right
   shape({
     path: [
       { x: -1, y, z: 1 },
