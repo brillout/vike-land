@@ -565,7 +565,7 @@ function genHeadSide(
     ],
     translate: { x: sideLength },
     scale: { x: slopeSizeEnhanced, y: slopeSizeEnhanced, z: sideLength },
-    color: 'blue'
+    color: normalizeColor(colors.colorSlopeTopRight ?? colors.metalSlope),
   })
 
   // Slope left
@@ -578,7 +578,7 @@ function genHeadSide(
     ],
     translate: { z: sideLength },
     scale: { x: sideLength, y: slopeSize, z: slopeSize },
-    color: 'yellow'
+    color: normalizeColor(colors.colorSlopeLeft ?? colors.metalSlope),
   })
 
   // Corner top left
@@ -597,7 +597,7 @@ function genHeadSide(
   slopeLeft.copy({
     scale: { x: sideLength, y: slopeSizeEnhanced, z: -1 * slopeSizeEnhanced },
     translate: { z: -1 * sideLength },
-    color: 'red'
+    color: normalizeColor(colors.colorSlopeRight ?? colors.metalSlope, { isVertical: true }),
   })
 
   // Slope top right
