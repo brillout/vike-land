@@ -481,6 +481,7 @@ function genFaces(head: Zdog.Anchor, ctx: Ctx) {
   })
 
   genLightningBolt(colors, ctx, true, { addTo: faceFront })
+  // TODO/ai remove hideBackLightningBolt and use `!isForScreenshot` instead
   if (!hideBackLightningBolt) genLightningBolt(colors, ctx, false, { addTo: faceBack })
 }
 
