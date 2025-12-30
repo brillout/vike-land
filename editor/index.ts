@@ -521,9 +521,7 @@ function initPresetsColor(presetsColorEl: Element, hammer: Hammer, colorPickerEl
 }
 
 function genPresetBtn(name: string, parentEl: Element, onclick: () => void) {
-  const btnEl = document.createElement('button')
-  btnEl.style.marginRight = '10px'
-  btnEl.style.marginBottom = '7px'
+  const btnEl = createElementButtton()
   btnEl.innerHTML = ` ${name} `
   btnEl.onclick = onclick
   parentEl.appendChild(btnEl)
@@ -577,13 +575,13 @@ function initColorInputs(colorPicker: Element, hammer: Hammer) {
     const labelEl = document.createElement('label')
     parentEl.appendChild(labelEl)
 
-    const inputEl = document.createElement('input')
+    const inputEl = createElementInput()
     inputEl.setAttribute('type', 'color')
     labelEl.appendChild(inputEl)
 
     let inputEl2: HTMLInputElement | undefined
     if (isGradient) {
-      inputEl2 = document.createElement('input')
+      inputEl2 = createElementInput()
       inputEl2.setAttribute('type', 'color')
       labelEl.appendChild(inputEl2)
     }
@@ -751,4 +749,15 @@ function colorNameToHex(color: string | [string, string]): string | null {
 /** Same as Object.keys() but with type inference */
 export function objectKeys<T extends Record<string, unknown>>(obj: T): Array<keyof T> {
   return Object.keys(obj)
+}
+
+function createElementButtton() {
+  const btnEl = document.createElement('button')
+  btnEl.classList.add('ctrl-btn')
+  return btnEl
+}
+function createElementInput() {
+  const btnEl = document.createElement('input')
+  btnEl.classList.add('ctrl-input')
+  return btnEl
 }

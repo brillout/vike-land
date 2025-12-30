@@ -11,6 +11,22 @@ body.faviconSize {
   --logo-size: 40px;
 }
 
+#control-panel {
+  .ctrl-btn {
+    padding: 0 4px !important;
+    margin: 0;
+  }
+  .ctrl-input {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 24px;
+  }
+  h3 {
+    font-size: 1em;
+    margin-bottom: 4px;
+  }
+}
+
 .hammer {
   cursor: move;
 }
