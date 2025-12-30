@@ -556,15 +556,15 @@ function genHeadSide(
   const colorCorner = normalizeColor(colors.metalCorner)
 
   const slopeHorizontal = (props: Zdog.ShapeOptions) => {
-  shape({
-    path: [
-      { x: 0, y: 0, z: 1 },
-      { x: 0, y: 0, z: -1 },
-      { x: 1, y: 1, z: -1 },
-      { x: 1, y: 1, z: 1 },
-    ],
-    ...props,
-  })
+    shape({
+      path: [
+        { x: 0, y: 0, z: 1 },
+        { x: 0, y: 0, z: -1 },
+        { x: 1, y: 1, z: -1 },
+        { x: 1, y: 1, z: 1 },
+      ],
+      ...props,
+    })
   }
 
   // Slope top right
