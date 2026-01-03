@@ -454,7 +454,7 @@ function initDownloadHead(downloadHead: HTMLButtonElement, hammer: Hammer) {
     // Small delay to ensure render is complete
     setTimeout(() => {
       const content = generateSvgContent()
-      downloadFile(content, 'image/svg+xml', 'vike-generated.svg')
+      downloadFile(content, 'image/svg+xml', 'vike-generated-head.svg')
 
       // Restore handle and re-render
       hammer.hideHandle = false
